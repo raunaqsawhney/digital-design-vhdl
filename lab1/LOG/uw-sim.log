@@ -1,0 +1,31 @@
+uw-sim /home/ece327/bin/uw-sim sum.vhd
+INFO: Using testbench        : sum_tb
+INFO: Using design entity    : sum
+INFO: Using simulation script: sum_tb.sim
+** Warning: vmap will not overwrite local modelsim.ini.
+ ** Warning: (vlib-34) Library already exists at "work-msim".
+ DEBUG: modelsim_pfx: testing: /opt/ModelSim101/modeltech/bin/
+DEBUG: try_set: altera_sim_lib: True: /home/ece327/altera
+DEBUG: default_board: DE2
+** Warning: (vlib-34) Library already exists at "work-msim".
+** Warning: (vlib-34) Library already exists at "work-msim".
+  Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+-- Loading package STANDARD
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_1164
+-- Compiling entity sum
+-- Compiling entity sum
+-- Compiling architecture main of sum
+-- Compiling architecture main of sum
+-- Compiling entity sum_tb
+-- Compiling entity sum_tb
+-- Compiling architecture main of sum_tb
+-- Compiling architecture main of sum_tb
+-- Loading entity sum
+-- Loading entity sum
+ 
+ Reading /opt/ModelSim101/modeltech/tcl/vsim/pref.tcl 

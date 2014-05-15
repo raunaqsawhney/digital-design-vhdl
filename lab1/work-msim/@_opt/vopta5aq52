@@ -1,0 +1,83 @@
+m255
+K3
+13
+cModel Technology
+Z0 d/home/s244sing/ece327/lab1-git/ece327/lab1
+T_opt
+V_B]Gjla<B]:k^9a1MFlON0
+04 6 4 work sum_tb main 1
+=1-74d02b26ff76-537524c8-5d977-4fd6
+o-quiet -auto_acc_if_foreign -work work-msim
+n@_opt
+OL;O;10.1;51
+Esum
+Z1 w1400186005
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 d/home/s244sing/ece327/lab1-git/ece327/lab1
+Z5 8sum.vhd
+Z6 Fsum.vhd
+l0
+L4
+VaHIjSJFUeY]]>h18BV78?1
+Z7 OL;C;10.1;51
+31
+Z8 !s108 1400186046.916994
+Z9 !s90 -93|+acc|-work|work-msim|sum.vhd|sum_tb.vhd|
+Z10 !s107 sum_tb.vhd|sum.vhd|
+Z11 o-93 +acc -work work-msim
+Z12 tExplicit 1
+!s100 8:ao_5=Q8kN?HG>]dHKC52
+!i10b 1
+Amain
+R2
+R3
+Z13 DEx4 work 3 sum 0 22 aHIjSJFUeY]]>h18BV78?1
+l11
+L10
+V6=8DMIBo@=zG^`[cVQkeL3
+!s100 d@2J;jSo1IMjc?PAJHRJU1
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!i10b 1
+Esum_tb
+Z14 w1400185460
+R2
+R3
+R4
+Z15 8sum_tb.vhd
+Z16 Fsum_tb.vhd
+l0
+L4
+VBo3jM]AdGoNKdG`Wddd4A3
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 a57V;C2RW2Z<1m^PdPn;V0
+!i10b 1
+Amain
+R13
+R2
+R3
+DEx4 work 6 sum_tb 0 22 Bo3jM]AdGoNKdG`Wddd4A3
+l9
+L7
+VF=aFA`JS<ZY<RVXA;OIf;1
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 S6Jj`KPUoHeIPRW_>PFa42
+!i10b 1
