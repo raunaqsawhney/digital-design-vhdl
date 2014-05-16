@@ -22,7 +22,9 @@ begin
 		port map (
 			i_a	=> i_a_1,
 			i_b => i_b_1,
-			fa0_cout => i_cin,
+			-- TODO: how to fix?
+			i_cin => o_cout,
+			-- todo end
 			o_sum => o_sum_1,
 			o_cout => o_cout
 		);

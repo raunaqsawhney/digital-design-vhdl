@@ -20,7 +20,8 @@ end myflipflop;
 
 architecture main of myflipflop is
 
-  -- define any extra signals here
+  signal inv_signal : std_logic;
+  inv_signal <= o_q_d;
 
 begin
 
@@ -31,21 +32,50 @@ begin
   end process; 
 
   proc_a : process
-      -- insert code for part (a) here
+  begin
+	wait until rising_edge(i_clock);
+	if (i_reset = '1') then
+		o_q_a <= ( NOT i_reset ) and i_d;
+	else
+		o_q_a <= i_d;	
+	end if;
   end process;
 
   proc_b : process
-      -- insert code for part (b) here
+  begin
+	wait until rising_edge(i_clock);
+	if (i_ce = '1') then
+		o_q_b <= i_d;
+	end if;
   end process;
 
   proc_c : process
-      -- insert code for part (c) here
+  begin
+	wait until rising_edge(i_clock);
+	-- TODO: what does req 4.8 imply?
+	if (i_sel = '0') then
+		o_q_c <= i_d;
+	else
+		o_q_c <= i_d2;
+	end if;
   end process;
-
+  
   proc_d : process
-      -- insert code for part (d) here
+  begin
+	wait until rising_edge(i_clock);
+	if (i_sel = '0') then
+		o_q_d <= i_d;
+	else
+		o_q_d <= inv_signal;
+	-- TODO: what does 4.12 mean?
+	end if;
   end process;
 
-  -- place any extra code or processes here
+-- FIXME: is this right?
+--  proc_inv_sig : process
+--  begin
+--		signal inv_signal : std_logic;
+--		inv_signal <= o_q_d;
+--  end process;
 
 end architecture;
