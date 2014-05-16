@@ -6,5 +6,5 @@
 25:-comment_transoff_regions
 13:-lib_map_file
 59:/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp//.jaguarc
-50:+incdir+/home/s244sing/ece327/lab1-git/ece327/lab1
+94:+incdir+/home/s244sing/ece327/lab1-git/ece327/lab1+/home/s244sing/ece327/lab1-git/ece327/lab1/
 17:+define+synthesis

@@ -1,8 +1,63 @@
 INFO: Starting PRECISION_RTL for logic synthesis
 precision: Executing on platform: CentOS release 5.10 (Final) Kernel \r on an \m  Linux ecelinux5.uwaterloo.ca 2.6.18-371.8.1.el5 #1 SMP Thu Apr 24 18:19:36 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux 
 precision: Setting MGC_HOME to /opt/Precision_Synthesis_2008a.47/Mgc_home ...
+Note: Defaulting to use the Next Generation GUI.
+//  Precision RTL Synthesis 2008a.47 (Production Release) Tue Dec  9 03:06:25 PST 2008
+//  
+//  Copyright (c) Mentor Graphics Corporation, 1996-2008, All Rights Reserved.
+//             Portions copyright 1991-2004 Compuware Corporation
+//                       UNPUBLISHED, LICENSED SOFTWARE.
+//            CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
+//          PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+//  
+//  Running on Linux s244sing@ecelinux5.uwaterloo.ca #1 SMP Thu Apr 24 18:19:36 EDT 2014 2.6.18-371.8.1.el5 x86_64
+//  
+//  Start time Thu May 15 21:00:56 2014
+-------------------------------------------------
+Info: Logging session transcript to file precision.log
+Info: Results directory: uw_tmp/
+Info: Moving session transcript to file uw_tmp/precision.log
+Info:  Setting up the design to use synthesis library "cycloneii.syn"
+Info: The global max fanout is currently set to 1000 for Altera - Cyclone II.
+Info:  Setting Part to: "EP2C35F672C"
+Info:  Setting Process to: "7"
+Info: Reading file: /opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/psr/techlibs/cycloneii.syn.
+Info: Loading library initialization file /opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/psr/userware/yeager_rename.tcl
+Info: vhdlorder, Release 2008a.22
+Info: Files sorted successfully.
+Info: hdl-analyze, Release RTLC-Precision 2008a.22
+INFO: Analyzing "sum.vhd"
+INFO: Analyzing "carry.vhd"
+INFO: Analyzing "fulladder.vhd"
+Info: Current working directory: uw_tmp/.
+Info: RTLC-Driver, Release RTLC-Precision 2008a.22
+Info: Last compiled on Nov 27 2008 12:40:04
+Info: Initializing...
+Info: Partitioning design ....
 
-INFO: generic-gate       netlist         written to uw_tmp/sum_gate.vhd
+Info: RTLCompiler, Release RTLC-Precision 2008a.22
+Info: Last compiled on Nov 27 2008 12:46:53
+Info: Initializing...
+Info: Root Module work.fulladder(main): Pre-processing...
+Info: Module work.sum(main): Pre-processing...
+Info: Module work.carry(main): Pre-processing...
+Info: Module work.sum(main): Compiling...
+Info: Module work.carry(main): Compiling...
+Info: Root Module work.fulladder(main): Compiling...
+Info: Compilation successfully completed.
+Info: Total CPU time taken for compilation: 0.0 secs.
+Info: Total lines of RTL compiled: 35.
+Info: Overall running time 1.0 secs.
+Info: Current working directory: uw_tmp/.
+Info: Finished compiling design.
+Info: -- Saving the design database in uw_tmp/fulladder_gate.xdb
+Info: Writing file: uw_tmp/fulladder_gate.vhd.
+Info: Info, Command 'auto_write' finished successfully
+Info: *** synthesis to generic gates succeeded ***
+
+COMMAND: close_results_dir
+Info: Results directory is closed.
+INFO: generic-gate       netlist         written to uw_tmp/fulladder_gate.vhd
 INFO: 
 INFO: ***********************************************
 INFO: *

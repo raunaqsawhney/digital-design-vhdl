@@ -9,15 +9,19 @@ end fulladder;
 
 architecture main of fulladder  is
 begin
-  -- sum instantiation
   u_sum : entity work.sum(main)
     port map (
-      i_a   => i_a,
+	  i_a   => i_a,
       i_b   => i_b,
       i_cin => i_cin,
       o_sum => o_sum
     );
          
-  -- carry instantiation
-
+  u_carry : entity work.carry(main)
+    port map (
+	  i_x   => i_a,
+      i_y   => i_b,
+      i_cin => i_cin,
+      o_carry => o_cout
+    );
 end architecture;

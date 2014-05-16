@@ -15,5 +15,5 @@ xsys( "vlib work-msim")
 #------------------------------------------------------------------------
 # compile source files
 
-xsys( "uw-msim-com  carry.vhd ")
+xsys( "uw-msim-com  fulladder.vhd ")
 
