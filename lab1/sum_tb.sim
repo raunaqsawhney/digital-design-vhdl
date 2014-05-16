@@ -3,4 +3,4 @@ add wave b
 add wave cin
 add wave the_sum
 
-run 40 ns
+run 100 ns

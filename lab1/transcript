@@ -8,7 +8,6 @@
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
 # vsim -do uw_tmp/uw-sim.tcl -lib work-msim -t 1ns -wlf uw_tmp/vsim.wlf sum_tb(main) 
-# ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -16,3 +15,4 @@
 # Loading work.sum(main)#1
 # do uw_tmp/uw-sim.tcl 
 #  
+# Load canceled

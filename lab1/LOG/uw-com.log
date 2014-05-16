@@ -13,8 +13,8 @@ Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package std_logic_1164
--- Compiling entity sum
--- Compiling entity sum
--- Compiling architecture main of sum
--- Compiling architecture main of sum
+-- Compiling entity carry
+-- Compiling entity carry
+-- Compiling architecture main of carry
+-- Compiling architecture main of carry
  

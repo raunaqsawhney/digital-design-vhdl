@@ -34,10 +34,10 @@ end architecture;
 
 -- question 2
 -- signal   | waveform description
--- a
--- b
--- cin
--- the_sum  
+-- a			0 1 0
+-- b			0 0 0
+-- cin			0 0 1
+-- the_sum  	0 1 1
 
 
 -- question 3

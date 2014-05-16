@@ -29,3 +29,7 @@ Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
 -- Loading entity sum
  
  Reading /opt/ModelSim101/modeltech/tcl/vsim/pref.tcl 
+X connection to localhost:14.0 broken (explicit kill or server shutdown).
+** Fatal: Read failure in vlm process (0,0)
+** Fatal: Kernel lost connection to front end process.
+ ERROR: Failure when running `vsim -lib work-msim     -wlf uw_tmp/vsim.wlf -t 1ns -do uw_tmp/uw-sim.tcl sum_tb(main)'
