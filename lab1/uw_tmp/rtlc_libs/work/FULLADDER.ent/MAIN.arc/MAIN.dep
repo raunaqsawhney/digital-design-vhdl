@@ -1,8 +1,0 @@
-1400202058.436470
-work	/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/rtlc_libs/work	FULLADDER	FULLADDER	0
-work	/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/rtlc_libs/work	SUM	SUM	0
-ieee	/opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/rtlc_psr.ixl/rtlc/IEEE	STD_LOGIC_1164	STD_LOGIC_1164	2
-work	/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/rtlc_libs/work	MAIN	SUM	1
-work	/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/rtlc_libs/work	CARRY	CARRY	0
-ieee	/opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/rtlc_psr.ixl/rtlc/IEEE	STD_LOGIC_1164	STD_LOGIC_1164	2
-work	/home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/rtlc_libs/work	MAIN	CARRY	1
