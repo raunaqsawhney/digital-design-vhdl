@@ -9,7 +9,7 @@ end add2;
 
 architecture main of add2 is
 begin
-	sum_0 : entity work.fulladder(main)
+	fa_0 : entity work.fulladder(main)
 		port map (
 			i_a	=> i_a_0,
 			i_b => i_b_0,
@@ -18,7 +18,7 @@ begin
 			o_cout => fa0_cout
 		);
 	
-	sum_1 : entity work.fulladder(main)
+	fa_1 : entity work.fulladder(main)
 		port map (
 			i_a	=> i_a_1,
 			i_b => i_b_1,
