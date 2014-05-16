@@ -2,7 +2,7 @@
 -- 
 -- Definition of  fulladder
 -- 
---      Thu May 15 21:00:59 2014
+--      Thu May 15 22:20:34 2014
 --      
 --      Precision RTL Synthesis, 2008a.47
 -- 
