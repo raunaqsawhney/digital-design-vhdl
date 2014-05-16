@@ -9,7 +9,7 @@
 //  
 //  Running on Linux s244sing@ecelinux5.uwaterloo.ca #1 SMP Thu Apr 24 18:19:36 EDT 2014 2.6.18-371.8.1.el5 x86_64
 //  
-//  Start time Thu May 15 21:00:56 2014
+//  Start time Thu May 15 21:56:04 2014
 # -------------------------------------------------
 # Info: [9566]: Logging session transcript to file /home/s244sing/ece327/lab1-git/ece327/lab1/precision.log
 # Info: [9575]: Results directory: /home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/
@@ -21,36 +21,11 @@
 # Info: [3021]: Reading file: /opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/psr/techlibs/cycloneii.syn.
 # Info: [618]: Loading library initialization file /opt/Precision_Synthesis_2008a.47/Mgc_home/pkgs/psr/userware/yeager_rename.tcl
 # Info: [40000]: vhdlorder, Release 2008a.22
+# Warning: [40000]: "/home/s244sing/ece327/lab1-git/ece327/lab1/add2.vhd", line 12: No such Design Unit fulladder is visible
+# Warning: [40000]: "/home/s244sing/ece327/lab1-git/ece327/lab1/add2.vhd", line 21: No such Design Unit fulladder is visible
 # Info: [40000]: Files sorted successfully.
 # Info: [40000]: hdl-analyze, Release RTLC-Precision 2008a.22
-# Info: [42502]: Analyzing input file "/home/s244sing/ece327/lab1-git/ece327/lab1/sum.vhd" ...
-# Info: [42502]: Analyzing input file "/home/s244sing/ece327/lab1-git/ece327/lab1/carry.vhd" ...
-# Info: [42502]: Analyzing input file "/home/s244sing/ece327/lab1-git/ece327/lab1/fulladder.vhd" ...
-# Info: [641]: Current working directory: /home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/.
-# Info: [40000]: RTLC-Driver, Release RTLC-Precision 2008a.22
-# Info: [40000]: Last compiled on Nov 27 2008 12:40:04
-# Info: [44512]: Initializing...
-# Info: [44504]: Partitioning design ....
-# Info: [40000]: RTLCompiler, Release RTLC-Precision 2008a.22
-# Info: [40000]: Last compiled on Nov 27 2008 12:46:53
-# Info: [44512]: Initializing...
-# Info: [44522]: Root Module work.fulladder(main): Pre-processing...
-# Info: [44506]: Module work.sum(main): Pre-processing...
-# Info: [44506]: Module work.carry(main): Pre-processing...
-# Info: [44508]: Module work.sum(main): Compiling...
-# Info: [44508]: Module work.carry(main): Compiling...
-# Info: [44523]: Root Module work.fulladder(main): Compiling...
-# Info: [44842]: Compilation successfully completed.
-# Info: [44835]: Total CPU time taken for compilation: 0.0 secs.
-# Info: [44856]: Total lines of RTL compiled: 35.
-# Info: [44513]: Overall running time 1.0 secs.
-# Info: [641]: Current working directory: /home/s244sing/ece327/lab1-git/ece327/lab1/uw_tmp/.
-# Info: [644]: Finished compiling design.
-# Info: -- Saving the design database in uw_tmp/fulladder_gate.xdb
-# Info: [3026]: Writing file: uw_tmp/fulladder_gate.vhd.
-# Info: Info, Command 'auto_write' finished successfully
-# Info: *** synthesis to generic gates succeeded ***
-# 
-# COMMAND: close_results_dir
-# Info: [9578]: Results directory is closed.
-close_results_dir
+# Info: [42502]: Analyzing input file "/home/s244sing/ece327/lab1-git/ece327/lab1/add2.vhd" ...
+# Error: [43094]: "/home/s244sing/ece327/lab1-git/ece327/lab1/add2.vhd", line 12: Design Unit fulladder not found in logical library work.
+# Error: [40000]: HDL analysis failed.
+# Error: [573]: near file uw_tmp/uw-gate-synth-precision_rtl.tcl, line 16: 
