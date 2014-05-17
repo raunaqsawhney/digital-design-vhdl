@@ -20,9 +20,9 @@ end myflipflop;
 
 architecture main of myflipflop is
 
-  signal inv_signal : std_logic;
-  inv_signal <= o_q_d;
-
+  -- define any extra signals here
+	signal inverter_in : std_logic; --intermediate input
+	signal inverter_out : std_logic; --intermediate output
 begin
 
   basic : process
@@ -32,50 +32,49 @@ begin
   end process; 
 
   proc_a : process
-  begin
+    -- insert code for part (a) here
+	begin
 	wait until rising_edge(i_clock);
 	if (i_reset = '1') then
-		o_q_a <= ( NOT i_reset ) and i_d;
+		o_q_a <= '0'; 
 	else
-		o_q_a <= i_d;	
-	end if;
-  end process;
+		o_q_a <= i_d; 
+  	end if;
+	end process;
 
   proc_b : process
-  begin
+      -- insert code for part (b) here
+	begin
 	wait until rising_edge(i_clock);
-	if (i_ce = '1') then
+	if (i_ce = '0') then
+	
+	else 
 		o_q_b <= i_d;
 	end if;
   end process;
 
   proc_c : process
-  begin
+      -- insert code for part (c) here
+	begin
 	wait until rising_edge(i_clock);
-	-- TODO: what does req 4.8 imply?
 	if (i_sel = '0') then
 		o_q_c <= i_d;
-	else
+	else 
 		o_q_c <= i_d2;
 	end if;
-  end process;
-  
+ end process;
+
   proc_d : process
-  begin
+      -- insert code for part (d) here
+	begin
 	wait until rising_edge(i_clock);
-	if (i_sel = '0') then
+	if (i_sel = '0') then 
 		o_q_d <= i_d;
 	else
-		o_q_d <= inv_signal;
-	-- TODO: what does 4.12 mean?
+		o_q_d <= inverter_out;
 	end if;
   end process;
 
--- FIXME: is this right?
---  proc_inv_sig : process
---  begin
---		signal inv_signal : std_logic;
---		inv_signal <= o_q_d;
---  end process;
-
+  -- place any extra code or processes here
+	inverter_out <= not inverter_in;
 end architecture;

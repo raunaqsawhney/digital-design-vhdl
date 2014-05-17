@@ -8,22 +8,16 @@ entity sum is
 end sum;
 
 architecture main of sum is
-begin	
-	o_sum <= i_a xor i_b xor i_cin; 
+begin
+
+o_sum <= i_a xor i_b xor i_cin;
+ 
 end architecture;
 
 -- question 1
+  -- There are two logical XOR gates, wherein, the first XOR gate (ix1) takes in
+  -- input input two signals, i_cin and i_a with the output signal being 'out'
+  -- This output signal from ix1 is fed into XOR gate 2, ix3 as in[0] and 
+  -- another signal i_b is also fed into second XOR gate, ix3 as in[1], with
+  -- the output being the signal, o_sum
 
--- We can see the following pins as described below:
--- Gate ix1:
--- i_cin --> in[0]
--- i_a 	 --> in[1]
--- out(ix1) --> i_cin xor i_a
-
--- Gate ix3:
--- i_b --> in[1]
--- out(ix1) --> in[0]
--- out(ix3) --> i_b xor out(ix1)
-
--- Final:
--- o_sum <-- out(ix3)
