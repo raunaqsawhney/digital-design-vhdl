@@ -2,7 +2,7 @@
 -- 
 -- Definition of  myflipflop
 -- 
---      Thu May 15 20:30:02 2014
+--      Mon May 19 01:24:47 2014
 --      
 --      Precision RTL Synthesis, 2008a.47
 -- 
@@ -87,17 +87,20 @@ architecture main of myflipflop is
            q <= 'X' ;
        end if ;
    end DFFPCE ;
-   signal GND, o_q_c_4n1ss1, o_q_d_5n1ss1, PWR: std_logic ;
+   signal o_q_d_EXMPLR10, GND, o_q_c_4n1ss1, inverter_sig_5n1ss1, not_o_q_d, 
+      PWR: std_logic ;
 
 begin
+   o_q_d <= o_q_d_EXMPLR10 ;
    GND <= '0' ;
+   not_o_q_d <= NOT o_q_d_EXMPLR10 ;
    o_q_c_4n1ss1 <= i_d2 when i_sel = '1' else i_d ;
+   inverter_sig_5n1ss1 <= not_o_q_d when i_sel = '1' else i_d ;
    DFFPC (i_d,GND,GND,i_clock,o_q) ;
    DFFRSE (i_d,GND,i_reset,PWR,i_clock,o_q_a) ;
    PWR <= '1' ;
    DFFPCE (i_d,GND,GND,i_ce,i_clock,o_q_b) ;
    DFFPC (o_q_c_4n1ss1,GND,GND,i_clock,o_q_c) ;
-   DFFPC (o_q_d_5n1ss1,GND,GND,i_clock,o_q_d) ;
-   o_q_d_5n1ss1 <= i_d OR i_sel ;
+   DFFPC (inverter_sig_5n1ss1,GND,GND,i_clock,o_q_d_EXMPLR10) ;
 end main ;
 

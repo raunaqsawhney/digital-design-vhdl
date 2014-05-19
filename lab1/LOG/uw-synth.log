@@ -1,5 +1,5 @@
 INFO: Starting PRECISION_RTL for logic synthesis
-precision: Executing on platform: CentOS release 5.10 (Final) Kernel \r on an \m  Linux ecelinux5.uwaterloo.ca 2.6.18-371.8.1.el5 #1 SMP Thu Apr 24 18:19:36 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux 
+precision: Executing on platform: CentOS release 5.10 (Final) Kernel \r on an \m  Linux eceLinux1.uwaterloo.ca 2.6.18-371.8.1.el5 #1 SMP Thu Apr 24 18:19:36 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux 
 precision: Setting MGC_HOME to /opt/Precision_Synthesis_2008a.47/Mgc_home ...
 Note: Defaulting to use the Next Generation GUI.
 //  Precision RTL Synthesis 2008a.47 (Production Release) Tue Dec  9 03:06:25 PST 2008
@@ -10,9 +10,9 @@ Note: Defaulting to use the Next Generation GUI.
 //            CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
 //          PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
 //  
-//  Running on Linux rsawhney@ecelinux5.uwaterloo.ca #1 SMP Thu Apr 24 18:19:36 EDT 2014 2.6.18-371.8.1.el5 x86_64
+//  Running on Linux rsawhney@eceLinux1.uwaterloo.ca #1 SMP Thu Apr 24 18:19:36 EDT 2014 2.6.18-371.8.1.el5 x86_64
 //  
-//  Start time Thu May 15 20:29:59 2014
+//  Start time Mon May 19 01:24:44 2014
 -------------------------------------------------
 Info: Logging session transcript to file precision.log
 Info: Results directory: uw_tmp/
@@ -37,11 +37,10 @@ Info: RTLCompiler, Release RTLC-Precision 2008a.22
 Info: Last compiled on Nov 27 2008 12:46:53
 Info: Initializing...
 Info: Root Module work.myflipflop(main): Pre-processing...
-Warning: "myflipflop.vhd", line 24: signal inverter_in has no drivers, will be treated as don't care.
 Info: Root Module work.myflipflop(main): Compiling...
 Info: Compilation successfully completed.
 Info: Total CPU time taken for compilation: 0.0 secs.
-Info: Total lines of RTL compiled: 74.
+Info: Total lines of RTL compiled: 73.
 Info: Overall running time 1.0 secs.
 Info: Current working directory: uw_tmp/.
 Info: Finished compiling design.

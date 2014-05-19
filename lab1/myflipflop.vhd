@@ -21,8 +21,7 @@ end myflipflop;
 architecture main of myflipflop is
 
   -- define any extra signals here
-	signal inverter_in : std_logic; --intermediate input
-	signal inverter_out : std_logic; --intermediate output
+	signal inverter_sig : std_logic; --intermediate input
 begin
 
   basic : process
@@ -69,12 +68,12 @@ begin
 	begin
 	wait until rising_edge(i_clock);
 	if (i_sel = '0') then 
-		o_q_d <= i_d;
+		inverter_sig <= i_d;
 	else
-		o_q_d <= inverter_out;
+		inverter_sig <= not inverter_sig;
 	end if;
   end process;
 
   -- place any extra code or processes here
-	inverter_out <= not inverter_in;
+	o_q_d <= inverter_sig;
 end architecture;

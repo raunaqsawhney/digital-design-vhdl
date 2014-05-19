@@ -27,12 +27,6 @@ Module : work.add2(main)
 Number of FSMs Extracted : zero
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Module : work.myflipflop(main)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Number of FSMs Extracted : zero
-
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module : work.fulladder(main)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

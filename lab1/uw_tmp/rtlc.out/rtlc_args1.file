@@ -2,7 +2,7 @@
 6:-mixed
 22:-suppress_ver_warnings
 11:-driver_pid
-16:27873@cfbbdbbdbc
+14:387@cfbbfiibjh
 11:-top_module
 21:work.myflipflop(main)
 5:-main
@@ -36,7 +36,7 @@
 5:10000
 9:-tech_map
 13:-lib_map_file
-43:/home/rsawhney/ece327/lab1/uw_tmp//.jaguarc
+50:/home/rsawhney/ece327/ece327/lab1/uw_tmp//.jaguarc
 14:-log_mux_merge
 10:-infer_mac
 11:-flatten_or
