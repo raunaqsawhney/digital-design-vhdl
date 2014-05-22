@@ -2,11 +2,11 @@
 6:-mixed
 22:-suppress_ver_warnings
 11:-driver_pid
-14:387@cfbbfiibjh
+16:25630@cfbbgfhifb
 11:-top_module
-21:work.myflipflop(main)
+15:work.add2(main)
 5:-main
-21:work.myflipflop(main)
+15:work.add2(main)
 5:-2000
 3:-sv
 7:-xprobe
@@ -201,3 +201,5 @@
 29:-partial_sanity_for_techcells
 4:-hdl
 4:vhdl
+10:-noFsmTH_f
+61:/home/rsawhney/ece327/ece327/lab1/uw_tmp//rtlc.out/noFsmTH.vh

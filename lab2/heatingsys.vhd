@@ -1,0 +1,58 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+package heat_pkg is
+  subtype heat_ty is std_logic_vector(1 downto 0);
+  constant off  : heat_ty := "00";
+  constant low  : heat_ty := "01";
+  constant high : heat_ty := "11";
+end heat_pkg;
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.heat_pkg.all;
+
+entity heatingsys is                           -- finite state machine
+  port(i_cur_temp       : in signed(7 downto 0); -- current temp
+       i_des_temp       : in signed(7 downto 0); -- desired temp
+       i_reset          : in std_logic;          -- reset
+       i_clock          : in std_logic;          -- clock
+       o_heatmode       : out heat_ty            -- mode
+      );
+end heatingsys;
+
+architecture main of heatingsys is
+  signal state : heat_ty;   
+begin
+	statemachine : process
+	begin
+		wait until rising_edge(i_clock);
+		if (i_reset = '1') then
+			state <= off;
+		else 
+			if ((state = off) and (5 <= (i_des_temp - i_cur_temp))) then
+				state <= high;
+			elsif ((state = off) and (3 <= (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5 )) then
+				state <= low;
+			elsif ((state = low) and (7 <= (i_des_temp - i_cur_temp))) then
+				state <= high;
+			elsif((state = low) and (2 < (i_cur_temp - i_des_temp))) then
+				state <= off;
+			elsif ((state = high) and (3 < (i_cur_temp - i_des_temp))) then
+				state <= low;
+			else 
+				state <= off;
+			end if;
+		end if;
+	end process;
+
+	-- Assign state to output
+	o_heatmode <= state;
+end main;
+
+-- question 1
+  --insert answer here
+  --TODO: ANSWER HERE 
+

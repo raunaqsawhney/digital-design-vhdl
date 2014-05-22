@@ -2,7 +2,7 @@
 -- 
 -- Definition of  myflipflop
 -- 
---      Mon May 19 01:24:47 2014
+--      Mon May 19 20:11:46 2014
 --      
 --      Precision RTL Synthesis, 2008a.47
 -- 

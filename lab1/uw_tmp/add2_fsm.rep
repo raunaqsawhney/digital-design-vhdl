@@ -15,27 +15,15 @@ Module : work.fulladder(main)
 Number of FSMs Extracted : zero
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~
-Module : work.sum(main)
-~~~~~~~~~~~~~~~~~~~~~~~~
-Number of FSMs Extracted : zero
-
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 Module : work.add2(main)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 Number of FSMs Extracted : zero
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Module : work.fulladder(main)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Number of FSMs Extracted : zero
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-Module : work.carry(main)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Module : work.myflipflop(main)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Number of FSMs Extracted : zero
 
 

@@ -9,12 +9,12 @@ my_rm( ["uw_tmp/*.xrf"] )
 # so rm old versions to make sure that don't pick up
 # obsolete file in case precision fails
 
-my_rm( [ "myflipflop_gate.vhd" ] )
+my_rm( [ "add2_gate.vhd" ] )
 
 #--------------------------------------------------------------
 # run precision
 
 xsys( "precision -shell -file uw_tmp/uw-gate-synth-precision_rtl.tcl" )
 
-my_rm( [ "myflipflop_gate.xdb" ] )
+my_rm( [ "add2_gate.xdb" ] )
 

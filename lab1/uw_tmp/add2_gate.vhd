@@ -2,7 +2,7 @@
 -- 
 -- Definition of  add2
 -- 
---      Mon May 19 01:24:36 2014
+--      Mon May 19 20:45:41 2014
 --      
 --      Precision RTL Synthesis, 2008a.47
 -- 
