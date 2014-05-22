@@ -10,11 +10,24 @@ entity heatingsys_tb is
 end entity;
 
 architecture main of heatingsys_tb is
+	signal des_temp, cur_temp : signed(7 downto 0);
+	signal reset 			  : std_logic;
+	signal clock 			  : std_logic;
+	signal heatmode 		  : work.heat_pkg.heat_ty;
 
 	constant period  : time := 20 ns;
 
 
 begin
+	heat : entity work.heatingsys(main)
+     port map (
+       i_des_temp    => des_temp,
+       i_cur_temp    => cur_temp,
+       i_reset 		 => reset,
+	   i_clock 		 => clock,
+	   o_heatmode 	 => heatmode
+    );
+
   	process
    	begin
    		---------off to high-------------
