@@ -28,11 +28,16 @@ architecture main of heatingsys is
 begin
 
   -- insert your vhdl code here
-state_sw : process (i_des_temp, i_cur_temp)
+state_sw : process
 begin
+	wait until rising_edge(i_clock);
+	if( i_reset = '1' ) then
+		state <= off;
+	end if;
+	
 	case state is
 	when off =>
-	if( 3 =< (i_des_temp - i_cur_temp) and (i_des_temp - i_cur_temp) < 5) then
+	if((3 =< (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5)) then
 		state <= low;
 	elsif ( 5 =< (i_des_temp - i_cur_temp ) then
 		state <= high;
@@ -49,7 +54,10 @@ begin
 	elsif ( 7 =< (i_des_temp - i_cur_temp) ) then
 		state <= high;
 	end if;
-	
+
+	when others =>
+	state <= off;
+
 end main;
 
 -- question 1
