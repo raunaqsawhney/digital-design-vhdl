@@ -31,25 +31,36 @@ begin
 		wait until rising_edge(i_clock);
 		if (i_reset = '1') then
 			state <= off;
-		else 
-			if ((state = off) and (5 <= (i_des_temp - i_cur_temp))) then
-				state <= high;
-			elsif ((state = off) and (3 <= (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5 )) then
-				state <= low;
-			elsif ((state = low) and (7 <= (i_des_temp - i_cur_temp))) then
-				state <= high;
-			elsif((state = low) and (2 < (i_cur_temp - i_des_temp))) then
+		else
+			case state is
+			when off =>
+				if (5 <= (i_des_temp - i_cur_temp)) then
+					state <= high;
+				elsif ((3 <= (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5)) then
+					state <= low;
+				end if;
+
+			when high =>
+				if (3 < (i_cur_temp - i_des_temp)) then
+					state <= low;
+				end if;
+				
+			when low =>
+				if (2 < (i_cur_temp - i_des_temp)) then
+					state <= off;
+				elsif (7 <= (i_des_temp - i_cur_temp)) then
+					state <= high;
+				end if;
+
+			when others =>
 				state <= off;
-			elsif ((state = high) and (3 < (i_cur_temp - i_des_temp))) then
-				state <= low;
-			else 
-				state <= off;
-			end if;
+			end case;
 		end if;
 	end process;
 
 	-- Assign state to output
 	o_heatmode <= state;
+
 end main;
 
 -- question 1

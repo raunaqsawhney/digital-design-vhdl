@@ -4,5 +4,5 @@ add wave reset
 add wave clock
 add wave heatmode
 
-run 100 ns
+run 180 ns
 

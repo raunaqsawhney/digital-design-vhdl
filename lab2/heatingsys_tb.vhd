@@ -15,6 +15,9 @@ architecture main of heatingsys_tb is
 	signal clock 			  : std_logic;
 	signal heatmode 		  : work.heat_pkg.heat_ty;
 
+	constant period  : time := 20 ns;
+
+
 begin
 	heat : entity work.heatingsys(main)
      port map (
@@ -27,34 +30,41 @@ begin
 
   	process
    	begin
-   	---------off to high-------------
-   	des_temp <= to_signed(9,8) ; cur_temp <= to_signed(2,8) ; clock <= '1'; reset <= '0';
-	wait for 10 ns;
+   		---------off to high-------------
+   		wait until rising_edge(clock);
+		des_temp <= to_signed(9,8) ; cur_temp <= to_signed(2,8); reset <= '0';
 
-    ---------off to low-------------
-    des_temp <= to_signed(6,8) ; cur_temp <= to_signed(2,8) ; clock <= '1'; reset <= '0';
-    wait for 10 ns;
+    	---------high to low-------------
+		wait until rising_edge(clock);
+    	des_temp <= to_signed(4,8) ; cur_temp <= to_signed(12,8); reset <= '0';
+    	
+		---------low to high-------------
+    	wait until rising_edge(clock);
+		des_temp <= to_signed(12,8) ; cur_temp <= to_signed(4,8); reset <= '0';
+    	
+   		----------RESET-----------------
+		wait until rising_edge(clock);
+    	des_temp <= to_signed(3,8) ; cur_temp <= to_signed(6,8); reset <= '1';
+		
+		---------off to low-------------
+    	wait until rising_edge(clock);
+		des_temp <= to_signed(6,8) ; cur_temp <= to_signed(2,8); reset <= '0';
 
-    ---------low to high-------------
-    des_temp <= to_signed(12,8) ; cur_temp <= to_signed(4,8); clock <= '1'; reset <= '0';
-    wait for 10 ns;  
+		---------low to off-------------
+		wait until rising_edge(clock);
+   		des_temp <= to_signed(4,8) ; cur_temp <= to_signed(7,8); reset <= '0';
 
-    ---------high to low-------------
-    des_temp <= to_signed(4,8) ; cur_temp <= to_signed(12,8); clock <= '1'; reset <= '0';
-    wait for 10 ns;
-
-	---------low to off-------------
-    des_temp <= to_signed(4,8) ; cur_temp <= to_signed(7,8); clock <= '1'; reset <= '0';
-    wait for 10 ns;
-
-    ----------RESET-----------------
-    des_temp <= to_signed(3,8) ; cur_temp <= to_signed(6,8); clock <= '1'; reset <= '1';
-    wait for 10 ns;
-
-    ---------RESET-------------
-    des_temp <= to_signed(4,8) ; cur_temp <= to_signed(7,8); clock <= '0'; reset <= '0';
-    wait for 10 ns;
-	---------------------------
-
+		---------------------------
 	end process;
+
+   -- clock
+
+    process
+    begin
+        clock <= '0';
+        wait for period/2;
+        clock <= '1';
+        wait for period/2;
+    end process;
+
 end architecture;
