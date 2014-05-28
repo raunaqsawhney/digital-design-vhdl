@@ -26,38 +26,39 @@ end heatingsys;
 architecture main of heatingsys is
   signal state : heat_ty;   
 begin
+	statemachine : process
+	begin
+		wait until rising_edge(i_clock);
+		if (i_reset = '1') then
+			state <= off;
+		else
+			case state is
+			when off =>
+				if (5 <= (i_des_temp - i_cur_temp)) then
+					state <= high;
+				elsif ((3 <= (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5)) then
+					state <= low;
+				end if;
 
-  -- insert your vhdl code here
-state_sw : process
-begin
-	wait until rising_edge(i_clock);
-	if( i_reset = '1' ) then
-		state <= off;
-	end if;
-	
-	case state is
-	when off =>
-	if((3 =< (i_des_temp - i_cur_temp)) and ((i_des_temp - i_cur_temp) < 5)) then
-		state <= low;
-	elsif ( 5 =< (i_des_temp - i_cur_temp ) then
-		state <= high;
-	end if;
-	
-	when high =>
-	if( 3 < (i_cur_temp - i_des_temp) ) then
-		state =< low;
-	end if;
+			when high =>
+				if (3 < (i_cur_temp - i_des_temp)) then
+					state <= low;
+				end if;
+				
+			when low =>
+				if (2 < (i_cur_temp - i_des_temp)) then
+					state <= off;
+				elsif (7 <= (i_des_temp - i_cur_temp)) then
+					state <= high;
+				end if;
 
-	when low =>
-	if( 2 < (i_cur_temp - i_des_temp) ) then
-		state <= off;
-	elsif ( 7 =< (i_des_temp - i_cur_temp) ) then
-		state <= high;
-	end if;
+			when others =>
+				state <= off;
+			end case;
+		end if;
+	end process;
 
-	when others =>
-	state <= off;
-
+	o_heatmode <= state;
 end main;
 
 -- question 1

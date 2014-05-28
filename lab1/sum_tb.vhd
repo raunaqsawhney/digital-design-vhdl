@@ -34,12 +34,16 @@ end architecture;
 
 -- question 2
 -- signal   | waveform description
--- a			0 1 0
--- b			0 0 0
--- cin			0 0 1
--- the_sum  	0 1 1
+-- a        0 1 0 0
+-- b        0 0 0 0 
+-- cin      0 0 1 0
+-- the_sum  0 1 1 0 
 
 
 -- question 3
-  --insert answer here
+  -- After the first 30ns (or 40ns based on the .sim file for this test bench),
+  -- the process loops back to the top statement (after the begin), and repeats
+  -- the signal assignments again for the duration of the simulation run length
+  -- specified in ModelSIM. If the runtime of the simulation was specified as
+  -- 30ns, then it wouldn't loop back to the beginning 
 
