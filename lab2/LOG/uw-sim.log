@@ -1,0 +1,76 @@
+uw-sim /home/ece327/bin/uw-sim fir.uwp
+INFO: Using testbench        : fir_tb
+INFO: Using design entity    : fir
+** Warning: vmap will not overwrite local modelsim.ini.
+ ** Warning: (vlib-34) Library already exists at "work-msim".
+ DEBUG: modelsim_pfx: testing: /opt/ModelSim101/modeltech/bin/
+DEBUG: try_set: altera_sim_lib: True: /home/ece327/altera
+DEBUG: default_board: DE2
+** Warning: (vlib-34) Library already exists at "work-msim".
+** Warning: (vlib-34) Library already exists at "work-msim".
+  Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+-- Loading package STANDARD
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package NUMERIC_STD
+-- Compiling package fir_synth_pkg
+-- Compiling package fir_synth_pkg
+-- Compiling package body fir_synth_pkg
+-- Compiling package body fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Compiling entity fir
+-- Compiling entity fir
+-- Compiling architecture avg of fir
+-- Compiling architecture avg of fir
+-- Compiling architecture low_pass of fir
+-- Compiling architecture low_pass of fir
+-- Loading entity fir
+-- Loading entity fir
+-- Compiling package fir_synth_pkg
+-- Compiling package fir_synth_pkg
+-- Compiling package body fir_synth_pkg
+-- Compiling package body fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Loading package fir_synth_pkg
+-- Compiling entity fir_tb
+-- Compiling entity fir_tb
+-- Compiling architecture main of fir_tb
+-- Compiling architecture main of fir_tb
+** Error: fir_tb.vhd(18): near "in": expecting STRING or IDENTIFIER or << or '('
+** Error: fir_tb.vhd(18): near "in": expecting STRING or IDENTIFIER or << or '('
+** Error: fir_tb.vhd(21): near "constant": expecting ';'
+** Error: fir_tb.vhd(21): near "constant": expecting ';'
+-- Loading entity fir
+-- Loading entity fir
+** Error: fir_tb.vhd(28): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(28): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(29): (vcom-1035) Formal port "clk" has OPEN or no actual associated with it.
+** Error: fir_tb.vhd(29): (vcom-1035) Formal port "clk" has OPEN or no actual associated with it.
+** Error: fir_tb.vhd(32): near "constant": syntax error
+** Error: fir_tb.vhd(32): near "constant": syntax error
+** Error: fir_tb.vhd(39): Illegal sequential statement.
+** Error: fir_tb.vhd(39): Illegal sequential statement.
+** Error: fir_tb.vhd(40): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(40): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(40): (vcom-1136) Unknown identifier "coef0".
+** Error: fir_tb.vhd(40): (vcom-1136) Unknown identifier "coef0".
+** Error: fir_tb.vhd(43): near "j": expecting <= or :=
+** Error: fir_tb.vhd(43): near "j": expecting <= or :=
+** Error: fir_tb.vhd(47): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(47): (vcom-1136) Unknown identifier "input".
+** Error: fir_tb.vhd(47): (vcom-1136) Unknown identifier "coef0".
+** Error: fir_tb.vhd(47): (vcom-1136) Unknown identifier "coef0".
+** Error: fir_tb.vhd(48): near "process": expecting ';'
+** Error: fir_tb.vhd(48): near "process": expecting ';'
+  ERROR: Failure when running `vcom -93 +acc -work work-msim fir_synth_pkg.vhd fir.vhd fir_synth_pkg.vhd fir_tb.vhd'
+ ERROR: Failure when running `uw-msim-com  fir_synth_pkg.vhd fir.vhd fir_synth_pkg.vhd fir_tb.vhd'
