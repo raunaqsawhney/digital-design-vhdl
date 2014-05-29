@@ -120,10 +120,20 @@ begin
   --
   -- Your FIR filter MUST be clocked with the data_clk 
 
+  -- ECE327: Code 8
+  avg_filter : entity work.fir(avg)
+    port map (
+      clk       => data_clk,
+      i_data	=> sine_data,
+      o_data    => audio_out
+    );
+
   -- ECE327: Code 6
   process begin
     wait until rising_edge( data_clk );
-	if (sw(17) = '0') then 
+	if (sw(17) = '0' and sw(16) = '1') then 
+		audio_out <= avg_filter;
+	elsif (sw(17) = '0' and sw(16) = '0') then
 		audio_out <= sine_data;
 	elsif (sw(17) = '1') then
 		audio_out <= noise_data;
@@ -144,11 +154,14 @@ begin
 
   ----------------------------------------------------
   -- ECE327: Code 7
-  if ( sw(17) = '0' ) then 
+  process begin
+  	wait until rising_edge( data_clk );
+  	if ( sw(17) = '0' ) then 
   		display_freq <= frequency_map( to_integer ( sine_freq ) );
-  elsif (sw(17) = '1') then
+  	elsif (sw(17) = '1') then
   		display_freq <= frequency_map( to_integer ( x"015E" ) );
-  end if;
+  	end if;
+  end process;
 
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
