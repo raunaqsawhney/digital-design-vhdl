@@ -23,10 +23,10 @@ architecture avg of fir is
                     , sum2 , sum3 , sum4
        : word;
 
-  constant coef1 : word := x"0400";
-  constant coef2 : word := x"0400";
+  constant coef1 : word := x"0200";
+  constant coef2 : word := x"0300";
   constant coef3 : word := x"0400";
-  constant coef4 : word := x"0400";
+  constant coef4 : word := x"0500";
   
 begin
 
@@ -84,7 +84,13 @@ begin
 end architecture;
 
 -- question 2
-  -- insert your answer here
+-- For one adder, we would need at most two LUTs as the input to adders are
+-- themselves the combination of two inputs. So for a worst cast e.g.:
+-- sum2 <= prod1 + prod2
+-- we would expand prod1 as prod1 <= mult( tap1, coef1)
+-- needing two LUTs for each prod1 and prod2.
 
 -- question 3
-  -- insert your answer here
+-- For one multiplier we would need at most one LUT as the multiplier is formed
+-- from two inputs and they can in total have atmost 4 possible combinations which
+-- can be stored in a 2x2 lookup table. 

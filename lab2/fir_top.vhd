@@ -120,10 +120,14 @@ begin
   --
   -- Your FIR filter MUST be clocked with the data_clk 
 
-
+  -- ECE327: Code 6
   process begin
     wait until rising_edge( data_clk );
-    audio_out <= sine_data;
+	if (sw(17) = '0') then 
+		audio_out <= sine_data;
+	elsif (sw(17) = '1') then
+		audio_out <= noise_data;
+	end if;
   end process;
   
   --------------------------------------------------------------
@@ -139,8 +143,11 @@ begin
 
 
   ----------------------------------------------------
-  
-  display_freq <= frequency_map( to_integer ( sine_freq ) );
+  -- ECE327: Code 7
+  if ( sw(17) = '0' ) then 
+  		display_freq <= frequency_map( to_integer ( sine_freq ) );
+  elsif (sw(17) = '1') then
+  		display_freq <= frequency_map( to_integer ( x"015E" ) );
 
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
