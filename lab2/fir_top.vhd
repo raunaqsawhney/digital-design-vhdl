@@ -69,7 +69,10 @@ architecture main of fir_top is
        , noise_data
        , audio_out
        : word;
-  
+
+  signal filter_in  :  word;
+  signal filter_out :  word;
+  signal data_out   :  word; 
   --------------------------------------------------------------
   -- audio chip signals
 
@@ -83,6 +86,7 @@ architecture main of fir_top is
   
   signal serial_audio_out : std_logic;
   
+
 begin
 
   --------------------------------------------------------------
@@ -105,7 +109,13 @@ begin
       clk    => data_clk,   
       o_data => noise_data
     );
-      
+
+  fir_avg : entity work.fir(avg)
+    port map (
+        clk     => data_clk,
+        i_data  => filter_in,
+        o_data  => filter_out
+    );
   --------------------------------------------------------------
   -- core audio connection
   --
@@ -120,24 +130,16 @@ begin
   --
   -- Your FIR filter MUST be clocked with the data_clk 
 
-  -- ECE327: Code 8
-  avg_filter : entity work.fir(avg)
-    port map (
-      clk       => data_clk,
-      i_data	=> sine_data,
-      o_data    => audio_out
-    );
-
-  -- ECE327: Code 6
+  -- ECE327: CODE 69
   process begin
     wait until rising_edge( data_clk );
-	if (sw(17) = '0' and sw(16) = '1') then 
-		audio_out <= avg_filter;
-	elsif (sw(17) = '0' and sw(16) = '0') then
-		audio_out <= sine_data;
-	elsif (sw(17) = '1') then
-		audio_out <= noise_data;
-	end if;
+    if (sw(17) = '0' AND sw(16) = '0') then
+        audio_out <= sine_data;
+    elsif (sw(17) = '1') then
+        audio_out <= noise_data;
+    elsif ((sw(17) = '0') AND (sw(16) = '1')) then
+        audio_out <= filter_out;
+    end if;
   end process;
   
   --------------------------------------------------------------
@@ -153,15 +155,27 @@ begin
 
 
   ----------------------------------------------------
-  -- ECE327: Code 7
-  process begin
-  	wait until rising_edge( data_clk );
-  	if ( sw(17) = '0' ) then 
-  		display_freq <= frequency_map( to_integer ( sine_freq ) );
-  	elsif (sw(17) = '1') then
-  		display_freq <= frequency_map( to_integer ( x"015E" ) );
-  	end if;
-  end process;
+
+    process begin
+        wait until rising_edge(data_clk);
+        if (sw(17) = '0') then
+            filter_in <= sine_data;
+        else 
+            filter_in <= noise_data;
+        end if;
+    end process;
+
+
+   --ECE327: Code 7
+   process begin
+       wait until rising_edge(data_clk);
+       if (sw(17) = '0') then
+            display_freq <= frequency_map( to_integer(sine_freq));
+       elsif (sw(17) = '1') then
+            display_freq <= x"015E";
+       end if;
+   end process;
+
 
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
