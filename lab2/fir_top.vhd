@@ -148,6 +148,7 @@ begin
   		display_freq <= frequency_map( to_integer ( sine_freq ) );
   elsif (sw(17) = '1') then
   		display_freq <= frequency_map( to_integer ( x"015E" ) );
+  end if;
 
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
