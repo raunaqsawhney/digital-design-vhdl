@@ -108,7 +108,7 @@ begin
       o_data => noise_data
     );
 
-  --ECE327: Code 8
+  --ECE327:Code 8
   fir_avg : entity work.fir(avg)
     port map (
         clk     => data_clk,
