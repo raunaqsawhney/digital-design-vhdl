@@ -130,7 +130,7 @@ begin
   --
   -- Your FIR filter MUST be clocked with the data_clk 
 
-  -- ECE327: CODE 69
+  -- ECE327: CODE 9
   process begin
     wait until rising_edge( data_clk );
     if (sw(17) = '0' AND sw(16) = '0') then
