@@ -72,10 +72,10 @@ architecture low_pass of fir is
   -- match your needs.
   
   -- ECE327: Code 10 
-  signal prod : std_logic_vector(16 downto 0);
-  signal sum  : std_logic_vector(15 downto 0);
-  signal tap  : std_logic_vector(15 downto 0); 
-  
+  signal prod : std_logic_vector(1 to num_taps);
+  signal sum  : std_logic_vector(2 to num_taps);
+  signal tap  : std_logic_vector(1 to num_taps); 
+  -- constant num_taps : natural := 17; 
   	 
   -- The attribute line below is usually needed to avoid a warning
   -- from PrecisionRTL that signals could be implemented using
@@ -86,28 +86,30 @@ architecture low_pass of fir is
 begin
 
   -- delay line of flops to hold samples of input data
-  tap0 <= i_data;
-  delay_line : process(clk)
+  tap(0) <= i_data;
+  delay_line_lowpass : process(clk)
   begin
-    if (rising_edge(clk)) then
-      tap1 <= tap0;
-      tap2 <= tap1;
-      tap3 <= tap2;
-      tap4 <= tap3;
-    end if;
+  for i in 1 to num_taps generate
+  	if (rising_edge(clk)) then
+		tap(i) <= tap(i-1);
+  	end if;
+  end generate;
   end process;
-  
+ 
   -- generalize the below statements to use a for-generate loop.
-  for i in 0 to num_taps generate 
-  prod1 <= mult( tap1, coef1);
-  prod2 <= mult( tap2, coef2);
-  prod3 <= mult( tap3, coef3);
-  prod4 <= mult( tap4, coef4);
+  for i in 1 to num_taps generate 
+  	prod(i) <= mult( tap(i), lpcoef(i));
+  end generate;
+	
+  -- there are no sum0 or sum1
+  sum(2) <= prod(1) + prod(2);
 
-  sum2  <= prod1 + prod2;
-  sum3  <= sum2  + prod3;
-  sum4  <= sum3  + prod4;
-  
+  for i in 3 to num_taps generate
+	sum(i) <= sum(i-1) + prod(i);
+  end generate;
+
+  o_data <= sum(num_taps);
+
 end architecture;
 
 -- question 2
