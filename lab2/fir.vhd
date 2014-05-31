@@ -71,8 +71,12 @@ architecture low_pass of fir is
   -- Use the signal names tap, prod, and sum, but change the type to
   -- match your needs.
   
-  signal tap, prod, sum : std_logic;
+  -- ECE327: Code 10 
+  signal prod : std_logic_vector(16 downto 0);
+  signal sum  : std_logic_vector(15 downto 0);
+  signal tap  : std_logic_vector(15 downto 0); 
   
+  	 
   -- The attribute line below is usually needed to avoid a warning
   -- from PrecisionRTL that signals could be implemented using
   -- memory arrays.  
@@ -81,6 +85,29 @@ architecture low_pass of fir is
   
 begin
 
+  -- delay line of flops to hold samples of input data
+  tap0 <= i_data;
+  delay_line : process(clk)
+  begin
+    if (rising_edge(clk)) then
+      tap1 <= tap0;
+      tap2 <= tap1;
+      tap3 <= tap2;
+      tap4 <= tap3;
+    end if;
+  end process;
+  
+  -- generalize the below statements to use a for-generate loop.
+  for i in 0 to num_taps generate 
+  prod1 <= mult( tap1, coef1);
+  prod2 <= mult( tap2, coef2);
+  prod3 <= mult( tap3, coef3);
+  prod4 <= mult( tap4, coef4);
+
+  sum2  <= prod1 + prod2;
+  sum3  <= sum2  + prod3;
+  sum4  <= sum3  + prod4;
+  
 end architecture;
 
 -- question 2
