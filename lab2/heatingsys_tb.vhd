@@ -10,6 +10,10 @@ entity heatingsys_tb is
 end entity;
 
 architecture main of heatingsys_tb is
+<<<<<<< HEAD
+=======
+begin
+>>>>>>> simar
 	signal des_temp, cur_temp : signed(7 downto 0);
 	signal reset 			  : std_logic;
 	signal clock 			  : std_logic;

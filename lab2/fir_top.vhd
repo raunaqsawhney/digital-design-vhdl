@@ -108,7 +108,7 @@ begin
       o_data => noise_data
     );
 
-  --ECE327: Code 8
+  -- ECE327: Code 8
   fir_avg : entity work.fir(avg)
     port map (
         clk     => data_clk,
@@ -152,27 +152,37 @@ begin
   -- For instance to display the number "2" one puts a "0010" into a to_sevenseg entity and then connects the output to the designed HEX display (hex0 .. hex7)
   -- To display "A5" one could use: hex1 <= to_sevenseg("1010"); hex0 <= to_sevenseg("0101");
 
-
  ----------------------------------------------------
  --ECE327: Code 6
  process begin
-	  wait until rising_edge(data_clk);
-	  if (sw(17) = '0') then
-		  filter_in <= sine_data;
-	  else 
-		  filter_in <= noise_data;
-	  end if;
+      wait until rising_edge(data_clk);
+      if (sw(17) = '0') then
+          filter_in <= sine_data;
+      else 
+          filter_in <= noise_data;
+      end if;
   end process;
 
-   --ECE327: Code 7
+  ----------------------------------------------------
+
+    process begin
+        wait until rising_edge(data_clk);
+        if (sw(17) = '0') then
+            filter_in <= sine_data;
+        else 
+            filter_in <= noise_data;
+        end if;
+    end process;
+
+   -- ECE327: Code 7
    process begin
-       wait until rising_edge(data_clk);
-       if (sw(17) = '0') then
-           display_freq <= frequency_map( to_integer(sine_freq));
-       elsif (sw(17) = '1') then
-            display_freq <= x"015E";
-       end if;
-   end process;
+   wait until rising_edge(data_clk);
+   if (sw(17) = '0') then
+        display_freq <= frequency_map( to_integer(sine_freq));
+    elsif (sw(17) = '1') then
+        display_freq <= x"015E";
+    end if;
+  end process;
 
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
