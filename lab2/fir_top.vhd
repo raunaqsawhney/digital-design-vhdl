@@ -154,17 +154,6 @@ begin
 
  ----------------------------------------------------
  --ECE327: Code 6
- process begin
-      wait until rising_edge(data_clk);
-      if (sw(17) = '0') then
-          filter_in <= sine_data;
-      else 
-          filter_in <= noise_data;
-      end if;
-  end process;
-
-  ----------------------------------------------------
-
     process begin
         wait until rising_edge(data_clk);
         if (sw(17) = '0') then
@@ -173,6 +162,7 @@ begin
             filter_in <= noise_data;
         end if;
     end process;
+  ----------------------------------------------------
 
    -- ECE327: Code 7
    process begin
