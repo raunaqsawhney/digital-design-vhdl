@@ -86,8 +86,15 @@ architecture low_pass of fir is
   attribute logic_block of tap, prod, sum : signal is true;
   
 begin
-
+  
+  
   tap(0) <= i_data;
+  process begin
+  	wait until rising_edge(clk);
+	for i in 1 to num_taps loop
+		tap(i) <= tap(i-1);
+	end loop;
+  end process;
 
   LPF_GEN: for i in 1 to num_taps generate
   	tap(i) <= tap(i-1);
