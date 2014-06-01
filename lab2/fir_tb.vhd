@@ -15,6 +15,7 @@ end entity;
 
 architecture main of fir_tb is
 
+<<<<<<< HEAD
     signal input : in word;
 
     constant coef1 : word := x"0100"
@@ -46,6 +47,12 @@ begin
 
             input := coef0;
     end process;
+=======
+  
+begin
+
+  
+>>>>>>> simar
 end architecture;
 ------------------------------------------------------------------------
 

@@ -1,5 +1,9 @@
 Analysis & Synthesis report for fir_top
+<<<<<<< HEAD
 Thu May 29 11:31:43 2014
+=======
+Thu May 29 11:17:19 2014
+>>>>>>> simar
 Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Full Version
 
 
@@ -51,15 +55,26 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
+<<<<<<< HEAD
 ; Analysis & Synthesis Status        ; Successful - Thu May 29 11:31:43 2014          ;
+=======
+; Analysis & Synthesis Status        ; Successful - Thu May 29 11:17:19 2014          ;
+>>>>>>> simar
 ; Quartus II Version                 ; 10.1 Build 197 01/19/2011 SP 1 SJ Full Version ;
 ; Revision Name                      ; fir_top                                        ;
 ; Top-level Entity Name              ; fir_top                                        ;
 ; Family                             ; Cyclone II                                     ;
+<<<<<<< HEAD
 ; Total logic elements               ; 300                                            ;
 ;     Total combinational functions  ; 246                                            ;
 ;     Dedicated logic registers      ; 142                                            ;
 ; Total registers                    ; 143                                            ;
+=======
+; Total logic elements               ; 337                                            ;
+;     Total combinational functions  ; 273                                            ;
+;     Dedicated logic registers      ; 152                                            ;
+; Total registers                    ; 153                                            ;
+>>>>>>> simar
 ; Total pins                         ; 114                                            ;
 ; Total virtual pins                 ; 0                                              ;
 ; Total memory bits                  ; 10,624                                         ;
@@ -187,6 +202,7 @@ applicable agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
+<<<<<<< HEAD
 ; Estimated Total logic elements              ; 300              ;
 ;                                             ;                  ;
 ; Total combinational functions               ; 246              ;
@@ -201,6 +217,22 @@ applicable agreement for further details.
 ;                                             ;                  ;
 ; Total registers                             ; 143              ;
 ;     -- Dedicated logic registers            ; 142              ;
+=======
+; Estimated Total logic elements              ; 337              ;
+;                                             ;                  ;
+; Total combinational functions               ; 273              ;
+; Logic element usage by number of LUT inputs ;                  ;
+;     -- 4 input functions                    ; 76               ;
+;     -- 3 input functions                    ; 103              ;
+;     -- <=2 input functions                  ; 94               ;
+;                                             ;                  ;
+; Logic elements by mode                      ;                  ;
+;     -- normal mode                          ; 143              ;
+;     -- arithmetic mode                      ; 130              ;
+;                                             ;                  ;
+; Total registers                             ; 153              ;
+;     -- Dedicated logic registers            ; 152              ;
+>>>>>>> simar
 ;     -- I/O registers                        ; 1                ;
 ;                                             ;                  ;
 ; I/O pins                                    ; 114              ;
@@ -209,8 +241,13 @@ applicable agreement for further details.
 ;     -- PLLs                                 ; 1                ;
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; aud_adclrck_dup0 ;
+<<<<<<< HEAD
 ; Maximum fan-out                             ; 122              ;
 ; Total fan-out                               ; 1423             ;
+=======
+; Maximum fan-out                             ; 132              ;
+; Total fan-out                               ; 1518             ;
+>>>>>>> simar
 ; Average fan-out                             ; 2.65             ;
 +---------------------------------------------+------------------+
 
@@ -220,7 +257,11 @@ applicable agreement for further details.
 +----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                         ; Library Name ;
 +----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------+
+<<<<<<< HEAD
 ; |fir_top                                                       ; 246 (77)          ; 142 (44)     ; 10624       ; 0            ; 0       ; 0         ; 114  ; 0            ; |fir_top                                                                                                    ;              ;
+=======
+; |fir_top                                                       ; 273 (77)          ; 152 (46)     ; 10624       ; 0            ; 0       ; 0         ; 114  ; 0            ; |fir_top                                                                                                    ;              ;
+>>>>>>> simar
 ;    |add_9_0:u_sine_address_add9_0i1|                           ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|add_9_0:u_sine_address_add9_0i1                                                                    ;              ;
 ;    |altpll:u_audio_dac_p1_altpll|                              ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altpll:u_audio_dac_p1_altpll                                                                       ;              ;
 ;    |altsyncram:modgen_rom_ix396__ix49625z59534|                ; 0 (0)             ; 0 (0)        ; 1664        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:modgen_rom_ix396__ix49625z59534                                                         ;              ;
@@ -229,10 +270,19 @@ applicable agreement for further details.
 ;       |altsyncram_9nk2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated                   ;              ;
 ;    |altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|          ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_sine_modgen_rom_ix21__ix62120z58996                                                   ;              ;
 ;       |altsyncram_0bk2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|altsyncram_0bk2:auto_generated                    ;              ;
+<<<<<<< HEAD
 ;    |fir:fir_avg|                                               ; 47 (0)            ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg                                                                                        ;              ;
 ;       |add_15_0:sum2_add15_2|                                  ; 15 (15)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_15_0:sum2_add15_2                                                                  ;              ;
 ;       |add_16_0:sum3_add16_0|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_0:sum3_add16_0                                                                  ;              ;
 ;       |add_16_1:o_data_add16_1|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_1:o_data_add16_1                                                                ;              ;
+=======
+;    |fir:fir_avg|                                               ; 74 (0)            ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg                                                                                        ;              ;
+;       |add_16_0:modgen_add_0|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_0:modgen_add_0                                                                  ;              ;
+;       |add_16_1:modgen_add_1|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_1:modgen_add_1                                                                  ;              ;
+;       |add_16_2:modgen_add_2|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_2:modgen_add_2                                                                  ;              ;
+;       |mult_32_8:prod2_mults19_0|                              ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|mult_32_8:prod2_mults19_0                                                              ;              ;
+;       |mult_32_9:prod4_mults20_1|                              ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|mult_32_9:prod4_mults20_1                                                              ;              ;
+>>>>>>> simar
 ;    |i2c_av_config_notri:u_i2c_av_config|                       ; 94 (13)           ; 39 (2)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config                                                                ;              ;
 ;       |i2c_ctrl_notri:u0|                                      ; 52 (40)           ; 8 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config|i2c_ctrl_notri:u0                                              ;              ;
 ;          |modgen_counter_6_0:modgen_counter_sd_counter|        ; 7 (7)             ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config|i2c_ctrl_notri:u0|modgen_counter_6_0:modgen_counter_sd_counter ;              ;
@@ -261,8 +311,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
+<<<<<<< HEAD
 ; Total registers                              ; 142   ;
 ; Number of registers using Synchronous Clear  ; 33    ;
+=======
+; Total registers                              ; 152   ;
+; Number of registers using Synchronous Clear  ; 35    ;
+>>>>>>> simar
 ; Number of registers using Synchronous Load   ; 30    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -939,6 +994,7 @@ Info: Running Quartus II Analysis & Synthesis
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
+<<<<<<< HEAD
     Info: Processing started: Thu May 29 11:31:35 2014
 Info: Command: quartus_map fir_top --source=fir_top_logic.edf --family=CycloneII
 Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -946,26 +1002,57 @@ Info: Found 14 design units, including 14 entities, in source file fir_top_logic
     Info: Found entity 1: add_15_0
     Info: Found entity 2: add_16_0
     Info: Found entity 3: add_16_1
+=======
+    Info: Processing started: Thu May 29 11:17:10 2014
+Info: Command: quartus_map fir_top --source=fir_top_logic.edf --family=CycloneII
+Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info: Found 16 design units, including 16 entities, in source file fir_top_logic.edf
+    Info: Found entity 1: add_16_0
+    Info: Found entity 2: add_16_1
+    Info: Found entity 3: add_16_2
+>>>>>>> simar
     Info: Found entity 4: add_9_0
     Info: Found entity 5: modgen_counter_10_0
     Info: Found entity 6: modgen_counter_16_0
     Info: Found entity 7: modgen_counter_16_1
     Info: Found entity 8: modgen_counter_6_0
     Info: Found entity 9: modgen_counter_9_0
+<<<<<<< HEAD
     Info: Found entity 10: sub_5_0
     Info: Found entity 11: fir
     Info: Found entity 12: fir_top
     Info: Found entity 13: i2c_av_config_notri
     Info: Found entity 14: i2c_ctrl_notri
+=======
+    Info: Found entity 10: mult_32_8
+    Info: Found entity 11: mult_32_9
+    Info: Found entity 12: sub_5_0
+    Info: Found entity 13: fir
+    Info: Found entity 14: fir_top
+    Info: Found entity 15: i2c_av_config_notri
+    Info: Found entity 16: i2c_ctrl_notri
+>>>>>>> simar
 Info: Elaborating entity "fir_top" for the top level hierarchy
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "fir" for hierarchy "fir:fir_avg"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+<<<<<<< HEAD
 Info: Elaborating entity "add_16_1" for hierarchy "fir:fir_avg|add_16_1:o_data_add16_1"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "add_15_0" for hierarchy "fir:fir_avg|add_15_0:sum2_add15_2"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "add_16_0" for hierarchy "fir:fir_avg|add_16_0:sum3_add16_0"
+=======
+Info: Elaborating entity "add_16_0" for hierarchy "fir:fir_avg|add_16_0:modgen_add_0"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_1" for hierarchy "fir:fir_avg|add_16_1:modgen_add_1"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_2" for hierarchy "fir:fir_avg|add_16_2:modgen_add_2"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_8" for hierarchy "fir:fir_avg|mult_32_8:prod2_mults19_0"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_9" for hierarchy "fir:fir_avg|mult_32_9:prod4_mults20_1"
+>>>>>>> simar
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "altsyncram" for hierarchy "altsyncram:modgen_rom_ix396__ix49625z59534"
 Info: Elaborated megafunction instantiation "altsyncram:modgen_rom_ix396__ix49625z59534"
@@ -1174,6 +1261,7 @@ Warning: Design contains 13 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "sw[13]"
     Warning (15610): No output dependent on input pin "sw[14]"
     Warning (15610): No output dependent on input pin "sw[15]"
+<<<<<<< HEAD
 Info: Implemented 454 device resources after synthesis - the final resource count might be different
     Info: Implemented 24 input pins
     Info: Implemented 88 output pins
@@ -1185,6 +1273,19 @@ Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
     Info: Peak virtual memory: 275 megabytes
     Info: Processing ended: Thu May 29 11:31:43 2014
     Info: Elapsed time: 00:00:08
+=======
+Info: Implemented 491 device resources after synthesis - the final resource count might be different
+    Info: Implemented 24 input pins
+    Info: Implemented 88 output pins
+    Info: Implemented 2 bidirectional pins
+    Info: Implemented 343 logic cells
+    Info: Implemented 33 RAM segments
+    Info: Implemented 1 PLLs
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 64 warnings
+    Info: Peak virtual memory: 274 megabytes
+    Info: Processing ended: Thu May 29 11:17:19 2014
+    Info: Elapsed time: 00:00:09
+>>>>>>> simar
     Info: Total CPU time (on all processors): 00:00:02
 
 
