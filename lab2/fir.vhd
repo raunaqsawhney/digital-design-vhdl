@@ -71,7 +71,7 @@ architecture low_pass of fir is
   -- Use the signal names tap, prod, and sum, but change the type to
   -- match your needs.
 
-  constant num_taps	: natural := 4;
+  constant num_taps	: natural := 17;
 
   signal prod 	: word_vector(1 to num_taps);
   signal sum	: word_vector(2 to num_taps);
