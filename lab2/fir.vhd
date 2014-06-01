@@ -70,6 +70,12 @@ architecture low_pass of fir is
 
   -- Use the signal names tap, prod, and sum, but change the type to
   -- match your needs.
+
+  constant num_taps	: natural := 4;
+
+  signal prod 	: word_vector(1 to num_taps);
+  signal sum	: word_vector(2 to num_taps);
+  signal tap	: word_vector(0 to num_taps);
   
   signal tap, prod, sum : std_logic;
   
@@ -80,6 +86,24 @@ architecture low_pass of fir is
   attribute logic_block of tap, prod, sum : signal is true;
   
 begin
+
+  tap(0) <= i_data;
+
+  LPF_GEN: for i in 1 to num_taps generate
+  	tap(i) <= tap(i-1);
+  end generate LPF_GEN;
+
+  MUL_GEN: for i in 1 to num_taps generate
+  	prod(i) <= mult(tap(i), lpcoef(i));
+  end generate MUL_GEN;
+
+  SUM_GEN: for i in 3 to num_taps generate
+  	sum(i) <= sum(i-1) + prod(i);
+
+  -- there are no sum0 or sum1
+  sum(2) <= sum(i-1) + prod(i);
+
+  o_data <= sum(num_taps);
 
 end architecture;
 
