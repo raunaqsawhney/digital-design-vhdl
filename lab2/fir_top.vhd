@@ -70,13 +70,8 @@ architecture main of fir_top is
        , audio_out
        : word;
 
-<<<<<<< HEAD
   signal filter_in, filter_out : word;
-=======
-  signal filter_in  :  word;
-  signal filter_out :  word;
-  signal data_out   :  word; 
->>>>>>> simar
+ 
   --------------------------------------------------------------
   -- audio chip signals
 
@@ -114,10 +109,7 @@ begin
       o_data => noise_data
     );
 
-<<<<<<< HEAD
-  --ECE327:Code 8
-=======
->>>>>>> simar
+  -- ECE327: Code 8
   fir_avg : entity work.fir(avg)
     port map (
         clk     => data_clk,
@@ -138,11 +130,7 @@ begin
   --
   -- Your FIR filter MUST be clocked with the data_clk 
 
-<<<<<<< HEAD
   --ECE327: Code 9
-=======
-  -- ECE327: CODE 9
->>>>>>> simar
   process begin
     wait until rising_edge( data_clk );
     if (sw(17) = '0' AND sw(16) = '0') then
@@ -165,8 +153,6 @@ begin
   -- For instance to display the number "2" one puts a "0010" into a to_sevenseg entity and then connects the output to the designed HEX display (hex0 .. hex7)
   -- To display "A5" one could use: hex1 <= to_sevenseg("1010"); hex0 <= to_sevenseg("0101");
 
-
-<<<<<<< HEAD
  ----------------------------------------------------
  --ECE327: Code 6
  process begin
@@ -177,7 +163,7 @@ begin
           filter_in <= noise_data;
       end if;
   end process;
-=======
+
   ----------------------------------------------------
 
     process begin
@@ -189,26 +175,16 @@ begin
         end if;
     end process;
 
->>>>>>> simar
-
-   --ECE327: Code 7
+   -- ECE327: Code 7
    process begin
-       wait until rising_edge(data_clk);
-       if (sw(17) = '0') then
-<<<<<<< HEAD
-           display_freq <= frequency_map( to_integer(sine_freq));
-=======
-            display_freq <= frequency_map( to_integer(sine_freq));
->>>>>>> simar
-       elsif (sw(17) = '1') then
-            display_freq <= x"015E";
-       end if;
-   end process;
+   wait until rising_edge(data_clk);
+   if (sw(17) = '0') then
+        display_freq <= frequency_map( to_integer(sine_freq));
+    elsif (sw(17) = '1') then
+        display_freq <= x"015E";
+    end if;
+  end process;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> simar
   hex7 <= to_sevenseg( unsigned(display_freq(15 downto 12)) );
   hex6 <= to_sevenseg( unsigned(display_freq(11 downto  8)) );
   hex5 <= to_sevenseg( unsigned(display_freq( 7 downto  4)) );
