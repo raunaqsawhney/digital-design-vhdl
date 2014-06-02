@@ -58,19 +58,21 @@ begin
 		end if;
 	end process;
 
-<<<<<<< HEAD
 	-- Assign state to output
 	o_heatmode <= state;
 
-=======
-	o_heatmode <= state;
->>>>>>> simar
 end main;
 
 -- question 1
   --insert answer here
-<<<<<<< HEAD
-  --TODO: ANSWER HERE 
-=======
->>>>>>> simar
+  -- Flip Flop: 2
+  -- AND: 11
+  -- OR: 8
+  -- NOT: 15
+  -- Latches: 0
+  -- Subtract: 2
+  -- MUX: 1
+  -- Comparator: 0
+  -- XOR: 0
+  -- ADDER: 0 
 

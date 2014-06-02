@@ -109,12 +109,20 @@ begin
     );
 
   -- ECE327: Code 8
-  fir_avg : entity work.fir(avg)
-    port map (
-        clk     => data_clk,
-        i_data  => filter_in,
-        o_data  => filter_out
-    );
+  --fir_avg : entity work.fir(avg)
+  --  port map (
+  --      clk     => data_clk,
+  --      i_data  => filter_in,
+  --      o_data  => filter_out
+  -- );
+  
+  -- ECE327: Code 11
+  fir_lp : entity work.fir(low_pass)
+  port map (
+  		clk		=> data_clk,
+  		i_data	=> filter_in,
+  		o_data	=> filter_out
+  	);
   --------------------------------------------------------------
   -- core audio connection
   --
@@ -132,11 +140,11 @@ begin
   --ECE327: Code 9
   process begin
     wait until rising_edge( data_clk );
-    if (sw(17) = '0' AND sw(16) = '0') then
+    if (sw(16) = '0' AND sw(17) = '0') then
         audio_out <= sine_data;
-    elsif (sw(17) = '1') then
-        audio_out <= noise_data;
-    elsif ((sw(17) = '0') AND (sw(16) = '1')) then
+	elsif (sw(16) = '0' AND sw(17) = '1') then
+		audio_out <= noise_data;
+    elsif (sw(16) = '1') then
         audio_out <= filter_out;
     end if;
   end process;
@@ -158,7 +166,7 @@ begin
         wait until rising_edge(data_clk);
         if (sw(17) = '0') then
             filter_in <= sine_data;
-        else 
+        elsif (sw(17) = '1') then 
             filter_in <= noise_data;
         end if;
     end process;
