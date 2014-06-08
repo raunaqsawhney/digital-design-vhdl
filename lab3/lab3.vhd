@@ -7,17 +7,8 @@ entity lab3 is
     clk       : in  std_logic;             -- the system clock
     reset     : in  std_logic;             -- reset
     i_valid   : in  std_logic;             -- input data is valid
-    i_data    : in  unsigned(7 downto 0);  -- input data
-    o_data    : out unsigned(7 downto 0);   -- output data
-    
-    hex0,
-    hex1,
-    hex2,
-    hex3,
-    hex4,
-    hex5,
-    hex6,
-    hex7      : out   std_logic_vector(6 downto 0);     -- hex display
+    i_data    : in  std_logic_vector(7 downto 0);  -- input data
+    o_data    : out std_logic_vector(7 downto 0)   -- output datay
 
 );
 
@@ -27,7 +18,7 @@ architecture main of lab3 is
 
     signal mem_address  : std_logic_vector(3 downto 0);
     signal mem_data     : std_logic_vector(7 downto 0); 
-    signal mem_out_data : std_logic_vector(7 downto 0);
+    --signal mem_out_data : std_logic_vector(7 downto 0);
     signal mem_wren     : std_logic_vector(2 downto 0); --for 3 mem banks
 
 
@@ -49,7 +40,7 @@ begin
     memA    :   entity work.mem(main)
         port map (
             address => mem_address,
-            clock   => i_clock,
+            clock   => clk,
             data    => mem_data,
             wren    => mem_wren(2),
             q       => mem_out_data(0)
@@ -58,7 +49,7 @@ begin
     memB    :   entity work.mem(main)
         port map (
             address => mem_address,
-            clock   => i_clock,
+            clock   => clk,
             data    => mem_data,
             wren    => mem_wren(1),
             q       => mem_out_data(1)
@@ -67,7 +58,7 @@ begin
     memC    :   entity work.mem(main)
         port map (
             address => mem_address,
-            clock   => i_clock,
+            clock   => clk,
             data    => mem_data,
             wren    => mem_wren(0),
             q       => mem_out_data(2)
@@ -78,10 +69,15 @@ begin
     begin
         wait until rising_edge(clk);
         if (i_valid = '1') then
-            --
+            for i in 0 to 15 loop
+                mem_data <= i_data;
+                mem_out_data(0) <= mem_data;
+            end loop;
         end if;
     end process;
 
+
+    o_data <= mem_out_data(0);
 
     
   
