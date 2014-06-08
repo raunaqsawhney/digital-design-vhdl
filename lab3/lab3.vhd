@@ -7,8 +7,8 @@ entity lab3 is
     clk       : in  std_logic;             -- the system clock
     reset     : in  std_logic;             -- reset
     i_valid   : in  std_logic;             -- input data is valid
-    i_data    : in  std_logic_vector(7 downto 0);  -- input data
-    o_data    : out std_logic_vector(7 downto 0)   -- output datay
+    i_data    : in  unsigned(7 downto 0);  -- input data
+    o_data    : out unsigned(7 downto 0);   -- output data
 
 );
 
@@ -18,7 +18,6 @@ architecture main of lab3 is
 
     signal mem_address  : std_logic_vector(3 downto 0);
     signal mem_data     : std_logic_vector(7 downto 0); 
-    --signal mem_out_data : std_logic_vector(7 downto 0);
     signal mem_wren     : std_logic_vector(2 downto 0); --for 3 mem banks
 
 
@@ -69,17 +68,14 @@ begin
     begin
         wait until rising_edge(clk);
         if (i_valid = '1') then
-            for i in 0 to 15 loop
-                mem_data <= i_data;
-                mem_out_data(0) <= mem_data;
+            for mem_address in 0 to 15 loop
+				mem_wren(2) <= '1';			-- enable write parcel to memory                
+
+mem_data <= i_data;
+                o_data <= memA(mem_address);
             end loop;
         end if;
     end process;
-
-
-    o_data <= mem_out_data(0);
-
-    
   
 end architecture main;
 
