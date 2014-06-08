@@ -1,9 +1,5 @@
 Analysis & Synthesis report for fir_top
-<<<<<<< HEAD
-Thu May 29 11:31:43 2014
-=======
-Thu May 29 11:17:19 2014
->>>>>>> simar
+Sun Jun 01 20:35:04 2014
 Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Full Version
 
 
@@ -19,12 +15,12 @@ Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Full Version
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. General Register Statistics
- 10. Source assignments for altsyncram:modgen_rom_ix396__ix49625z59534|altsyncram_mqj2:auto_generated
- 11. Source assignments for altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated
+ 10. Source assignments for altsyncram:modgen_rom_ix364__ix49625z59534|altsyncram_hqj2:auto_generated
+ 11. Source assignments for altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|altsyncram_9nk2:auto_generated
  12. Source assignments for altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|altsyncram_0bk2:auto_generated
- 13. Parameter Settings for User Entity Instance: altsyncram:modgen_rom_ix396__ix49625z59534
+ 13. Parameter Settings for User Entity Instance: altsyncram:modgen_rom_ix364__ix49625z59534
  14. Parameter Settings for User Entity Instance: altpll:u_audio_dac_p1_altpll
- 15. Parameter Settings for User Entity Instance: altsyncram:u_noise_modgen_rom_ix24__ix47421z34210
+ 15. Parameter Settings for User Entity Instance: altsyncram:u_noise_modgen_rom_ix24__ix62120z34212
  16. Parameter Settings for User Entity Instance: altsyncram:u_sine_modgen_rom_ix21__ix62120z58996
  17. altsyncram Parameter Settings by Entity Instance
  18. altpll Parameter Settings by Entity Instance
@@ -55,26 +51,15 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-<<<<<<< HEAD
-; Analysis & Synthesis Status        ; Successful - Thu May 29 11:31:43 2014          ;
-=======
-; Analysis & Synthesis Status        ; Successful - Thu May 29 11:17:19 2014          ;
->>>>>>> simar
+; Analysis & Synthesis Status        ; Successful - Sun Jun 01 20:35:03 2014          ;
 ; Quartus II Version                 ; 10.1 Build 197 01/19/2011 SP 1 SJ Full Version ;
 ; Revision Name                      ; fir_top                                        ;
 ; Top-level Entity Name              ; fir_top                                        ;
 ; Family                             ; Cyclone II                                     ;
-<<<<<<< HEAD
-; Total logic elements               ; 300                                            ;
-;     Total combinational functions  ; 246                                            ;
-;     Dedicated logic registers      ; 142                                            ;
-; Total registers                    ; 143                                            ;
-=======
-; Total logic elements               ; 337                                            ;
-;     Total combinational functions  ; 273                                            ;
-;     Dedicated logic registers      ; 152                                            ;
-; Total registers                    ; 153                                            ;
->>>>>>> simar
+; Total logic elements               ; 910                                            ;
+;     Total combinational functions  ; 690                                            ;
+;     Dedicated logic registers      ; 308                                            ;
+; Total registers                    ; 309                                            ;
 ; Total pins                         ; 114                                            ;
 ; Total virtual pins                 ; 0                                              ;
 ; Total memory bits                  ; 10,624                                         ;
@@ -180,21 +165,21 @@ applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                ;
-+-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------+
-; File Name with User-Entered Path                      ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                       ;
-+-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------+
-; fir_top_logic.edf                                     ; yes             ; User EDIF File                         ; P:/ece327/ece327/lab2/uw_tmp/fir_top_logic.edf                                     ;
-; altsyncram.tdf                                        ; yes             ; Megafunction                           ; c:/software/altera/10.1/quartus/libraries/megafunctions/altsyncram.tdf             ;
-; db/altsyncram_mqj2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/ece327/lab2/uw_tmp/db/altsyncram_mqj2.tdf                                ;
-; modgen_rom_ix396__altsyncram_13_7_128_2_0.hex         ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/ece327/lab2/uw_tmp/modgen_rom_ix396__altsyncram_13_7_128_2_0.hex         ;
-; altpll.tdf                                            ; yes             ; Megafunction                           ; c:/software/altera/10.1/quartus/libraries/megafunctions/altpll.tdf                 ;
-; db/altsyncram_9nk2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/ece327/lab2/uw_tmp/db/altsyncram_9nk2.tdf                                ;
-; u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/ece327/lab2/uw_tmp/u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ;
-; db/altsyncram_0bk2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/ece327/lab2/uw_tmp/db/altsyncram_0bk2.tdf                                ;
-; u_sine_modgen_rom_ix21__altsyncram_12_6_64_2_0.hex    ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/ece327/lab2/uw_tmp/u_sine_modgen_rom_ix21__altsyncram_12_6_64_2_0.hex    ;
-+-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                            ;
++-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------------+
+; File Name with User-Entered Path                      ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                   ;
++-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------------+
+; fir_top_logic.edf                                     ; yes             ; User EDIF File                         ; P:/ece327/github-repo/ece327/lab2/uw_tmp/fir_top_logic.edf                                     ;
+; altsyncram.tdf                                        ; yes             ; Megafunction                           ; c:/software/altera/10.1/quartus/libraries/megafunctions/altsyncram.tdf                         ;
+; db/altsyncram_hqj2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/github-repo/ece327/lab2/uw_tmp/db/altsyncram_hqj2.tdf                                ;
+; modgen_rom_ix364__altsyncram_13_7_128_2_0.hex         ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/github-repo/ece327/lab2/uw_tmp/modgen_rom_ix364__altsyncram_13_7_128_2_0.hex         ;
+; altpll.tdf                                            ; yes             ; Megafunction                           ; c:/software/altera/10.1/quartus/libraries/megafunctions/altpll.tdf                             ;
+; db/altsyncram_9nk2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/github-repo/ece327/lab2/uw_tmp/db/altsyncram_9nk2.tdf                                ;
+; u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/github-repo/ece327/lab2/uw_tmp/u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ;
+; db/altsyncram_0bk2.tdf                                ; yes             ; Auto-Generated Megafunction            ; P:/ece327/github-repo/ece327/lab2/uw_tmp/db/altsyncram_0bk2.tdf                                ;
+; u_sine_modgen_rom_ix21__altsyncram_12_6_64_2_0.hex    ; yes             ; Auto-Found Memory Initialization File  ; P:/ece327/github-repo/ece327/lab2/uw_tmp/u_sine_modgen_rom_ix21__altsyncram_12_6_64_2_0.hex    ;
++-------------------------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------+
@@ -202,37 +187,20 @@ applicable agreement for further details.
 +---------------------------------------------+------------------+
 ; Resource                                    ; Usage            ;
 +---------------------------------------------+------------------+
-<<<<<<< HEAD
-; Estimated Total logic elements              ; 300              ;
+; Estimated Total logic elements              ; 910              ;
 ;                                             ;                  ;
-; Total combinational functions               ; 246              ;
+; Total combinational functions               ; 690              ;
 ; Logic element usage by number of LUT inputs ;                  ;
 ;     -- 4 input functions                    ; 76               ;
-;     -- 3 input functions                    ; 80               ;
-;     -- <=2 input functions                  ; 90               ;
+;     -- 3 input functions                    ; 461              ;
+;     -- <=2 input functions                  ; 153              ;
 ;                                             ;                  ;
 ; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 141              ;
-;     -- arithmetic mode                      ; 105              ;
+;     -- normal mode                          ; 171              ;
+;     -- arithmetic mode                      ; 519              ;
 ;                                             ;                  ;
-; Total registers                             ; 143              ;
-;     -- Dedicated logic registers            ; 142              ;
-=======
-; Estimated Total logic elements              ; 337              ;
-;                                             ;                  ;
-; Total combinational functions               ; 273              ;
-; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 76               ;
-;     -- 3 input functions                    ; 103              ;
-;     -- <=2 input functions                  ; 94               ;
-;                                             ;                  ;
-; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 143              ;
-;     -- arithmetic mode                      ; 130              ;
-;                                             ;                  ;
-; Total registers                             ; 153              ;
-;     -- Dedicated logic registers            ; 152              ;
->>>>>>> simar
+; Total registers                             ; 309              ;
+;     -- Dedicated logic registers            ; 308              ;
 ;     -- I/O registers                        ; 1                ;
 ;                                             ;                  ;
 ; I/O pins                                    ; 114              ;
@@ -241,14 +209,9 @@ applicable agreement for further details.
 ;     -- PLLs                                 ; 1                ;
 ;                                             ;                  ;
 ; Maximum fan-out node                        ; aud_adclrck_dup0 ;
-<<<<<<< HEAD
-; Maximum fan-out                             ; 122              ;
-; Total fan-out                               ; 1423             ;
-=======
-; Maximum fan-out                             ; 132              ;
-; Total fan-out                               ; 1518             ;
->>>>>>> simar
-; Average fan-out                             ; 2.65             ;
+; Maximum fan-out                             ; 288              ;
+; Total fan-out                               ; 2978             ;
+; Average fan-out                             ; 2.60             ;
 +---------------------------------------------+------------------+
 
 
@@ -257,32 +220,47 @@ applicable agreement for further details.
 +----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                     ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                         ; Library Name ;
 +----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------+--------------+
-<<<<<<< HEAD
-; |fir_top                                                       ; 246 (77)          ; 142 (44)     ; 10624       ; 0            ; 0       ; 0         ; 114  ; 0            ; |fir_top                                                                                                    ;              ;
-=======
-; |fir_top                                                       ; 273 (77)          ; 152 (46)     ; 10624       ; 0            ; 0       ; 0         ; 114  ; 0            ; |fir_top                                                                                                    ;              ;
->>>>>>> simar
+; |fir_top                                                       ; 690 (77)          ; 308 (46)     ; 10624       ; 0            ; 0       ; 0         ; 114  ; 0            ; |fir_top                                                                                                    ;              ;
 ;    |add_9_0:u_sine_address_add9_0i1|                           ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|add_9_0:u_sine_address_add9_0i1                                                                    ;              ;
 ;    |altpll:u_audio_dac_p1_altpll|                              ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altpll:u_audio_dac_p1_altpll                                                                       ;              ;
-;    |altsyncram:modgen_rom_ix396__ix49625z59534|                ; 0 (0)             ; 0 (0)        ; 1664        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:modgen_rom_ix396__ix49625z59534                                                         ;              ;
-;       |altsyncram_mqj2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 1664        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:modgen_rom_ix396__ix49625z59534|altsyncram_mqj2:auto_generated                          ;              ;
-;    |altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|         ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_noise_modgen_rom_ix24__ix47421z34210                                                  ;              ;
-;       |altsyncram_9nk2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated                   ;              ;
+;    |altsyncram:modgen_rom_ix364__ix49625z59534|                ; 0 (0)             ; 0 (0)        ; 1664        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:modgen_rom_ix364__ix49625z59534                                                         ;              ;
+;       |altsyncram_hqj2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 1664        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:modgen_rom_ix364__ix49625z59534|altsyncram_hqj2:auto_generated                          ;              ;
+;    |altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|         ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_noise_modgen_rom_ix24__ix62120z34212                                                  ;              ;
+;       |altsyncram_9nk2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|altsyncram_9nk2:auto_generated                   ;              ;
 ;    |altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|          ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_sine_modgen_rom_ix21__ix62120z58996                                                   ;              ;
 ;       |altsyncram_0bk2:auto_generated|                         ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|altsyncram_0bk2:auto_generated                    ;              ;
-<<<<<<< HEAD
-;    |fir:fir_avg|                                               ; 47 (0)            ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg                                                                                        ;              ;
-;       |add_15_0:sum2_add15_2|                                  ; 15 (15)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_15_0:sum2_add15_2                                                                  ;              ;
-;       |add_16_0:sum3_add16_0|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_0:sum3_add16_0                                                                  ;              ;
-;       |add_16_1:o_data_add16_1|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_1:o_data_add16_1                                                                ;              ;
-=======
-;    |fir:fir_avg|                                               ; 74 (0)            ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg                                                                                        ;              ;
-;       |add_16_0:modgen_add_0|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_0:modgen_add_0                                                                  ;              ;
-;       |add_16_1:modgen_add_1|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_1:modgen_add_1                                                                  ;              ;
-;       |add_16_2:modgen_add_2|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|add_16_2:modgen_add_2                                                                  ;              ;
-;       |mult_32_8:prod2_mults19_0|                              ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|mult_32_8:prod2_mults19_0                                                              ;              ;
-;       |mult_32_9:prod4_mults20_1|                              ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_avg|mult_32_9:prod4_mults20_1                                                              ;              ;
->>>>>>> simar
+;    |fir:fir_lp|                                                ; 491 (0)           ; 204 (204)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp                                                                                         ;              ;
+;       |add_16_0:modgen_add_0|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_0:modgen_add_0                                                                   ;              ;
+;       |add_16_10:modgen_add_10|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_10:modgen_add_10                                                                 ;              ;
+;       |add_16_11:modgen_add_11|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_11:modgen_add_11                                                                 ;              ;
+;       |add_16_12:modgen_add_12|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_12:modgen_add_12                                                                 ;              ;
+;       |add_16_13:modgen_add_13|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_13:modgen_add_13                                                                 ;              ;
+;       |add_16_14:modgen_add_14|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_14:modgen_add_14                                                                 ;              ;
+;       |add_16_15:modgen_add_15|                                ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_15:modgen_add_15                                                                 ;              ;
+;       |add_16_1:modgen_add_1|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_1:modgen_add_1                                                                   ;              ;
+;       |add_16_2:modgen_add_2|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_2:modgen_add_2                                                                   ;              ;
+;       |add_16_3:modgen_add_3|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_3:modgen_add_3                                                                   ;              ;
+;       |add_16_4:modgen_add_4|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_4:modgen_add_4                                                                   ;              ;
+;       |add_16_5:modgen_add_5|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_5:modgen_add_5                                                                   ;              ;
+;       |add_16_6:modgen_add_6|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_6:modgen_add_6                                                                   ;              ;
+;       |add_16_7:modgen_add_7|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_7:modgen_add_7                                                                   ;              ;
+;       |add_16_8:modgen_add_8|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_8:modgen_add_8                                                                   ;              ;
+;       |add_16_9:modgen_add_9|                                  ; 16 (16)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|add_16_9:modgen_add_9                                                                   ;              ;
+;       |mult_32_60:prod_1__mults21_0|                           ; 15 (15)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_60:prod_1__mults21_0                                                            ;              ;
+;       |mult_32_61:prod_2__mults19_1|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_61:prod_2__mults19_1                                                            ;              ;
+;       |mult_32_62:prod_3__mults20_2|                           ; 17 (17)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_62:prod_3__mults20_2                                                            ;              ;
+;       |mult_32_63:prod_5__mults20_3|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_63:prod_5__mults20_3                                                            ;              ;
+;       |mult_32_64:prod_6__mults21_4|                           ; 27 (27)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_64:prod_6__mults21_4                                                            ;              ;
+;       |mult_32_65:prod_7__mults19_5|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_65:prod_7__mults19_5                                                            ;              ;
+;       |mult_32_66:prod_8__mults19_6|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_66:prod_8__mults19_6                                                            ;              ;
+;       |mult_32_67:prod_9__mults19_7|                           ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_67:prod_9__mults19_7                                                            ;              ;
+;       |mult_32_68:prod_10__mults19_8|                          ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_68:prod_10__mults19_8                                                           ;              ;
+;       |mult_32_69:prod_11__mults19_9|                          ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_69:prod_11__mults19_9                                                           ;              ;
+;       |mult_32_70:prod_12__mults21_10|                         ; 27 (27)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_70:prod_12__mults21_10                                                          ;              ;
+;       |mult_32_71:prod_13__mults20_11|                         ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_71:prod_13__mults20_11                                                          ;              ;
+;       |mult_32_72:prod_15__mults20_12|                         ; 17 (17)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_72:prod_15__mults20_12                                                          ;              ;
+;       |mult_32_73:prod_16__mults19_13|                         ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_73:prod_16__mults19_13                                                          ;              ;
+;       |mult_32_74:prod_17__mults21_14|                         ; 15 (15)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|fir:fir_lp|mult_32_74:prod_17__mults21_14                                                          ;              ;
 ;    |i2c_av_config_notri:u_i2c_av_config|                       ; 94 (13)           ; 39 (2)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config                                                                ;              ;
 ;       |i2c_ctrl_notri:u0|                                      ; 52 (40)           ; 8 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config|i2c_ctrl_notri:u0                                              ;              ;
 ;          |modgen_counter_6_0:modgen_counter_sd_counter|        ; 7 (7)             ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fir_top|i2c_av_config_notri:u_i2c_av_config|i2c_ctrl_notri:u0|modgen_counter_6_0:modgen_counter_sd_counter ;              ;
@@ -300,8 +278,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+-------------------------------------------------------+
 ; Name                                                                                        ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                                                   ;
 +---------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+-------------------------------------------------------+
-; altsyncram:modgen_rom_ix396__ix49625z59534|altsyncram_mqj2:auto_generated|ALTSYNCRAM        ; AUTO ; ROM  ; 128          ; 13           ; --           ; --           ; 1664 ; modgen_rom_ix396__altsyncram_13_7_128_2_0.hex         ;
-; altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 1024         ; 8            ; --           ; --           ; 8192 ; u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ;
+; altsyncram:modgen_rom_ix364__ix49625z59534|altsyncram_hqj2:auto_generated|ALTSYNCRAM        ; AUTO ; ROM  ; 128          ; 13           ; --           ; --           ; 1664 ; modgen_rom_ix364__altsyncram_13_7_128_2_0.hex         ;
+; altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|altsyncram_9nk2:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 1024         ; 8            ; --           ; --           ; 8192 ; u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex ;
 ; altsyncram:u_sine_modgen_rom_ix21__ix62120z58996|altsyncram_0bk2:auto_generated|ALTSYNCRAM  ; AUTO ; ROM  ; 64           ; 12           ; --           ; --           ; 768  ; u_sine_modgen_rom_ix21__altsyncram_12_6_64_2_0.hex    ;
 +---------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+-------------------------------------------------------+
 
@@ -311,13 +289,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-<<<<<<< HEAD
-; Total registers                              ; 142   ;
-; Number of registers using Synchronous Clear  ; 33    ;
-=======
-; Total registers                              ; 152   ;
-; Number of registers using Synchronous Clear  ; 35    ;
->>>>>>> simar
+; Total registers                              ; 308   ;
+; Number of registers using Synchronous Clear  ; 27    ;
 ; Number of registers using Synchronous Load   ; 30    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -327,7 +300,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------+
-; Source assignments for altsyncram:modgen_rom_ix396__ix49625z59534|altsyncram_mqj2:auto_generated ;
+; Source assignments for altsyncram:modgen_rom_ix364__ix49625z59534|altsyncram_hqj2:auto_generated ;
 +---------------------------------+--------------------+------+------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                 ;
 +---------------------------------+--------------------+------+------------------------------------+
@@ -336,7 +309,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +---------------------------------------------------------------------------------------------------------+
-; Source assignments for altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated ;
+; Source assignments for altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|altsyncram_9nk2:auto_generated ;
 +---------------------------------+--------------------+------+-------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                        ;
 +---------------------------------+--------------------+------+-------------------------------------------+
@@ -354,7 +327,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-----------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: altsyncram:modgen_rom_ix396__ix49625z59534             ;
+; Parameter Settings for User Entity Instance: altsyncram:modgen_rom_ix364__ix49625z59534             ;
 +------------------------------------+-----------------------------------------------+----------------+
 ; Parameter Name                     ; Value                                         ; Type           ;
 +------------------------------------+-----------------------------------------------+----------------+
@@ -396,7 +369,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                     ; Untyped        ;
 ; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                          ; Untyped        ;
 ; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                          ; Untyped        ;
-; INIT_FILE                          ; modgen_rom_ix396__altsyncram_13_7_128_2_0.hex ; Untyped        ;
+; INIT_FILE                          ; modgen_rom_ix364__altsyncram_13_7_128_2_0.hex ; Untyped        ;
 ; INIT_FILE_LAYOUT                   ; PORT_A                                        ; Untyped        ;
 ; MAXIMUM_DEPTH                      ; 0                                             ; Untyped        ;
 ; CLOCK_ENABLE_INPUT_A               ; NORMAL                                        ; Untyped        ;
@@ -408,7 +381,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ENABLE_ECC                         ; FALSE                                         ; Untyped        ;
 ; WIDTH_ECCSTATUS                    ; 3                                             ; Untyped        ;
 ; DEVICE_FAMILY                      ; Cyclone II                                    ; Untyped        ;
-; CBXI_PARAMETER                     ; altsyncram_mqj2                               ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_hqj2                               ; Untyped        ;
 +------------------------------------+-----------------------------------------------+----------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -788,7 +761,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: altsyncram:u_noise_modgen_rom_ix24__ix47421z34210              ;
+; Parameter Settings for User Entity Instance: altsyncram:u_noise_modgen_rom_ix24__ix62120z34212              ;
 +------------------------------------+-------------------------------------------------------+----------------+
 ; Parameter Name                     ; Value                                                 ; Type           ;
 +------------------------------------+-------------------------------------------------------+----------------+
@@ -913,7 +886,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Name                                      ; Value                                             ;
 +-------------------------------------------+---------------------------------------------------+
 ; Number of entity instances                ; 3                                                 ;
-; Entity Instance                           ; altsyncram:modgen_rom_ix396__ix49625z59534        ;
+; Entity Instance                           ; altsyncram:modgen_rom_ix364__ix49625z59534        ;
 ;     -- OPERATION_MODE                     ; ROM                                               ;
 ;     -- WIDTH_A                            ; 13                                                ;
 ;     -- NUMWORDS_A                         ; 128                                               ;
@@ -924,7 +897,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- OUTDATA_REG_B                      ; UNREGISTERED                                      ;
 ;     -- RAM_BLOCK_TYPE                     ; AUTO                                              ;
 ;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                         ;
-; Entity Instance                           ; altsyncram:u_noise_modgen_rom_ix24__ix47421z34210 ;
+; Entity Instance                           ; altsyncram:u_noise_modgen_rom_ix24__ix62120z34212 ;
 ;     -- OPERATION_MODE                     ; ROM                                               ;
 ;     -- WIDTH_A                            ; 8                                                 ;
 ;     -- NUMWORDS_A                         ; 1024                                              ;
@@ -994,69 +967,121 @@ Info: Running Quartus II Analysis & Synthesis
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-<<<<<<< HEAD
-    Info: Processing started: Thu May 29 11:31:35 2014
+    Info: Processing started: Sun Jun 01 20:34:49 2014
 Info: Command: quartus_map fir_top --source=fir_top_logic.edf --family=CycloneII
 Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
-Info: Found 14 design units, including 14 entities, in source file fir_top_logic.edf
-    Info: Found entity 1: add_15_0
-    Info: Found entity 2: add_16_0
-    Info: Found entity 3: add_16_1
-=======
-    Info: Processing started: Thu May 29 11:17:10 2014
-Info: Command: quartus_map fir_top --source=fir_top_logic.edf --family=CycloneII
-Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
-Info: Found 16 design units, including 16 entities, in source file fir_top_logic.edf
+Info: Found 42 design units, including 42 entities, in source file fir_top_logic.edf
     Info: Found entity 1: add_16_0
     Info: Found entity 2: add_16_1
-    Info: Found entity 3: add_16_2
->>>>>>> simar
-    Info: Found entity 4: add_9_0
-    Info: Found entity 5: modgen_counter_10_0
-    Info: Found entity 6: modgen_counter_16_0
-    Info: Found entity 7: modgen_counter_16_1
-    Info: Found entity 8: modgen_counter_6_0
-    Info: Found entity 9: modgen_counter_9_0
-<<<<<<< HEAD
-    Info: Found entity 10: sub_5_0
-    Info: Found entity 11: fir
-    Info: Found entity 12: fir_top
-    Info: Found entity 13: i2c_av_config_notri
-    Info: Found entity 14: i2c_ctrl_notri
-=======
-    Info: Found entity 10: mult_32_8
-    Info: Found entity 11: mult_32_9
-    Info: Found entity 12: sub_5_0
-    Info: Found entity 13: fir
-    Info: Found entity 14: fir_top
-    Info: Found entity 15: i2c_av_config_notri
-    Info: Found entity 16: i2c_ctrl_notri
->>>>>>> simar
+    Info: Found entity 3: add_16_10
+    Info: Found entity 4: add_16_11
+    Info: Found entity 5: add_16_12
+    Info: Found entity 6: add_16_13
+    Info: Found entity 7: add_16_14
+    Info: Found entity 8: add_16_15
+    Info: Found entity 9: add_16_2
+    Info: Found entity 10: add_16_3
+    Info: Found entity 11: add_16_4
+    Info: Found entity 12: add_16_5
+    Info: Found entity 13: add_16_6
+    Info: Found entity 14: add_16_7
+    Info: Found entity 15: add_16_8
+    Info: Found entity 16: add_16_9
+    Info: Found entity 17: add_9_0
+    Info: Found entity 18: modgen_counter_10_0
+    Info: Found entity 19: modgen_counter_16_0
+    Info: Found entity 20: modgen_counter_16_1
+    Info: Found entity 21: modgen_counter_6_0
+    Info: Found entity 22: modgen_counter_9_0
+    Info: Found entity 23: mult_32_60
+    Info: Found entity 24: mult_32_61
+    Info: Found entity 25: mult_32_62
+    Info: Found entity 26: mult_32_63
+    Info: Found entity 27: mult_32_64
+    Info: Found entity 28: mult_32_65
+    Info: Found entity 29: mult_32_66
+    Info: Found entity 30: mult_32_67
+    Info: Found entity 31: mult_32_68
+    Info: Found entity 32: mult_32_69
+    Info: Found entity 33: mult_32_70
+    Info: Found entity 34: mult_32_71
+    Info: Found entity 35: mult_32_72
+    Info: Found entity 36: mult_32_73
+    Info: Found entity 37: mult_32_74
+    Info: Found entity 38: sub_5_0
+    Info: Found entity 39: fir
+    Info: Found entity 40: fir_top
+    Info: Found entity 41: i2c_av_config_notri
+    Info: Found entity 42: i2c_ctrl_notri
 Info: Elaborating entity "fir_top" for the top level hierarchy
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "fir" for hierarchy "fir:fir_avg"
+Info: Elaborating entity "fir" for hierarchy "fir:fir_lp"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-<<<<<<< HEAD
-Info: Elaborating entity "add_16_1" for hierarchy "fir:fir_avg|add_16_1:o_data_add16_1"
+Info: Elaborating entity "add_16_0" for hierarchy "fir:fir_lp|add_16_0:modgen_add_0"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "add_15_0" for hierarchy "fir:fir_avg|add_15_0:sum2_add15_2"
+Info: Elaborating entity "add_16_1" for hierarchy "fir:fir_lp|add_16_1:modgen_add_1"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "add_16_0" for hierarchy "fir:fir_avg|add_16_0:sum3_add16_0"
-=======
-Info: Elaborating entity "add_16_0" for hierarchy "fir:fir_avg|add_16_0:modgen_add_0"
+Info: Elaborating entity "add_16_10" for hierarchy "fir:fir_lp|add_16_10:modgen_add_10"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "add_16_1" for hierarchy "fir:fir_avg|add_16_1:modgen_add_1"
+Info: Elaborating entity "add_16_11" for hierarchy "fir:fir_lp|add_16_11:modgen_add_11"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "add_16_2" for hierarchy "fir:fir_avg|add_16_2:modgen_add_2"
+Info: Elaborating entity "add_16_12" for hierarchy "fir:fir_lp|add_16_12:modgen_add_12"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "mult_32_8" for hierarchy "fir:fir_avg|mult_32_8:prod2_mults19_0"
+Info: Elaborating entity "add_16_13" for hierarchy "fir:fir_lp|add_16_13:modgen_add_13"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "mult_32_9" for hierarchy "fir:fir_avg|mult_32_9:prod4_mults20_1"
->>>>>>> simar
+Info: Elaborating entity "add_16_14" for hierarchy "fir:fir_lp|add_16_14:modgen_add_14"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "altsyncram" for hierarchy "altsyncram:modgen_rom_ix396__ix49625z59534"
-Info: Elaborated megafunction instantiation "altsyncram:modgen_rom_ix396__ix49625z59534"
-Info: Instantiated megafunction "altsyncram:modgen_rom_ix396__ix49625z59534" with the following parameter:
+Info: Elaborating entity "add_16_15" for hierarchy "fir:fir_lp|add_16_15:modgen_add_15"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_2" for hierarchy "fir:fir_lp|add_16_2:modgen_add_2"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_3" for hierarchy "fir:fir_lp|add_16_3:modgen_add_3"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_4" for hierarchy "fir:fir_lp|add_16_4:modgen_add_4"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_5" for hierarchy "fir:fir_lp|add_16_5:modgen_add_5"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_6" for hierarchy "fir:fir_lp|add_16_6:modgen_add_6"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_7" for hierarchy "fir:fir_lp|add_16_7:modgen_add_7"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_8" for hierarchy "fir:fir_lp|add_16_8:modgen_add_8"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "add_16_9" for hierarchy "fir:fir_lp|add_16_9:modgen_add_9"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_68" for hierarchy "fir:fir_lp|mult_32_68:prod_10__mults19_8"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_69" for hierarchy "fir:fir_lp|mult_32_69:prod_11__mults19_9"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_70" for hierarchy "fir:fir_lp|mult_32_70:prod_12__mults21_10"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_71" for hierarchy "fir:fir_lp|mult_32_71:prod_13__mults20_11"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_72" for hierarchy "fir:fir_lp|mult_32_72:prod_15__mults20_12"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_73" for hierarchy "fir:fir_lp|mult_32_73:prod_16__mults19_13"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_74" for hierarchy "fir:fir_lp|mult_32_74:prod_17__mults21_14"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_60" for hierarchy "fir:fir_lp|mult_32_60:prod_1__mults21_0"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_61" for hierarchy "fir:fir_lp|mult_32_61:prod_2__mults19_1"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_62" for hierarchy "fir:fir_lp|mult_32_62:prod_3__mults20_2"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_63" for hierarchy "fir:fir_lp|mult_32_63:prod_5__mults20_3"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_64" for hierarchy "fir:fir_lp|mult_32_64:prod_6__mults21_4"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_65" for hierarchy "fir:fir_lp|mult_32_65:prod_7__mults19_5"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_66" for hierarchy "fir:fir_lp|mult_32_66:prod_8__mults19_6"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "mult_32_67" for hierarchy "fir:fir_lp|mult_32_67:prod_9__mults19_7"
+Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
+Info: Elaborating entity "altsyncram" for hierarchy "altsyncram:modgen_rom_ix364__ix49625z59534"
+Info: Elaborated megafunction instantiation "altsyncram:modgen_rom_ix364__ix49625z59534"
+Info: Instantiated megafunction "altsyncram:modgen_rom_ix364__ix49625z59534" with the following parameter:
     Info: Parameter "init_file_layout" = "UNUSED"
     Info: Parameter "numwords_b" = "128"
     Info: Parameter "outdata_reg_b" = "UNREGISTERED"
@@ -1068,7 +1093,7 @@ Info: Instantiated megafunction "altsyncram:modgen_rom_ix396__ix49625z59534" wit
     Info: Parameter "indata_aclr_a" = "NONE"
     Info: Parameter "maximum_depth" = "0"
     Info: Parameter "indata_aclr_b" = "NONE"
-    Info: Parameter "init_file" = "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex"
+    Info: Parameter "init_file" = "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex"
     Info: Parameter "intended_device_family" = "Stratix"
     Info: Parameter "outdata_aclr_a" = "NONE"
     Info: Parameter "ram_block_type" = "AUTO"
@@ -1091,20 +1116,20 @@ Info: Instantiated megafunction "altsyncram:modgen_rom_ix396__ix49625z59534" wit
     Info: Parameter "width_byteena_a" = "1"
     Info: Parameter "address_aclr_b" = "NONE"
     Info: Parameter "width_byteena_b" = "1"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_mqj2.tdf
-    Info: Found entity 1: altsyncram_mqj2
-Info: Elaborating entity "altsyncram_mqj2" for hierarchy "altsyncram:modgen_rom_ix396__ix49625z59534|altsyncram_mqj2:auto_generated"
-Warning: Width of data items in "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is greater than the memory width. Wrapping data items to subsequent addresses. Found 16 warnings, reporting 10
-    Warning: Data at line (2) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (3) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (4) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (5) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (6) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (7) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (8) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (9) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (10) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
-    Warning: Data at line (11) of memory initialization file "modgen_rom_ix396__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_hqj2.tdf
+    Info: Found entity 1: altsyncram_hqj2
+Info: Elaborating entity "altsyncram_hqj2" for hierarchy "altsyncram:modgen_rom_ix364__ix49625z59534|altsyncram_hqj2:auto_generated"
+Warning: Width of data items in "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is greater than the memory width. Wrapping data items to subsequent addresses. Found 16 warnings, reporting 10
+    Warning: Data at line (2) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (3) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (4) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (5) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (6) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (7) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (8) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (9) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (10) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
+    Warning: Data at line (11) of memory initialization file "modgen_rom_ix364__altsyncram_13_7_128_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
 Info: Elaborating entity "modgen_counter_9_0" for hierarchy "modgen_counter_9_0:u_audio_dac_modgen_counter_lrck_1x_div"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "altpll" for hierarchy "altpll:u_audio_dac_p1_altpll"
@@ -1138,9 +1163,9 @@ Info: Elaborating entity "sub_5_0" for hierarchy "i2c_av_config_notri:u_i2c_av_c
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
 Info: Elaborating entity "modgen_counter_10_0" for hierarchy "modgen_counter_10_0:u_noise_modgen_counter_address"
 Warning: EDA design entry or synthesis tool was not specified.  Detecting EDA tool "Precision Synthesis" as the tool that generated the EDIF Input File.
-Info: Elaborating entity "altsyncram" for hierarchy "altsyncram:u_noise_modgen_rom_ix24__ix47421z34210"
-Info: Elaborated megafunction instantiation "altsyncram:u_noise_modgen_rom_ix24__ix47421z34210"
-Info: Instantiated megafunction "altsyncram:u_noise_modgen_rom_ix24__ix47421z34210" with the following parameter:
+Info: Elaborating entity "altsyncram" for hierarchy "altsyncram:u_noise_modgen_rom_ix24__ix62120z34212"
+Info: Elaborated megafunction instantiation "altsyncram:u_noise_modgen_rom_ix24__ix62120z34212"
+Info: Instantiated megafunction "altsyncram:u_noise_modgen_rom_ix24__ix62120z34212" with the following parameter:
     Info: Parameter "init_file_layout" = "UNUSED"
     Info: Parameter "numwords_b" = "1024"
     Info: Parameter "outdata_reg_b" = "UNREGISTERED"
@@ -1177,7 +1202,7 @@ Info: Instantiated megafunction "altsyncram:u_noise_modgen_rom_ix24__ix47421z342
     Info: Parameter "width_byteena_b" = "1"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_9nk2.tdf
     Info: Found entity 1: altsyncram_9nk2
-Info: Elaborating entity "altsyncram_9nk2" for hierarchy "altsyncram:u_noise_modgen_rom_ix24__ix47421z34210|altsyncram_9nk2:auto_generated"
+Info: Elaborating entity "altsyncram_9nk2" for hierarchy "altsyncram:u_noise_modgen_rom_ix24__ix62120z34212|altsyncram_9nk2:auto_generated"
 Warning: Byte addressed memory initialization file "u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex" was read in the word-addressed format
 Warning: Width of data items in "u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex" is greater than the memory width. Wrapping data items to subsequent addresses. Found 128 warnings, reporting 10
     Warning: Data at line (2) of memory initialization file "u_noise_modgen_rom_ix24__altsyncram_8_10_1024_2_0.hex" is too wide to fit in one memory word. Wrapping data to subsequent addresses.
@@ -1261,31 +1286,17 @@ Warning: Design contains 13 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "sw[13]"
     Warning (15610): No output dependent on input pin "sw[14]"
     Warning (15610): No output dependent on input pin "sw[15]"
-<<<<<<< HEAD
-Info: Implemented 454 device resources after synthesis - the final resource count might be different
+Info: Implemented 1069 device resources after synthesis - the final resource count might be different
     Info: Implemented 24 input pins
     Info: Implemented 88 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 306 logic cells
+    Info: Implemented 921 logic cells
     Info: Implemented 33 RAM segments
     Info: Implemented 1 PLLs
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 62 warnings
-    Info: Peak virtual memory: 275 megabytes
-    Info: Processing ended: Thu May 29 11:31:43 2014
-    Info: Elapsed time: 00:00:08
-=======
-Info: Implemented 491 device resources after synthesis - the final resource count might be different
-    Info: Implemented 24 input pins
-    Info: Implemented 88 output pins
-    Info: Implemented 2 bidirectional pins
-    Info: Implemented 343 logic cells
-    Info: Implemented 33 RAM segments
-    Info: Implemented 1 PLLs
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 64 warnings
-    Info: Peak virtual memory: 274 megabytes
-    Info: Processing ended: Thu May 29 11:17:19 2014
-    Info: Elapsed time: 00:00:09
->>>>>>> simar
-    Info: Total CPU time (on all processors): 00:00:02
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 90 warnings
+    Info: Peak virtual memory: 280 megabytes
+    Info: Processing ended: Sun Jun 01 20:35:04 2014
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:03
 
 

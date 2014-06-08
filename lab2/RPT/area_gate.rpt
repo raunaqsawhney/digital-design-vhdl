@@ -788,27 +788,6 @@ Total accumulated area :
 
 ******************************************************************
 
-<<<<<<< HEAD
-Library: OPERATORS    Cell: add_15u_15u_15u_0_0    View: INTERFACE
-
-******************************************************************
-
- Number of ports :                      47
- Number of nets :                        0
- Number of instances :                   0
- Number of references to this view :     1
-
-Total accumulated area : 
- Black Box add_15u_15u_15u_0_0 :         1
-
-******************************************************************
-
-Library: OPERATORS    Cell: add_16u_16u_16u_0_0    View: INTERFACE
-
-******************************************************************
-
- Number of ports :                      50
-=======
 Library: OPERATORS    Cell: add_16u_16u_16u_0_0    View: INTERFACE
 
 ******************************************************************
@@ -816,7 +795,7 @@ Library: OPERATORS    Cell: add_16u_16u_16u_0_0    View: INTERFACE
  Number of ports :                      50
  Number of nets :                        0
  Number of instances :                   0
- Number of references to this view :     3
+ Number of references to this view :    16
 
 Total accumulated area : 
  Black Box add_16u_16u_16u_0_0 :         1
@@ -828,69 +807,41 @@ Library: OPERATORS    Cell: mult_32s_32s_32s    View: INTERFACE
 ***************************************************************
 
  Number of ports :                      96
->>>>>>> simar
  Number of nets :                        0
  Number of instances :                   0
- Number of references to this view :     2
+ Number of references to this view :    15
 
 Total accumulated area : 
-<<<<<<< HEAD
- Black Box add_16u_16u_16u_0_0 :         1
-
-***************************************************
-
-Library: work    Cell: fir    View: avg_unfold_1389
-
-***************************************************
-
-  Cell                  Library  References     Total Area
-
- DFF                    PRIMITIVES    56 x      1     56 DFF
- FALSE                  PRIMITIVES     1 x      1      1 FALSE
- add_15u_15u_15u_0_0    OPERATORS      1 x      1      1 add_15u_15u_15u_0_0
- add_16u_16u_16u_0_0    OPERATORS      2 x      1      2 add_16u_16u_16u_0_0
-
- Number of ports :                      33
- Number of nets :                      119
- Number of instances :                  60
- Number of references to this view :     1
-
-Total accumulated area : 
- Black Box DFF :                        56
- Black Box FALSE :                       1
- Black Box add_15u_15u_15u_0_0 :         1
- Black Box add_16u_16u_16u_0_0 :         2
- Number of accumulated instances :      60
-=======
  Black Box mult_32s_32s_32s :            1
 
-***************************************
+********************************************
 
-Library: work    Cell: fir    View: avg
+Library: work    Cell: fir    View: low_pass
 
-***************************************
+********************************************
 
   Cell                  Library  References     Total Area
 
- DFF                    PRIMITIVES    64 x      1     64 DFF
+ BUF                    PRIMITIVES    41 x      1     41 BUF
+ DFF                    PRIMITIVES   272 x      1    272 DFF
  FALSE                  PRIMITIVES     1 x      1      1 FALSE
  TRUE                   PRIMITIVES     1 x      1      1 TRUE
- add_16u_16u_16u_0_0    OPERATORS      3 x      1      3 add_16u_16u_16u_0_0
- mult_32s_32s_32s       OPERATORS      2 x      1      2 mult_32s_32s_32s
+ add_16u_16u_16u_0_0    OPERATORS     16 x      1     16 add_16u_16u_16u_0_0
+ mult_32s_32s_32s       OPERATORS     15 x      1     15 mult_32s_32s_32s
 
  Number of ports :                      33
- Number of nets :                      162
- Number of instances :                  71
+ Number of nets :                      809
+ Number of instances :                 346
  Number of references to this view :     1
 
 Total accumulated area : 
- Black Box DFF :                        64
+ Black Box BUF :                        41
+ Black Box DFF :                       272
  Black Box FALSE :                       1
  Black Box TRUE :                        1
- Black Box add_16u_16u_16u_0_0 :         3
- Black Box mult_32s_32s_32s :            2
- Number of accumulated instances :      71
->>>>>>> simar
+ Black Box add_16u_16u_16u_0_0 :        16
+ Black Box mult_32s_32s_32s :           15
+ Number of accumulated instances :     346
 
 **************************************************************
 
@@ -1147,18 +1098,12 @@ Library: work    Cell: fir_top    View: main
 
   Cell                     Library  References     Total Area
 
-<<<<<<< HEAD
- AND2                      PRIMITIVES    82 x      1     82 AND2
- BUF                       PRIMITIVES     4 x      1      4 BUF
- DFF                       PRIMITIVES    31 x      1     31 DFF
-=======
- AND2                      PRIMITIVES    84 x      1     84 AND2
+ AND2                      PRIMITIVES    80 x      1     80 AND2
  BUF                       PRIMITIVES     4 x      1      4 BUF
  DFF                       PRIMITIVES    33 x      1     33 DFF
->>>>>>> simar
  FALSE                     PRIMITIVES     1 x      1      1 FALSE
  INV                       PRIMITIVES    27 x      1     27 INV
- MUX                       PRIMITIVES    40 x      1     40 MUX
+ MUX                       PRIMITIVES    28 x      1     28 MUX
  OR2                       PRIMITIVES     6 x      1      6 OR2
  TRI                       PRIMITIVES    56 x      1     56 TRI
  TRUE                      PRIMITIVES     1 x      1      1 TRUE
@@ -1177,17 +1122,12 @@ Library: work    Cell: fir_top    View: main
                                                    1      1 inc_4u_4u_0_0
                                                    4      4 DFF
                                                    1      1 FALSE
-<<<<<<< HEAD
- fir                       work           1 x     56     56 DFF
-                                                   1      1 add_15u_15u_15u_0_0
-                                                   2      2 add_16u_16u_16u_0_0
-=======
- fir                       work           1 x      3      3 add_16u_16u_16u_0_0
-                                                  64     64 DFF
-                                                   2      2 mult_32s_32s_32s
-                                                   1      1 TRUE
->>>>>>> simar
+ fir                       work           1 x     16     16 add_16u_16u_16u_0_0
+                                                 272    272 DFF
+                                                  15     15 mult_32s_32s_32s
+                                                  41     41 BUF
                                                    1      1 FALSE
+                                                   1      1 TRUE
  i2c_av_config_notri       work           1 x      1      1 mux_24u_24u
                                                    1      1 sub_5u_5u_5u_0
                                                    1      1 select_3_3
@@ -1234,40 +1174,23 @@ Library: work    Cell: fir_top    View: main
                                                    4      4 FALSE
 
  Number of ports :                     114
-<<<<<<< HEAD
- Number of nets :                      353
- Number of instances :                 283
+ Number of nets :                      341
+ Number of instances :                 271
  Number of references to this view :     0
 
 Total accumulated area : 
- Black Box AND2 :                      151
- Black Box BUF :                        12
- Black Box DFF :                       167
-=======
- Number of nets :                      357
- Number of instances :                 287
- Number of references to this view :     0
-
-Total accumulated area : 
- Black Box AND2 :                      153
- Black Box BUF :                        12
- Black Box DFF :                       177
->>>>>>> simar
+ Black Box AND2 :                      149
+ Black Box BUF :                        53
+ Black Box DFF :                       385
  Black Box DFFE :                       48
  Black Box DFFRSE :                      5
  Black Box FALSE :                      24
  Black Box INV :                        77
- Black Box MUX :                        47
+ Black Box MUX :                        35
  Black Box OR2 :                        33
  Black Box TRI :                        56
-<<<<<<< HEAD
- Black Box TRUE :                       22
- Black Box add_15u_15u_15u_0_0 :         1
- Black Box add_16u_16u_16u_0_0 :         2
-=======
  Black Box TRUE :                       23
- Black Box add_16u_16u_16u_0_0 :         3
->>>>>>> simar
+ Black Box add_16u_16u_16u_0_0 :        16
  Black Box add_9u_9u_9u_0_0 :            1
  Black Box and_10u_10u :                 1
  Black Box and_16u_16u :                 1
@@ -1280,10 +1203,7 @@ Total accumulated area :
  Black Box inc_4u_4u_0_0 :               2
  Black Box inc_6u_6u_0_0 :               2
  Black Box inc_9u_9u_0_0 :               1
-<<<<<<< HEAD
-=======
- Black Box mult_32s_32s_32s :            2
->>>>>>> simar
+ Black Box mult_32s_32s_32s :           15
  Black Box mux_1024u_1024u :             8
  Black Box mux_128u_128u :              13
  Black Box mux_16u_16u :                 1
@@ -1294,8 +1214,4 @@ Total accumulated area :
  Black Box or_5u_5u :                   11
  Black Box select_3_3 :                  1
  Black Box sub_5u_5u_5u_0 :              1
-<<<<<<< HEAD
- Number of accumulated instances :     752
-=======
- Number of accumulated instances :     767
->>>>>>> simar
+ Number of accumulated instances :    1026

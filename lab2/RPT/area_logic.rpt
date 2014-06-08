@@ -4,13 +4,8 @@ Device Utilization for EP2C35F672C
 Resource                Used    Avail   Utilization
 -----------------------------------------------
 IOs                     113     475      23.79%
-<<<<<<< HEAD
-LUTs                    246     33216     0.74%
-Registers               142     33216     0.43%
-=======
-LUTs                    273     33216     0.82%
-Registers               152     33216     0.46%
->>>>>>> simar
+LUTs                    690     33216     2.08%
+Registers               308     33216     0.93%
 Memory Bits             10624   483340    2.20%
 DSP block 9-bit elems   0       70        0.00%
 
@@ -220,31 +215,15 @@ Total accumulated area :
  Number of Registers :                  39
  Number of accumulated instances :     145
 
-************************************************************
+*************************************************************
 
-<<<<<<< HEAD
-Library: OPERATORS    Cell: add_15_0    View: IMPLEMENTATION
-=======
-Library: OPERATORS    Cell: add_16_2    View: IMPLEMENTATION
->>>>>>> simar
+Library: OPERATORS    Cell: add_16_15    View: IMPLEMENTATION
 
-************************************************************
+*************************************************************
 
   Cell                   Library  References     Total Area
 
  VCC                     cycloneii     1 x
-<<<<<<< HEAD
- cycloneii_lcell_comb    cycloneii    15 x      1     15 LUTs
-
- Number of ports :                      47
- Number of nets :                       54
- Number of instances :                  16
- Number of references to this view :     1
-
-Total accumulated area : 
- Number of LUTs :                       15
- Number of accumulated instances :      16
-=======
  cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
 
  Number of ports :                      50
@@ -255,7 +234,266 @@ Total accumulated area :
 Total accumulated area : 
  Number of LUTs :                       16
  Number of accumulated instances :      17
->>>>>>> simar
+
+*************************************************************
+
+Library: OPERATORS    Cell: add_16_14    View: IMPLEMENTATION
+
+*************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+*************************************************************
+
+Library: OPERATORS    Cell: add_16_13    View: IMPLEMENTATION
+
+*************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+*************************************************************
+
+Library: OPERATORS    Cell: add_16_12    View: IMPLEMENTATION
+
+*************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       63
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+*************************************************************
+
+Library: OPERATORS    Cell: add_16_11    View: IMPLEMENTATION
+
+*************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       63
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+*************************************************************
+
+Library: OPERATORS    Cell: add_16_10    View: IMPLEMENTATION
+
+*************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       59
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_9    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_8    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_7    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_6    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_5    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_4    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_3    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
+
+************************************************************
+
+Library: OPERATORS    Cell: add_16_2    View: IMPLEMENTATION
+
+************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
+
+ Number of ports :                      50
+ Number of nets :                       64
+ Number of instances :                  17
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       16
+ Number of accumulated instances :      17
 
 ************************************************************
 
@@ -269,7 +507,7 @@ Library: OPERATORS    Cell: add_16_1    View: IMPLEMENTATION
  cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
 
  Number of ports :                      50
- Number of nets :                       60
+ Number of nets :                       57
  Number of instances :                  17
  Number of references to this view :     1
 
@@ -289,11 +527,7 @@ Library: OPERATORS    Cell: add_16_0    View: IMPLEMENTATION
  cycloneii_lcell_comb    cycloneii    16 x      1     16 LUTs
 
  Number of ports :                      50
-<<<<<<< HEAD
- Number of nets :                       59
-=======
- Number of nets :                       58
->>>>>>> simar
+ Number of nets :                       61
  Number of instances :                  17
  Number of references to this view :     1
 
@@ -301,35 +535,31 @@ Total accumulated area :
  Number of LUTs :                       16
  Number of accumulated instances :      17
 
-<<<<<<< HEAD
-***************************************************
+**************************************************************
 
-Library: work    Cell: fir    View: avg_unfold_1389
+Library: OPERATORS    Cell: mult_32_74    View: IMPLEMENTATION
 
-***************************************************
+**************************************************************
 
-  Cell                 Library  References     Total Area
+  Cell                   Library  References     Total Area
 
- add_15_0              OPERATORS     1 x     15     15 LUTs
- add_16_0              OPERATORS     1 x     16     16 LUTs
- add_16_1              OPERATORS     1 x     16     16 LUTs
- cycloneii_lcell_ff    cycloneii    40 x      1     40 Registers
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    15 x      1     15 LUTs
 
- Number of ports :                      33
- Number of nets :                       98
- Number of instances :                  43
+ Number of ports :                      96
+ Number of nets :                       41
+ Number of instances :                  16
  Number of references to this view :     1
 
 Total accumulated area : 
- Number of LUTs :                       47
- Number of Registers :                  40
- Number of accumulated instances :      90
-=======
-*************************************************************
+ Number of LUTs :                       15
+ Number of accumulated instances :      16
 
-Library: OPERATORS    Cell: mult_32_9    View: IMPLEMENTATION
+**************************************************************
 
-*************************************************************
+Library: OPERATORS    Cell: mult_32_73    View: IMPLEMENTATION
+
+**************************************************************
 
   Cell                   Library  References     Total Area
 
@@ -337,7 +567,7 @@ Library: OPERATORS    Cell: mult_32_9    View: IMPLEMENTATION
  cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
 
  Number of ports :                      96
- Number of nets :                       38
+ Number of nets :                       36
  Number of instances :                  14
  Number of references to this view :     1
 
@@ -345,11 +575,31 @@ Total accumulated area :
  Number of LUTs :                       13
  Number of accumulated instances :      14
 
-*************************************************************
+**************************************************************
 
-Library: OPERATORS    Cell: mult_32_8    View: IMPLEMENTATION
+Library: OPERATORS    Cell: mult_32_72    View: IMPLEMENTATION
 
-*************************************************************
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    17 x      1     17 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       43
+ Number of instances :                  18
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       17
+ Number of accumulated instances :      18
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_71    View: IMPLEMENTATION
+
+**************************************************************
 
   Cell                   Library  References     Total Area
 
@@ -365,31 +615,276 @@ Total accumulated area :
  Number of LUTs :                       13
  Number of accumulated instances :      14
 
-***************************************
+**************************************************************
 
-Library: work    Cell: fir    View: avg
+Library: OPERATORS    Cell: mult_32_70    View: IMPLEMENTATION
 
-***************************************
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    27 x      1     27 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       62
+ Number of instances :                  28
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       27
+ Number of accumulated instances :      28
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_69    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_68    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_67    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_66    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_65    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_64    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    27 x      1     27 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       62
+ Number of instances :                  28
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       27
+ Number of accumulated instances :      28
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_63    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       37
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_62    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    17 x      1     17 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       43
+ Number of instances :                  18
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       17
+ Number of accumulated instances :      18
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_61    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    13 x      1     13 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       36
+ Number of instances :                  14
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       13
+ Number of accumulated instances :      14
+
+**************************************************************
+
+Library: OPERATORS    Cell: mult_32_60    View: IMPLEMENTATION
+
+**************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    15 x      1     15 LUTs
+
+ Number of ports :                      96
+ Number of nets :                       41
+ Number of instances :                  16
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       15
+ Number of accumulated instances :      16
+
+********************************************
+
+Library: work    Cell: fir    View: low_pass
+
+********************************************
 
   Cell                 Library  References     Total Area
 
  add_16_0              OPERATORS     1 x     16     16 LUTs
  add_16_1              OPERATORS     1 x     16     16 LUTs
+ add_16_10             OPERATORS     1 x     16     16 LUTs
+ add_16_11             OPERATORS     1 x     16     16 LUTs
+ add_16_12             OPERATORS     1 x     16     16 LUTs
+ add_16_13             OPERATORS     1 x     16     16 LUTs
+ add_16_14             OPERATORS     1 x     16     16 LUTs
+ add_16_15             OPERATORS     1 x     16     16 LUTs
  add_16_2              OPERATORS     1 x     16     16 LUTs
- cycloneii_lcell_ff    cycloneii    48 x      1     48 Registers
- mult_32_8             OPERATORS     1 x     13     13 LUTs
- mult_32_9             OPERATORS     1 x     13     13 LUTs
+ add_16_3              OPERATORS     1 x     16     16 LUTs
+ add_16_4              OPERATORS     1 x     16     16 LUTs
+ add_16_5              OPERATORS     1 x     16     16 LUTs
+ add_16_6              OPERATORS     1 x     16     16 LUTs
+ add_16_7              OPERATORS     1 x     16     16 LUTs
+ add_16_8              OPERATORS     1 x     16     16 LUTs
+ add_16_9              OPERATORS     1 x     16     16 LUTs
+ cycloneii_lcell_ff    cycloneii   204 x      1    204 Registers
+ mult_32_60            OPERATORS     1 x     15     15 LUTs
+ mult_32_61            OPERATORS     1 x     13     13 LUTs
+ mult_32_62            OPERATORS     1 x     17     17 LUTs
+ mult_32_63            OPERATORS     1 x     13     13 LUTs
+ mult_32_64            OPERATORS     1 x     27     27 LUTs
+ mult_32_65            OPERATORS     1 x     13     13 LUTs
+ mult_32_66            OPERATORS     1 x     13     13 LUTs
+ mult_32_67            OPERATORS     1 x     13     13 LUTs
+ mult_32_68            OPERATORS     1 x     13     13 LUTs
+ mult_32_69            OPERATORS     1 x     13     13 LUTs
+ mult_32_70            OPERATORS     1 x     27     27 LUTs
+ mult_32_71            OPERATORS     1 x     13     13 LUTs
+ mult_32_72            OPERATORS     1 x     17     17 LUTs
+ mult_32_73            OPERATORS     1 x     13     13 LUTs
+ mult_32_74            OPERATORS     1 x     15     15 LUTs
 
  Number of ports :                      33
- Number of nets :                      140
- Number of instances :                  53
+ Number of nets :                      694
+ Number of instances :                 235
  Number of references to this view :     1
 
 Total accumulated area : 
- Number of LUTs :                       74
- Number of Registers :                  48
- Number of accumulated instances :     127
->>>>>>> simar
+ Number of LUTs :                      491
+ Number of Registers :                 204
+ Number of accumulated instances :     726
 
 ********************************************
 
@@ -410,15 +905,9 @@ Library: work    Cell: fir_top    View: main
  altsyncram_8_10_1024_2_0    OPERATORS     1 x
  cycloneii_io                cycloneii   100 x      1    100 IOs
  cycloneii_lcell_comb        cycloneii    77 x      1     77 LUTs
-<<<<<<< HEAD
- cycloneii_lcell_ff          cycloneii    44 x      1     44 Registers
- fir                         work          1 x     40     40 Registers
-                                                   47     47 LUTs
-=======
  cycloneii_lcell_ff          cycloneii    46 x      1     46 Registers
- fir                         work          1 x     48     48 Registers
-                                                   74     74 LUTs
->>>>>>> simar
+ fir                         work          1 x    204    204 Registers
+                                                  491    491 LUTs
  i2c_av_config_notri         work          1 x      0      0 LCs
                                                    39     39 Registers
                                                    94     94 LUTs
@@ -428,28 +917,15 @@ Library: work    Cell: fir_top    View: main
                                                     9      9 Registers
 
  Number of ports :                     114
-<<<<<<< HEAD
- Number of nets :                      317
- Number of instances :                 234
-=======
  Number of nets :                      319
  Number of instances :                 236
->>>>>>> simar
  Number of references to this view :     0
 
 Total accumulated area : 
  Number of IOs :                       113
  Number of LCs :                         0
-<<<<<<< HEAD
- Number of LUTs :                      246
+ Number of LUTs :                      690
  Number of Memory Bits :             10624
- Number of Registers :                 142
+ Number of Registers :                 308
  Number of TRIs :                        1
- Number of accumulated instances :     514
-=======
- Number of LUTs :                      273
- Number of Memory Bits :             10624
- Number of Registers :                 152
- Number of TRIs :                        1
- Number of accumulated instances :     553
->>>>>>> simar
+ Number of accumulated instances :    1152

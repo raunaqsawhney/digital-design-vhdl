@@ -77,8 +77,6 @@ architecture low_pass of fir is
   signal sum	: word_vector(2 to num_taps);
   signal tap	: word_vector(0 to num_taps);
   
-  signal tap, prod, sum : std_logic;
-  
   -- The attribute line below is usually needed to avoid a warning
   -- from PrecisionRTL that signals could be implemented using
   -- memory arrays.  
@@ -87,41 +85,32 @@ architecture low_pass of fir is
   
 begin
   
-  
   tap(0) <= i_data;
-  process begin
-  	wait until rising_edge(clk);
-	for i in 1 to num_taps loop
+
+  TAP_GEN: for i in 1 to num_taps generate
+	process begin
+	wait until rising_edge(clk);
 		tap(i) <= tap(i-1);
-	end loop;
-  end process;
-
-  LPF_GEN: for i in 1 to num_taps generate
-  	tap(i) <= tap(i-1);
-  end generate LPF_GEN;
-
+	end process;
+  end generate TAP_GEN;
+  
   MUL_GEN: for i in 1 to num_taps generate
   	prod(i) <= mult(tap(i), lpcoef(i));
   end generate MUL_GEN;
 
   SUM_GEN: for i in 3 to num_taps generate
   	sum(i) <= sum(i-1) + prod(i);
+  end generate SUM_GEN;
 
   -- there are no sum0 or sum1
-  sum(2) <= sum(i-1) + prod(i);
-
+  sum(2) <= prod(1) + prod(2);
+  
   o_data <= sum(num_taps);
 
 end architecture;
 
 -- question 2
--- For one adder, we would need at most two LUTs as the input to adders are
--- themselves the combination of two inputs. So for a worst cast e.g.:
--- sum2 <= prod1 + prod2
--- we would expand prod1 as prod1 <= mult( tap1, coef1)
--- needing two LUTs for each prod1 and prod2.
+-- 4 LUTs
 
 -- question 3
--- For one multiplier we would need at most one LUT as the multiplier is formed
--- from two inputs and they can in total have atmost 4 possible combinations which
--- can be stored in a 2x2 lookup table. 
+-- 8 LUTs

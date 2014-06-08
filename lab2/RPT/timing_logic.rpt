@@ -2,15 +2,9 @@
 
 	Domain                  Clock Name                            Min Period (Freq)
 	------                  ----------                            -----------------
-<<<<<<< HEAD
-	ClockDomain2            u_audio_dac_reg_lrck_1x/regout        4.715 (212.089 MHz)  
-	ClockDomain0            clock_27                              7.667 (130.429 MHz) *
-	ClockDomain1            aud_bclk                              1.381 (724.113 MHz)  
-=======
-	ClockDomain2            u_audio_dac_reg_lrck_1x/regout        4.847 (206.313 MHz)  
+	ClockDomain2            u_audio_dac_reg_lrck_1x/regout        6.975 (143.369 MHz)  
 	ClockDomain1            aud_bclk                              1.381 (724.113 MHz)  
 	ClockDomain0            clock_27                              7.667 (130.429 MHz) *
->>>>>>> simar
 
 *  DLL/PLL clocks present in this clock domain. Estimated frequencies are shown.
 

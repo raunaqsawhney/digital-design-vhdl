@@ -1,0 +1,5 @@
+add wave clk
+add wave input
+add wave output
+
+run 1000 ns

@@ -15,44 +15,36 @@ end entity;
 
 architecture main of fir_tb is
 
-<<<<<<< HEAD
-    signal input : in word;
-
-    constant coef1 : word := x"0100"
-    constant coef0 : word := x"0000";
+    signal input 	: word;
+	signal output 	: word;
+	signal clk		: std_logic;
 
 
 begin
 
-    FIR : entity work.fir(avg)
+    TEST_BENCH : entity work.fir(low_pass)
     port map (
-       i_data => input
+		clk 	=> clk,
+       	i_data	=> input,
+		o_data	=> output
     );
 
+	IMPULSE	: process begin
+		input 	<= x"0000";
+		wait for 170 ns;
+		input	<= x"1000";
+		wait for 10 ns;
+		input 	<= x"0000";
+		wait;
+	end process;
 
-    constant coef1 : word := x"0100";
-    constant coef0 : word := x"0000";
+	CLK_CYCLE	: process begin
+		clk		<= '0';
+		wait for 5 ns;
+		clk 	<= '1';
+		wait for 5 ns;
+	end process;
 
-    process 
-    begin
-
-        TAP :
-            for i in 0 to 3 generate
-                input := coef0;
-            end generate;
-
-            fir j in 0 to 1 loop
-                input := coef1;
-            end loop;
-
-            input := coef0;
-    end process;
-=======
-  
-begin
-
-  
->>>>>>> simar
 end architecture;
 ------------------------------------------------------------------------
 
