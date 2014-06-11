@@ -123,7 +123,10 @@ begin
 	-- TODO: we need a signal assignment here that maps the computer o_data to an output port,
 	-- like it's done on slide 12 of hnatyshyn-finite.
 	end process;
-  
+ 
+
+	-- ECE327: Code 5
+ 
 end architecture main;
 
 -- Q1: number of flip flops and lookup tables?
