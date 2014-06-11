@@ -16,10 +16,21 @@ end entity lab3;
 
 architecture main of lab3 is
 
+    -- Row and Column counters
+    signal row          : std_logic_vector(2 downto 0);
+    signal col          : std_logic_vector(3 downto 0);
+    
+
+    -- P and P counter (P counter is written to output)
+    signal p_counter    : signed (7 downto 0);
+    signal p            : signed (7 downto 0);
+    signal start_count  : std_logic;
+
+    -- Memory signals
     signal mem_address  : std_logic_vector(3 downto 0);
     signal mem_data     : std_logic_vector(7 downto 0); 
-    signal mem_wren     : std_logic_vector(2 downto 0); --for 3 mem banks
-
+    signal mem_wren     : std_logic_vector(2 downto 0);  --for 3 mem banks
+    signal mem_out_data : std_logic_vector(7 downto 0);
 
     -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
     subtype data is std_logic_vector(7 downto 0);
@@ -67,13 +78,37 @@ begin
     process
     begin
         wait until rising_edge(clk);
+        row <= "000";
+        col <= "0000";
         if (i_valid = '1') then
-            for mem_address in 0 to 15 loop
-				mem_wren(2) <= '1';			-- enable write parcel to memory                
+            for i in 0 to 2 loop                                                    -- Row Looper
+                for j in 0 to 15 loop                                               -- Col Looper
+                    if (row = "2" AND col = "1") then
+                        -- Perform first P calculation
+                        -- Set start_count to 1, now do P calculation for following bytes
+                        start_count <= '1';
+                    end if;
 
-mem_data <= i_data;
-                o_data <= memA(mem_address);
+                    if (start_count = '1') then
+                        mem_wren (i) <= '0';                                         -- Read from memory
+                        p <= signed(mem_out_array(0(j-1)) - mem_out_array(1(j-1)) + mem_out_array(2(j-1)));
+                        if (p >= 0) then
+                            p_counter = p_counter + 1;
+                        end if;
+                    end if;
+
+                    mem_wren(i) <= '1';
+                    -- Put i_data into jth column of ith row of table
+                    mem_out_array(i(j)) <= i_data;
+                    col <= col + 1;
+
+                end loop;
+                row <= row + 1;
             end loop;
+
+        -- Use one-hot encoding for row
+        -- Use binary encoding for col
+        -- After row = 100 ; col = 0000
         end if;
     end process;
   
