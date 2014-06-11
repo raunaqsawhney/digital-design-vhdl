@@ -25,14 +25,16 @@ end entity lab3;
 
 architecture main of lab3 is
 
-    signal mem_address  : std_logic_vector(3 downto 0);
+	-- both mem_address and mem_data are 7 downto 0 as listed in mem.vhd
+    signal mem_address  : std_logic_vector(7 downto 0);
     signal mem_data     : std_logic_vector(7 downto 0); 
     signal mem_out_data : std_logic_vector(7 downto 0);
     signal mem_wren     : std_logic_vector(2 downto 0); --for 3 mem banks
 
 
-    -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
-    subtype data is std_logic_vector(7 downto 0);
+    -- ECE327: Code 4 Note
+	-- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
+    subtype data is std_logic_vector(15 downto 0);
     type mem_out_array is array (2 downto 0) of data;
     signal mem_out_data : mem_out_array;
 
@@ -74,16 +76,53 @@ begin
         );
 
     -- ECE327: Code 3
-    process
-    begin
+    process begin
+		counter = 0;
         wait until rising_edge(clk);
-        if (i_valid = '1') then
-            --
-        end if;
+        while counter < 15 loop
+			if (i_valid = '1') then
+            	mem_out_data(0) <= i_data;
+				o_data <= mem_out_data(0);
+				counter = counter + 1; 
+        	end if;
+		end loop;
+	-- TODO: we need a signal assignment here that maps the computer o_data to an output port,
+	-- like it's done on slide 12 of hnatyshyn-finite.
+		
     end process;
 
-
-    
+	-- ECE327: Code 4
+	process begin
+		column = 0;
+		row = 0;
+		signal cur_mem_in_use : std_logic_vector(2 downto 0);
+		cur_mem_in_use(0) = '1';
+		wait until rising_edge(clk);
+		while column < 15 loop
+			while row < 15 loop
+				if (i_valid = '1') then
+					-- ECE327: Code 4 Note
+					-- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
+					-- subtype data is std_logic_vector(15 downto 0);
+					-- type mem_out_array is array (2 downto 0) of data;
+					-- signal mem_out_data : mem_out_array;
+					mem_out_data(mem_out_array(cur_mem_in_use), row) <= i_data;
+					o_data <= mem_out_data(mem_out_array(cur_mem_in_use), row);
+					
+				  -- A function to rotate left (rol) a vector by n bits
+				  --function "rol" ( a : std_logic_vector; n : natural )
+				  --	return std_logic_vector
+				  --is
+				  --begin
+				  --	return std_logic_vector( unsigned(a) rol n );
+				  --end function;
+					cur_mem_in_use = rol(cur_mem_in_use, 1);
+				end if;
+			end loop;
+		end loop;
+	-- TODO: we need a signal assignment here that maps the computer o_data to an output port,
+	-- like it's done on slide 12 of hnatyshyn-finite.
+	end process;
   
 end architecture main;
 
