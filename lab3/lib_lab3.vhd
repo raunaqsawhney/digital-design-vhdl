@@ -336,10 +336,11 @@ begin
         when Idle =>      -- Wait until start bit occurs
           RxBitCnt <= 0;
           if Even then
-            Rx_Par<='0';
-          else Rx_Par<='1';
+            Rx_Par <= '0';
+          else
+            Rx_Par <= '1';
           end if;
-          if Rx_r='0' then
+          if Rx_r = '0' then
             RxFSM  <= Start_Rx;
           end if;
         when Start_Rx =>  -- Wait on first data bit
@@ -432,82 +433,82 @@ end RTL;
 -- last revision: 29 October 2004 
 -- Copyright(c) 2004, University of Waterloo, F. Khalvati
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-Entity uw_uart is
-  Port (
-    CLK : In  std_logic;
-    RST : In  std_logic;
-    RXFLEX : In    std_logic; -- RX input    
-    datain : Out std_logic_vector(7 downto 0); -- from URTS
-    TXFLEX : Out   std_logic; -- TX output
+entity uw_uart is
+  port (
+    clk : in  std_logic;
+    rst : in  std_logic;
+    rxflex : in    std_logic; -- rx input    
+    datain : out std_logic_vector(7 downto 0); -- from urts
+    txflex : out   std_logic; -- tx output
     o_pixavail:out std_logic
   );
 end uw_uart;
 
 
-Architecture main of uw_uart is
-  signal Baud : STD_LOGIC;
-  signal DIPSW :std_logic; -- Baud rate selection
-  signal SDin : std_logic_vector (7 downto 0);-- from UARTS
-  signal RxErr : STD_LOGIC;
-  signal RxRDY : std_logic;                    -- from UARTS
-  signal TxBusy : std_logic;
-  signal RTS : std_logic; -- resync FLipFlop on RTS
-  signal RawRx : std_logic;
+architecture main of uw_uart is
+  signal baud : std_logic;
+  signal dipsw :std_logic; -- baud rate selection
+  signal sdin : std_logic_vector (7 downto 0);-- from uarts
+  signal rxerr : std_logic;
+  signal rxrdy : std_logic;                    -- from uarts
+  signal txbusy : std_logic;
+  signal rts : std_logic; -- resync flipflop on rts
+  signal rawrx : std_logic;
   signal lab3out : std_logic_vector(7 downto 0);
-  signal sdout : std_logic_vector(7 downto 0);  --data to UART and PC
+  signal sdout : std_logic_vector(7 downto 0);  --data to uart and pc
   signal dataoutavail: std_logic;           
-  signal RData : std_logic_vector (7 downto 0);         
-  signal CharAvail : boolean;
-  signal Dataout :std_logic_vector(7 downto 0);         
-  type   State_Type is  (Idle,send);
-  signal State: State_Type;
+  signal rdata : std_logic_vector (7 downto 0);         
+  signal charavail : boolean;
+  signal dataout :std_logic_vector(7 downto 0);         
+  type   state_type is  (idle,send);
+  signal state: state_type;
   signal dsend: std_logic;--data ready to send
   signal mdata:std_logic_vector (7 downto 0);
   signal ack: std_logic;--data ready to send
   signal waitcount:unsigned(15 downto 0);
-  signal LD_SDOUT : std_logic;
+  signal ld_sdout : std_logic;
 begin
-  Baud <= DIPSW;
-  DIPSW<='1';
-  RawRx <= RXFLEX when rst='0' else '0';    
-  -- TXFLEX <= TXFLEX when rst='0' else '0'; 
-  RTS <= '1';  -- permanently enabled
+  baud <= dipsw;
+  dipsw<='1';
+  rawrx <= rxflex when rst='0' else '0';    
+  -- txflex <= txflex when rst='0' else '0'; 
+  rts <= '1';  -- permanently enabled
           
-  u_UARTS : entity work.UARTS(rtl) 
-    Port map (
-      CLK    => CLK,
-      RST    => rst,
-      Baud   => Baud,
-      Din    => SDout,
-      LD     => LD_SDout,
-      Rx     => RawRx,
-      Dout   => SDin,
-      RxErr  => RxErr,
-      RxRDY  => RxRDY,
-      Tx     => TXFLEX,
-      TxBusy => TxBusy
+  u_uarts : entity work.uarts(rtl) 
+    port map (
+      clk    => clk,
+      rst    => rst,
+      baud   => baud,
+      din    => sdout,
+      ld     => ld_sdout,
+      rx     => rawrx,
+      dout   => sdin,
+      rxerr  => rxerr,
+      rxrdy  => rxrdy,
+      tx     => txflex,
+      txbusy => txbusy
     );
 
- Dataout      <= lab3out;
- dataoutavail <= '0'; 
+  dataout      <= lab3out;
+  dataoutavail <= '0';                  --!!MDA
 
-  process (CLK,RST)
+  process (clk,rst)
   begin
-    if RST='1' then
-       RData <= (others=>'0');
-       RTS <= '0';
-       CharAvail <= false;
-    elsif rising_edge(CLK) then
-      if RxRDY='1' then  -- memorize the incoming char
-         RData <= SDin;
-         CharAvail <= true;
+    if rst='1' then
+       rdata <= (others=>'0');
+       rts <= '0';
+       charavail <= false;
+    elsif rising_edge(clk) then
+      if rxrdy='1' then  -- memorize the incoming char
+        rdata <= sdin;
+        charavail <= true;
       end if;
-      if CharAvail then
-         CharAvail <= false;
+      if charavail then
+         charavail <= false;
       end if; 
     end if;   
   end process;   
@@ -534,46 +535,50 @@ begin
         elsif dataoutavail='1' then
           mdata <= dataout;
           dsend <= dataoutavail;
-          --  if  TxBusy='0' and RTS='1'  then --  busy with sending prev data
+          --  if  txbusy='0' and rts='1'  then --  busy with sending prev data
           ack<='0';
           waitcount<=to_unsigned(0,16);
         end if;
-      elsif RxErr='1' then
+      elsif rxerr='1' then
         dsend<='1';
-        mdata<="11110000";  -- tell PC  error in previous data             
+        mdata<="11110000";  -- tell pc  error in previous data             
       end if;
     end if;
   end process;
 
   o_pixavail<='1' when charavail else '0';
-  Datain<=Rdata when charavail else (others=>'0');
+  datain<=rdata when charavail else (others=>'0');
 
-  process (CLK,RST)
+  process (clk,rst)
   begin
-    if RST='1' then
+    if rst='1' then
       state<=idle;
-      LD_SDout <= '0';
-    elsif rising_edge(CLK) then
-      case State is
-        when Idle =>
+      ld_sdout <= '0';
+    elsif rising_edge(clk) then
+      case state is
+        when idle =>
           if dsend='1' then
-            State <= send;
+            state <= send;
             sdout<=mdata;
-            LD_SDout <= '1';  
+            ld_sdout <= '1';  
           else
-            STATE<=idle;
+            state<=idle;
           end if;
-        when Send=>
-          State <=idle;
-          LD_SDout <= '0';
+        when send=>
+          state <=idle;
+          ld_sdout <= '0';
         when others =>
-          State <= Idle;
-          LD_SDout <= '0';
+          state <= idle;
+          ld_sdout <= '0';
       end case;
     end if;
   end process;
   
 end main;
+
+------------------------------------------------------------------------
+-- lab3_pkg
+------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -615,6 +620,3 @@ package body lab3_pkg is
     return result;
   end function;
 end package body;
-
-
-

@@ -10,6 +10,7 @@ use work.lab3_unsynth_pkg.all;
 
 entity lab3_tb is
   generic ( test_num     : integer   := 1;
+            mode         : string    := "prog";
             result_file  : string    := "sim_result.txt"
           );
 end lab3_tb;
@@ -19,13 +20,14 @@ architecture main of lab3_tb is
   --------------------------------------------------------------
   -- clock cycle
 
-  constant period  : time := 20 ns;
+  constant period       : time := 20 ns;
+  constant hold_time    : time := 0.1 * period;
 
   --------------------------------------------------------------
   -- name of test file
 
-  constant test_name   : string     := "test"& integer'image(test_num);
-  constant test_file   : string     := "tests/"& test_name &".txt";
+  constant test_name    : string     := "test"& integer'image(test_num);
+  constant test_file    : string     := "tests/"& test_name &".txt";
 
   --------------------------------------------------------------
   -- number of invalid input data between valid data
@@ -44,14 +46,13 @@ architecture main of lab3_tb is
   --------------------------------------------------------------
   -- signals to interface to lab3.vhd
   
-  signal clock          : std_logic;
+  signal clk            : std_logic;
   signal reset          : std_logic;
   
-  signal in_valid       : std_logic;
+  signal i_valid        : std_logic;
   
-  signal in_input        : std_logic_vector(7 downto 0); 
-  signal input           : unsigned(7 downto 0); 
-  signal out_output      : std_logic_vector(7 downto 0);                      
+  signal i_data         : unsigned(7 downto 0); 
+  signal o_data         : unsigned(7 downto 0);                      
   
   --------------------------------------------------------------
   -- 2-d array for input data
@@ -67,35 +68,22 @@ begin
     -- use circuit
     
     uut: entity WORK.lab3 port map
-      (i_clock    => clock,
-       i_valid    => in_valid,
-       i_input    => std_logic_vector(input),
-       i_reset    => reset,
-       o_output   => out_output
+      (clk        => clk,
+       reset      => reset,
+       i_valid    => i_valid,
+       i_data     => i_data,
+       o_data     => o_data
       );
-
-       in_input  <= std_logic_vector(input);
 
     ----------------------------------------------------
     -- clock
 
     process
     begin
-        clock <= '0';
-        wait for period/2;
-        clock <= '1';
-        wait for period/2;
-    end process;
-
-    ----------------------------------------------------
-    -- reset
-
-    process
-    begin
-        reset <= '1';
-        wait for 2 * period;
-        reset <= '0';
-        wait;
+        clk <= '0';
+        wait for 0.5 * period;
+        clk <= '1';
+        wait for 0.5 * period;
     end process;
 
     ----------------------------------------------------
@@ -103,24 +91,30 @@ begin
 
     process
     begin
-      in_valid <= '0';
+      ----------------------------------------
       input_matrix <= read_input( test_file );
-      wait until rising_edge(clock);
-      wait until rising_edge(clock);
+      ----------------------------------------
+      reset   <= '1';
+      i_valid <= '0';
+      i_data  <= ( others => 'X' );
+      ----------------------------------------
+      wait until rising_edge(clk);
+      wait for 2 * period + hold_time;
+      reset   <= '0';
+      ----------------------------------------
       for row_idx in row_min to row_max loop
         for col_idx in col_min to col_max loop
-          for delay_count in 1 to bubbles loop
-            wait until rising_edge(clock);
-          end loop;
-          wait for period/4;
-          in_valid <= '1';
-          input    <= input_matrix(row_idx, col_idx);
+          i_valid  <= '1';
+          i_data   <= input_matrix(row_idx, col_idx);
           wait for period;
-          in_valid <= '0';
-          input    <= to_unsigned(0,8);
+          i_valid  <= '0';
+          i_data   <= (others => 'X');
+          wait for bubbles * period;
         end loop;
       end loop;
+      ----------------------------------------
       wait;
+      ----------------------------------------
     end process;
 
     ----------------------------------------------------
@@ -129,9 +123,10 @@ begin
     process
       variable spec_val, impl_val : integer;
     begin
+      ----------------------------------------
       wait; -- delete this line to enable execution of remainder of process
       wait for (10 + input_height*input_width*(1+bubbles)) * period;
-      impl_val := to_integer(unsigned(out_output));
+      impl_val := to_integer( o_data );
       case test_num is
         when 1       => spec_val := 188;
         when 2       => spec_val := 183;
@@ -140,25 +135,41 @@ begin
         when 5       => spec_val := 201;
         when others  => spec_val := -1;
       end case;
-      -- if test_num = 1, then overwrite result_file, otherwise append
+      ----------------------------------------
+      -- if test_num = 1 and mode = "prog",
+      -- then overwrite result_file,
+      -- else append
       if  impl_val = spec_val then
-        if test_num = 1 then 
-          write_file( result_file, test_name &" PASS" );
+        ------------------------------
+        if test_num = 1 and mode = "prog" then 
+          write_file( result_file, test_name &"_"& mode &" = PASS" );
         else
-          append_file( result_file, test_name &" PASS" );
+          append_file( result_file, test_name &"_"& mode &" = PASS" );
         end if;
-        report( test_name &" PASS" );
+        ------------------------------
+        report( test_name &" "& mode & " PASS" );
+        ------------------------------
       else
-        if test_num = 1 then 
-          write_file( result_file, test_name &" FAIL" );
+        ------------------------------
+        if test_num = 1 and mode = "prog" then 
+          write_file( result_file,
+                        test_name &"_"& mode &" = FAIL, "
+                        & integer'image(impl_val) & ", "
+                        & integer'image(spec_val));
         else
-          append_file( result_file, test_name &" PASS" );
+          append_file( result_file,
+                        test_name &"_"& mode &" = FAIL, "
+                        & integer'image(impl_val) & ", "
+                        & integer'image(spec_val));
         end if;
-        report("    "& integer'image(192));
+        ------------------------------
         report( test_name &" FAIL impl="& integer'image(impl_val)
                               &"; spec="& integer'image(spec_val));
+        ------------------------------
       end if;
+      ----------------------------------------
       wait;
+      ----------------------------------------
     end process;
     
 end main;

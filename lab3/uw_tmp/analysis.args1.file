@@ -1,0 +1,10 @@
+8:-out_dir
+62:/home/s244sing/ece327/github-repo/ece327/lab3/uw_tmp//rtlc.out
+10:-pipe_flow
+4:-vhf
+73:/home/s244sing/ece327/github-repo/ece327/lab3/uw_tmp//hdlAnalyze_vhdlfile
+25:-comment_transoff_regions
+13:-lib_map_file
+62:/home/s244sing/ece327/github-repo/ece327/lab3/uw_tmp//.jaguarc
+100:+incdir+/home/s244sing/ece327/github-repo/ece327/lab3+/home/s244sing/ece327/github-repo/ece327/lab3/
+17:+define+synthesis

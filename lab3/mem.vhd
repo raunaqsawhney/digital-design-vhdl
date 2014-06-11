@@ -13,7 +13,7 @@ entity mem is
     wren     : in std_logic;
     q        : out std_logic_vector(data_width - 1 downto 0)
     );
-end mem ;
+end entity;
 
 
 architecture main of mem is
