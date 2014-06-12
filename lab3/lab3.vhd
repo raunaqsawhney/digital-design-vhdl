@@ -110,7 +110,7 @@ begin
                 end if;
 
                 if (p >= 0) then
-                    p_counter <= p_counter + 1;
+                    p_counter <= p_counter + to_unsigned(1, 1);
                 end if;
             end if;
         end if;
