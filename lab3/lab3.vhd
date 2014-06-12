@@ -89,7 +89,7 @@ begin
 
             -- Initialize P and P coutners --
             p               <= to_signed(0,9);
-            p_counter       <= "00000000"; 
+            p_counter       <= to_unsigned(0,9); 
 
             -- Initialize start count --
             start_count     <= '0';
@@ -105,7 +105,7 @@ begin
 
                 if (col = "1111") then
                     row <= row + 1;
-                    col <= "0000";                                  -- reset col to 0 after reading 1 row
+                    col <= to_unsigned(0,4);                                  -- reset col to 0 after reading 1 row
                     cur_mem_in_use  <= cur_mem_in_use rol 1;        -- rotate virtual row (mem) 
                 end if;
 
