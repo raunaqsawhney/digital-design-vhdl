@@ -74,43 +74,42 @@ begin
             q       => mem_out_data(2)
         );
 
-    -- ECE327: Code 3
-    process
-    begin
-        wait until rising_edge(clk);
-        row <= "000";
-        col <= "0000";
-        if (i_valid = '1') then
-            for i in 0 to 2 loop                                                    -- Row Looper
-                for j in 0 to 15 loop                                               -- Col Looper
-                    if (row = "2" AND col = "1") then
-                        -- Perform first P calculation
-                        -- Set start_count to 1, now do P calculation for following bytes
-                        start_count <= '1';
-                    end if;
 
-                    if (start_count = '1') then
-                        mem_wren (i) <= '0';                                         -- Read from memory
-                        p <= signed(mem_out_array(0(j-1)) - mem_out_array(1(j-1)) + mem_out_array(2(j-1)));
-                        if (p >= 0) then
-                            p_counter = p_counter + 1;
-                        end if;
-                    end if;
 
-                    mem_wren(i) <= '1';
-                    -- Put i_data into jth column of ith row of table
-                    mem_out_array(i(j)) <= i_data;
-                    col <= col + 1;
+	signal cur_mem_in_use : std_logic_vector(2 downto 0);
 
-                end loop;
-                row <= row + 1;
-            end loop;
+	-- ECE327: Code 3 part2
 
-        -- Use one-hot encoding for row
-        -- Use binary encoding for col
-        -- After row = 100 ; col = 0000
-        end if;
-    end process;
+	process begin
+		cur_mem_in_use(2) = to'1';
+		row = '0'
+		col = '0'
+		wait until rising_edge(clk);
+		if (i_valid = '1') then
+		while row < 16 loop
+			while col < 16 loop
+					mem_wren(to_integer(cur_mem_in_use)) <= '1';
+					mem_out_data(mem_out_array(cur_mem_in_use), col) <= i_data;
+					o_data <= mem_out_data(mem_out_array(cur_mem_in_use), col);
+					
+					if ( row = '2' AND col= '1' ) then
+						start_count <= '1';
+					end if;
+
+					if (start_count = '1') then
+						mem_wren(to_integer(cur_mem_in_use)) <= '0';
+						P <= signed(mem_out_array(0, (col)) - signed(mem_out_array(1, (col))) + signed(2, (col));
+					if ( P >= 0 ) then
+						P_counter = P_counter + 1;
+					end if;
+					
+					
+					col= col + 1;
+			end loop;
+		row = row + 1;
+    	cur_mem_in_use = to_integer(rol(cur_mem_in_use, 1));
+		end loop;
+	end process;
   
 end architecture main;
 
