@@ -17,22 +17,21 @@ end entity lab3;
 architecture main of lab3 is
 
     -- Row and Column counters
-    signal row          : unsigned(4 downto 0);
-    signal col          : unsigned(4 downto 0);
-	
+    signal row          : unsigned(3 downto 0);
+    signal col          : unsigned(3 downto 0);
+
+    signal reset        : std_logic;
+
 	signal cur_mem_in_use : std_logic_vector(2 downto 0);
-	signal mem_index	: natural;
+	signal counter      : unsigned(7 downto 0);
 	
     -- P and P counter (P counter is written to output)
-    signal p_counter    : signed (7 downto 0);
-    signal p            : signed (7 downto 0);
-    signal start_count  : std_logic;
+    signal p_counter    : unsigned (7 downto 0);
+    signal p            : signed (8 downto 0);
+    signal start_count  : std_logic;            -- BOOLEAN YES OR NO
 
     -- Memory signals
     signal mem_address  : std_logic_vector(3 downto 0);
-    signal mem_data     : std_logic_vector(7 downto 0); 
-    signal mem_wren     : std_logic_vector(2 downto 0);  --for 3 mem banks
-    --signal mem_out_data : std_logic_vector(7 downto 0);
 
     -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
     subtype data is std_logic_vector(7 downto 0);
@@ -53,8 +52,8 @@ begin
         port map (
             address => mem_address,
             clock   => clk,
-            data    => mem_data,
-            wren    => mem_wren(2),
+            data    => std_logic_vector(i_data),
+            wren    => cur_mem_in_use(0),
             q       => mem_out_data(0)
         );
 
@@ -62,8 +61,8 @@ begin
         port map (
             address => mem_address,
             clock   => clk,
-            data    => mem_data,
-            wren    => mem_wren(1),
+            data    => std_logic_vector(i_data),
+            wren    => cur_mem_in_use(1),
             q       => mem_out_data(1)
         );
 
@@ -71,58 +70,74 @@ begin
         port map (
             address => mem_address,
             clock   => clk,
-            data    => mem_data,
-            wren    => mem_wren(0),
+            data    => std_logic_vector(i_data),
+            wren    => cur_mem_in_use(2),
             q       => mem_out_data(2)
         );
 
-	-- ECE327: Code 3 part2
-
 	process begin
-		wait until rising_edge(clk);
-		row <= to_unsigned(0, 4); 
-		col <= to_unsigned(0, 4);
+        wait until rising_edge(clk);
+        
+        if (reset = '1') then
+            -- Initialize global counter;
+            counter         <= to_unsigned(0,8);
 
-		cur_mem_in_use <= "001";		--intial mem to use is 0 (i.e. 001)
+            -- Initialize memory index  --
+            cur_mem_in_use  <= "001";
 
-		-----------SETUP DONE---------------
+            -- Initialize Row and Col counters --
+            row             <= to_unsigned(0,4);
+            col             <= to_unsigned(0,4);
 
-		wait until rising_edge(clk);
-		if (i_valid = '1') then
-		while row < 16 loop
-			while col < 16 loop
-					
-					if (cur_mem_in_use = "001") then
-						mem_index <= 0;
-					elsif (cur_mem_in_use = "010") then 
-						mem_index <= 1;
-					elsif(cur_mem_in_use = "100") then
-						mem_index <= 2;
-					end if;
+            -- Initialize P and P coutners --
+            p               <= to_signed(0,9);
+            p_counter       <= to_unsigned(0,8);
 
-					mem_wren(mem_index) <= '1';
-					mem_out_data(mem_out_array(mem_index), col) <= to_stdlogicvector(i_data);
-					o_data <= mem_out_data(mem_out_array(mem_index), col);
-					
-					if ( row = '2' AND col = '1' ) then
-						start_count <= '1';
-					end if;
+            -- Initialize start count --
+            start_count     <= '0';
 
-					if (start_count = '1') then
-						mem_wren(mem_index) <= '0';
-						P <= signed(mem_out_array(0, (col)) - signed(mem_out_array(1, (col))) + signed(2, (col));
-					if ( P >= 0 ) then
-						P_counter = P_counter + 1;
-					end if;
-					
-					
-					col= col + 1;
-			end loop;
-		row = row + 1;
-    	cur_mem_in_use = rol(cur_mem_in_use, 1));
-		end loop;
-	end process;
-  
+        else
+            if (i_valid = '1') then
+
+                counter <= counter + 1;                             -- Received valid data, increment count
+            
+                if (col < "1111") then
+                    col <= col + 1;
+                end if;
+
+                if (col = "1111") then
+                    row <= row + 1;
+                    col <= "0000";                                  -- reset col to 0 after reading 1 row
+                    cur_mem_in_use  <= cur_mem_in_use rol 1;        -- rotate virtual row (mem) 
+                end if;
+
+                if (p >= 0) then
+                    p_counter <= p_counter + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process begin
+        
+        -- Read the values, and calculate P
+        if (counter > "11111") then
+            case cur_mem_in_use is
+                when "001" => -- a-b+c
+                    p <= signed('0' & unsigned(mem_out_data(0))) - signed('0' & unsigned(mem_out_data(1))) + signed('0' & unsigned(i_data));
+                when "010" => -- c-a+b
+                    p <= signed('0' & unsigned(mem_out_data(2))) - signed('0' & unsigned(mem_out_data(0))) + signed('0' & unsigned(i_data));
+                when "100" => -- b-c+a
+                    p <= signed('0' & unsigned(mem_out_data(1))) - signed('0' & unsigned(mem_out_data(2))) + signed('0' & unsigned(i_data));
+                when others =>
+                    --
+            end case;
+        end if;
+    end process;
+
+    -- Output the value of p_counter
+    o_data <= p_counter;
+
 end architecture main;
 
 -- Q1: number of flip flops and lookup tables?
