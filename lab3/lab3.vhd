@@ -8,7 +8,7 @@ entity lab3 is
     reset     : in  std_logic;             -- reset
     i_valid   : in  std_logic;             -- input data is valid
     i_data    : in  unsigned(7 downto 0);  -- input data
-    o_data    : out unsigned(7 downto 0);   -- output data
+    o_data    : out unsigned(7 downto 0)   -- output data
 
 );
 
@@ -17,10 +17,12 @@ end entity lab3;
 architecture main of lab3 is
 
     -- Row and Column counters
-    signal row          : std_logic_vector(2 downto 0);
-    signal col          : std_logic_vector(3 downto 0);
-    
-
+    signal row          : unsigned(4 downto 0);
+    signal col          : unsigned(4 downto 0);
+	
+	signal cur_mem_in_use : std_logic_vector(2 downto 0);
+	signal mem_index	: natural;
+	
     -- P and P counter (P counter is written to output)
     signal p_counter    : signed (7 downto 0);
     signal p            : signed (7 downto 0);
@@ -30,7 +32,7 @@ architecture main of lab3 is
     signal mem_address  : std_logic_vector(3 downto 0);
     signal mem_data     : std_logic_vector(7 downto 0); 
     signal mem_wren     : std_logic_vector(2 downto 0);  --for 3 mem banks
-    signal mem_out_data : std_logic_vector(7 downto 0);
+    --signal mem_out_data : std_logic_vector(7 downto 0);
 
     -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
     subtype data is std_logic_vector(7 downto 0);
@@ -74,30 +76,40 @@ begin
             q       => mem_out_data(2)
         );
 
-
-
-	signal cur_mem_in_use : std_logic_vector(2 downto 0);
-
 	-- ECE327: Code 3 part2
 
 	process begin
-		cur_mem_in_use(2) = to'1';
-		row = '0'
-		col = '0'
+		wait until rising_edge(clk);
+		row <= to_unsigned(0, 4); 
+		col <= to_unsigned(0, 4);
+
+		cur_mem_in_use <= "001";		--intial mem to use is 0 (i.e. 001)
+
+		-----------SETUP DONE---------------
+
 		wait until rising_edge(clk);
 		if (i_valid = '1') then
 		while row < 16 loop
 			while col < 16 loop
-					mem_wren(to_integer(cur_mem_in_use)) <= '1';
-					mem_out_data(mem_out_array(cur_mem_in_use), col) <= i_data;
-					o_data <= mem_out_data(mem_out_array(cur_mem_in_use), col);
 					
-					if ( row = '2' AND col= '1' ) then
+					if (cur_mem_in_use = "001") then
+						mem_index <= 0;
+					elsif (cur_mem_in_use = "010") then 
+						mem_index <= 1;
+					elsif(cur_mem_in_use = "100") then
+						mem_index <= 2;
+					end if;
+
+					mem_wren(mem_index) <= '1';
+					mem_out_data(mem_out_array(mem_index), col) <= to_stdlogicvector(i_data);
+					o_data <= mem_out_data(mem_out_array(mem_index), col);
+					
+					if ( row = '2' AND col = '1' ) then
 						start_count <= '1';
 					end if;
 
 					if (start_count = '1') then
-						mem_wren(to_integer(cur_mem_in_use)) <= '0';
+						mem_wren(mem_index) <= '0';
 						P <= signed(mem_out_array(0, (col)) - signed(mem_out_array(1, (col))) + signed(2, (col));
 					if ( P >= 0 ) then
 						P_counter = P_counter + 1;
@@ -107,7 +119,7 @@ begin
 					col= col + 1;
 			end loop;
 		row = row + 1;
-    	cur_mem_in_use = to_integer(rol(cur_mem_in_use, 1));
+    	cur_mem_in_use = rol(cur_mem_in_use, 1));
 		end loop;
 	end process;
   
