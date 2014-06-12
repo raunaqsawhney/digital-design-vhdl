@@ -8,7 +8,7 @@ entity lab3 is
     reset     : in  std_logic;             -- reset
     i_valid   : in  std_logic;             -- input data is valid
     i_data    : in  unsigned(7 downto 0);  -- input data
-    o_data    : out unsigned(7 downto 0)   -- output data
+    o_data    : out std_logic_vector(7 downto 0)   -- output data
 
 );
 
@@ -20,13 +20,11 @@ architecture main of lab3 is
     signal row          : unsigned(3 downto 0);
     signal col          : unsigned(3 downto 0);
 
-    signal reset        : std_logic;
-
 	signal cur_mem_in_use : std_logic_vector(2 downto 0);
 	signal counter      : unsigned(7 downto 0);
 	
     -- P and P counter (P counter is written to output)
-    signal p_counter    : unsigned (7 downto 0);
+    signal p_counter    : std_logic_vector(7 downto 0);
     signal p            : signed (8 downto 0);
     signal start_count  : std_logic;            -- BOOLEAN YES OR NO
 
@@ -91,7 +89,7 @@ begin
 
             -- Initialize P and P coutners --
             p               <= to_signed(0,9);
-            p_counter       <= to_unsigned(0,8);
+            p_counter       <= "00000000"; 
 
             -- Initialize start count --
             start_count     <= '0';
