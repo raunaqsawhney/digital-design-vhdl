@@ -26,10 +26,6 @@ architecture main of lab3 is
     -- P and P counter (P counter is written to output)
     signal p_counter    : unsigned(7 downto 0);
     signal p            : signed (8 downto 0);
-    signal start_count  : std_logic;            -- BOOLEAN YES OR NO
-
-    -- Memory signals
-    signal mem_address  : std_logic_vector(3 downto 0);
 
     -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
     subtype data is std_logic_vector(7 downto 0);
@@ -48,7 +44,7 @@ begin
 
     memA    :   entity work.mem(main)
         port map (
-            address => mem_address,
+            address => std_logic_vector(col),
             clock   => clk,
             data    => std_logic_vector(i_data),
             wren    => cur_mem_in_use(0),
@@ -57,7 +53,7 @@ begin
 
     memB    :   entity work.mem(main)
         port map (
-            address => mem_address,
+            address => std_logic_vector(col),
             clock   => clk,
             data    => std_logic_vector(i_data),
             wren    => cur_mem_in_use(1),
@@ -66,7 +62,7 @@ begin
 
     memC    :   entity work.mem(main)
         port map (
-            address => mem_address,
+            address => std_logic_vector(col),
             clock   => clk,
             data    => std_logic_vector(i_data),
             wren    => cur_mem_in_use(2),
@@ -91,14 +87,11 @@ begin
             p               <= to_signed(0,9);
             p_counter       <= to_unsigned(0,8); 
 
-            -- Initialize start count --
-            start_count     <= '0';
 
         else
             if (i_valid = '1') then
 
-                counter <= counter + 1;                             -- Received valid data, increment count
-            
+                counter <= counter + 1;                             -- Received valid data, increment count         
                 if (col < "1111") then
                     col <= col + 1;
                 end if;
@@ -116,17 +109,17 @@ begin
         end if;
     end process;
 
-    process begin
-        
+    process (counter)
+    begin    
         -- Read the values, and calculate P
-        if (counter > "11111") then
+        if (counter > "11111" and counter < "11111111") then
             case cur_mem_in_use is
                 when "001" => -- a-b+c
+                    p <= signed('0' & unsigned(i_data)) - signed('0' & unsigned(mem_out_data(1))) + signed('0' & unsigned(mem_out_data(2)));
+                when "010" => -- a-b+c
+                    p <= signed('0' & unsigned(mem_out_data(0))) - signed('0' & unsigned(i_data)) + signed('0' & unsigned(mem_out_data(2)));
+                when "100" => -- a-b+c
                     p <= signed('0' & unsigned(mem_out_data(0))) - signed('0' & unsigned(mem_out_data(1))) + signed('0' & unsigned(i_data));
-                when "010" => -- c-a+b
-                    p <= signed('0' & unsigned(mem_out_data(2))) - signed('0' & unsigned(mem_out_data(0))) + signed('0' & unsigned(i_data));
-                when "100" => -- b-c+a
-                    p <= signed('0' & unsigned(mem_out_data(1))) - signed('0' & unsigned(mem_out_data(2))) + signed('0' & unsigned(i_data));
                 when others =>
                     --
             end case;
