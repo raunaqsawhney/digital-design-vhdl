@@ -1,0 +1,149 @@
+
+************************************************************
+
+Library: OPERATORS    Cell: inc_9u_9u_0_0    View: INTERFACE
+
+************************************************************
+
+ Number of ports :                      20
+ Number of nets :                       18
+ Number of instances :                   0
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Black Box inc_9u_9u_0_0 :               1
+
+*********************************************************************************
+
+Library: OPERATORS    Cell: counter_up_cnt_en_sclear_clock_0_9    View: INTERFACE
+
+*********************************************************************************
+
+  Cell            Library  References     Total Area
+
+ AND2             PRIMITIVES     9 x      1      9 AND2
+ DFFE             PRIMITIVES     9 x      1      9 DFFE
+ FALSE            PRIMITIVES     1 x      1      1 FALSE
+ INV              PRIMITIVES     1 x      1      1 INV
+ OR2              PRIMITIVES     1 x      1      1 OR2
+ TRUE             PRIMITIVES     1 x      1      1 TRUE
+ inc_9u_9u_0_0    OPERATORS      1 x      1      1 inc_9u_9u_0_0
+
+ Number of ports :                      26
+ Number of nets :                       34
+ Number of instances :                  23
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Black Box AND2 :                        9
+ Black Box DFFE :                        9
+ Black Box FALSE :                       1
+ Black Box INV :                         1
+ Black Box OR2 :                         1
+ Black Box TRUE :                        1
+ Black Box inc_9u_9u_0_0 :               1
+ Number of accumulated instances :      23
+
+************************************************************
+
+Library: OPERATORS    Cell: inc_8u_8u_0_0    View: INTERFACE
+
+************************************************************
+
+ Number of ports :                      18
+ Number of nets :                       16
+ Number of instances :                   0
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Black Box inc_8u_8u_0_0 :               1
+
+*********************************************************************************
+
+Library: OPERATORS    Cell: counter_up_cnt_en_sclear_clock_0_8    View: INTERFACE
+
+*********************************************************************************
+
+  Cell            Library  References     Total Area
+
+ AND2             PRIMITIVES     8 x      1      8 AND2
+ DFFE             PRIMITIVES     8 x      1      8 DFFE
+ FALSE            PRIMITIVES     1 x      1      1 FALSE
+ INV              PRIMITIVES     1 x      1      1 INV
+ OR2              PRIMITIVES     1 x      1      1 OR2
+ TRUE             PRIMITIVES     1 x      1      1 TRUE
+ inc_8u_8u_0_0    OPERATORS      1 x      1      1 inc_8u_8u_0_0
+
+ Number of ports :                      24
+ Number of nets :                       31
+ Number of instances :                  21
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Black Box AND2 :                        8
+ Black Box DFFE :                        8
+ Black Box FALSE :                       1
+ Black Box INV :                         1
+ Black Box OR2 :                         1
+ Black Box TRUE :                        1
+ Black Box inc_8u_8u_0_0 :               1
+ Number of accumulated instances :      21
+
+********************************************************
+
+Library: OPERATORS    Cell: and_8u_8u    View: INTERFACE
+
+********************************************************
+
+ Number of ports :                       9
+ Number of nets :                        0
+ Number of instances :                   0
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Black Box and_8u_8u :                   1
+
+*****************************************
+
+Library: work    Cell: lab3    View: main
+
+*****************************************
+
+  Cell                                 Library  References     Total Area
+
+ AND2                                  PRIMITIVES     1 x      1      1 AND2
+ FALSE                                 PRIMITIVES     1 x      1      1 FALSE
+ OR2                                   PRIMITIVES     2 x      1      2 OR2
+ TRUE                                  PRIMITIVES     1 x      1      1 TRUE
+ and_8u_8u                             OPERATORS      1 x      1      1 and_8u_8u
+ counter_up_cnt_en_sclear_clock_0_8    OPERATORS      1 x      8      8 AND2
+                                                               1      1 INV
+                                                               1      1 TRUE
+                                                               1      1 inc_8u_8u_0_0
+                                                               8      8 DFFE
+                                                               1      1 OR2
+                                                               1      1 FALSE
+ counter_up_cnt_en_sclear_clock_0_9    OPERATORS      1 x      9      9 AND2
+                                                               1      1 INV
+                                                               1      1 TRUE
+                                                               1      1 inc_9u_9u_0_0
+                                                               9      9 DFFE
+                                                               1      1 OR2
+                                                               1      1 FALSE
+
+ Number of ports :                      19
+ Number of nets :                       26
+ Number of instances :                   8
+ Number of references to this view :     0
+
+Total accumulated area : 
+ Black Box AND2 :                       18
+ Black Box DFFE :                       17
+ Black Box FALSE :                       3
+ Black Box INV :                         2
+ Black Box OR2 :                         4
+ Black Box TRUE :                        3
+ Black Box and_8u_8u :                   1
+ Black Box inc_8u_8u_0_0 :               1
+ Black Box inc_9u_9u_0_0 :               1
+ Number of accumulated instances :      50

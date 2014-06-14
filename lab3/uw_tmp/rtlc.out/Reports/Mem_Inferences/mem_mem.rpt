@@ -1,0 +1,8 @@
+Inferred RAM
+------------
+  1. Instance: rtlc_new_ram_I1
+    File: /home/rsawhney/ece327/ece327/lab3/mem.vhd , Net: mem, Type: single port
+    port 1  read-write
+    port 1  address width: 4
+    port 1  data width: 8
+

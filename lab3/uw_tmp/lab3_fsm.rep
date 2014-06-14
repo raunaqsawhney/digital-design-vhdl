@@ -1,0 +1,15 @@
+
+                                FSM EXTRACTION ANALYSIS                         
+                                =======================                         
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Module : work.lab3(main)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Number of FSMs Extracted : zero
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Module : work.mem(main){generic map (data_width => 8 addr_width => 4)}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Number of FSMs Extracted : zero

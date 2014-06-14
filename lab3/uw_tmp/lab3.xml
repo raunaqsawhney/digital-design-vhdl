@@ -1,0 +1,13 @@
+<interfaceDefinition version='1.2' language='vhdl' kind='component' name='lab3'>
+  <useClause path='ieee.NUMERIC_STD.all' />
+  <useClause path='ieee.std_logic_1164.all' />
+    <portList>
+
+      <port name='clk' direction='in' type='STD_LOGIC' kind='' />
+      <port name='reset' direction='in' type='STD_LOGIC' kind='' />
+      <port name='i_valid' direction='in' type='STD_LOGIC' kind='' />
+      <port name='i_data' direction='in' type='UNSIGNED (7 downto 0)' kind='array' library='work' package='lab3' packedDimension='(7 downto 0)' />
+      <port name='o_data' direction='out' type='UNSIGNED (7 downto 0)' kind='array' library='work' package='lab3' packedDimension='(7 downto 0)' />
+
+    </portList>
+</interfaceDefinition>
