@@ -21,10 +21,10 @@ architecture main of lab3 is
     signal col          : unsigned(3 downto 0);
 
 	signal cur_mem_in_use : std_logic_vector(2 downto 0);
-	signal counter      : unsigned(7 downto 0);
+	signal counter      : std_logic_vector(7 downto 0);
 	
     -- P and P counter (P counter is written to output)
-    signal p_counter    : unsigned(7 downto 0);
+    signal p_counter    : std_logic_vector(7 downto 0);
     signal p            : signed (8 downto 0);
 
     -- setup mem_out_data for 3 mem banks, each holding 8 bit data vector
@@ -74,7 +74,7 @@ begin
         
         if (reset = '1') then
             -- Initialize global counter;
-            counter         <= to_unsigned(0,8);
+            counter         <= "00000000"; 
 
             -- Initialize memory index  --
             cur_mem_in_use  <= "001";
@@ -85,13 +85,13 @@ begin
 
             -- Initialize P and P coutners --
             p               <= to_signed(0,9);
-            p_counter       <= to_unsigned(0,8); 
+            p_counter       <= "00000000"; 
 
 
         else
             if (i_valid = '1') then
 
-                counter <= counter + 1;                             -- Received valid data, increment count         
+                counter <= std_logic_vector( unsigned(counter) + 1 );                             -- Received valid data, increment count         
                 if (col < "1111") then
                     col <= col + 1;
                 end if;
@@ -103,7 +103,7 @@ begin
                 end if;
 
                 if (p >= 0) then
-                    p_counter <= p_counter + to_unsigned(1, 1);
+                    p_counter <= std_logic_vector( unsigned(p_counter) + 1);
                 end if;
             end if;
         end if;
@@ -112,7 +112,7 @@ begin
     process (counter)
     begin    
         -- Read the values, and calculate P
-        if (counter > "11111" and counter < "11111111") then
+        if (counter > "00011111" and counter < "11111111") then
             case cur_mem_in_use is
                 when "001" => -- a-b+c
                     p <= signed('0' & unsigned(i_data)) - signed('0' & unsigned(mem_out_data(1))) + signed('0' & unsigned(mem_out_data(2)));

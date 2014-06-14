@@ -124,7 +124,7 @@ begin
       variable spec_val, impl_val : integer;
     begin
       ----------------------------------------
-      wait; -- delete this line to enable execution of remainder of process
+      -- wait; -- delete this line to enable execution of remainder of process
       wait for (10 + input_height*input_width*(1+bubbles)) * period;
       impl_val := to_integer( o_data );
       case test_num is
