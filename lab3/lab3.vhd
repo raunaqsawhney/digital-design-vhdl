@@ -49,8 +49,8 @@ begin
             address => std_logic_vector(col),
             clock   => clk,
             data    => std_logic_vector(i_data),
-            wren    => cur_mem_in_use(0),
-            q       => mem_out_data(0)
+            wren    => cur_mem_in_use(2),
+            q       => mem_out_data(2)
         );
 
     memB    :   entity work.mem(main)
@@ -67,8 +67,8 @@ begin
             address => std_logic_vector(col),
             clock   => clk,
             data    => std_logic_vector(i_data),
-            wren    => cur_mem_in_use(2),
-            q       => mem_out_data(2)
+            wren    => cur_mem_in_use(0),
+            q       => mem_out_data(0)
         );
 
 	process begin
