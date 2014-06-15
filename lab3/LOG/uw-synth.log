@@ -1,5 +1,5 @@
 INFO: Starting PRECISION_RTL for logic synthesis
-precision: Executing on platform: CentOS release 5.10 (Final) Kernel \r on an \m  Linux eceLinux1.uwaterloo.ca 2.6.18-371.8.1.el5 #1 SMP Thu Apr 24 18:19:36 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux 
+precision: Executing on platform: CentOS release 5.10 (Final) Kernel \r on an \m  Linux eceLinux2.uwaterloo.ca 2.6.18-371.9.1.el5 #1 SMP Tue Jun 10 17:49:56 EDT 2014 x86_64 x86_64 x86_64 GNU/Linux 
 precision: Setting MGC_HOME to /opt/Precision_Synthesis_2008a.47/Mgc_home ...
 Note: Defaulting to use the Next Generation GUI.
 //  Precision RTL Synthesis 2008a.47 (Production Release) Tue Dec  9 03:06:25 PST 2008
@@ -10,9 +10,9 @@ Note: Defaulting to use the Next Generation GUI.
 //            CONFIDENTIAL AND PROPRIETARY INFORMATION WHICH IS THE
 //          PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
 //  
-//  Running on Linux rsawhney@eceLinux1.uwaterloo.ca #1 SMP Thu Apr 24 18:19:36 EDT 2014 2.6.18-371.8.1.el5 x86_64
+//  Running on Linux rsawhney@eceLinux2.uwaterloo.ca #1 SMP Tue Jun 10 17:49:56 EDT 2014 2.6.18-371.9.1.el5 x86_64
 //  
-//  Start time Sat Jun 14 19:03:48 2014
+//  Start time Sun Jun 15 01:06:11 2014
 -------------------------------------------------
 Info: Logging session transcript to file precision.log
 Info: Results directory: uw_tmp/
@@ -43,16 +43,16 @@ Info: Module work.mem(main){generic map (data_width => 8 addr_width => 4)}: Pre-
 Info: Built-in hardware memory core inferred for variable ': mem.mem depth = 16, width = 8'.
 Info: Module work.mem(main){generic map (data_width => 8 addr_width => 4)}: Compiling...
 Info: Root Module work.lab3(main): Compiling...
-Warning: "lab3.vhd", line 96: The comparison operator has been optimized to constant.
-Info: "lab3.vhd", line 97: Macro Modgen_Counter "counter_up_sclear_clock_cnt_en_0_8" inferred for node "p_counter".
-Info: "lab3.vhd", line 109: Macro Modgen_Counter "counter_up_sclear_clock_cnt_en_0_9" inferred for node "counter".
-Info: "lab3.vhd", line 111: Macro Modgen_Counter "counter_up_sclear_clock_clk_en_cnt_en_0_4" inferred for node "col".
+Warning: "lab3.vhd", line 98: The comparison operator has been optimized to constant.
+Info: "lab3.vhd", line 99: Macro Modgen_Counter "counter_up_sclear_clock_cnt_en_0_8" inferred for node "p_counter".
+Info: "lab3.vhd", line 114: Macro Modgen_Counter "counter_up_sclear_clock_cnt_en_0_9" inferred for node "counter".
+Info: "lab3.vhd", line 118: Macro Modgen_Counter "counter_up_sclear_clock_clk_en_cnt_en_0_4" inferred for node "col".
 Warning: "lab3.vhd", line 28: Net p[8:0] is unused after optimization
 Warning: "lab3.vhd", line 10: Net i_data[7:0] is unused after optimization
 Info: Compilation successfully completed.
 Info: Counter Inferencing === Detected : 4, Inferred (Modgen/Selcounter/AddSub) : 4 (3 / 0 / 0), AcrossDH (Merged/Not-Merged) : (0 / 0), Not-Inferred (Acrossdh/Attempted) : (0 / 0), Local Vars : 0 ===
 Info: Total CPU time taken for compilation: 0.0 secs.
-Info: Total lines of RTL compiled: 247.
+Info: Total lines of RTL compiled: 261.
 Info: Overall running time 0.0 secs.
 Info: Current working directory: uw_tmp/.
 Info: Finished compiling design.
@@ -71,7 +71,7 @@ Info: Writing file: uw_tmp/lab3.xrf.
 Info: -- Writing file uw_tmp/lab3.tcl
 Info: exq_pr_compile_project gen_vcf lab3 1
 Info: Finished synthesizing design.
-Info: Total CPU time taken for synthesis: 0.4 secs.
+Info: Total CPU time taken for synthesis: 0.3 secs.
 Info: Overall running time 0.5 secs.
 Info: uw_tmp/precision_tech.sdc
 Info: -- Saving the design database in uw_tmp/lab3_logic.xdb
@@ -86,8 +86,11 @@ Info: Warning, Moving uw_tmp/lab3_logic.xrf to uw_tmp/mgc_old_lab3_logic.xrf as 
 Info: Writing file: uw_tmp/lab3_logic.xrf.
 Info: Info, Command 'auto_write' finished successfully
 Info: *** logic synthesis succeeded ***
-Copying /opt/ModelSim101/modeltech/linux_x86_64/../modelsim.ini to modelsim.ini
+Warning: vmap will not overwrite local modelsim.ini.
+Warning: Library already exists at "work-msim".
+Warning: Library already exists at "altera_mf".
 Modifying modelsim.ini
+Warning: Library already exists at "cycloneii".
 Modifying modelsim.ini
 INFO: generic-gate       netlist         written to uw_tmp/lab3_gate.vhd
 INFO: generic-gate       area estimate   written to RPT/area_gate.rpt
@@ -125,13 +128,13 @@ Info: Running Quartus II Shell
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:53 2014
+    Info: Processing started: Sun Jun 15 01:06:16 2014
 Info: Command: quartus_sh -t uw-chip-synth-quartus.tcl lab3
 Info: Quartus(args): lab3
 Info: Evaluation of Tcl script uw-chip-synth-quartus.tcl was successful
 Info: Quartus II Shell was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 53 megabytes
-    Info: Processing ended: Sat Jun 14 19:03:53 2014
+    Info: Peak virtual memory: 52 megabytes
+    Info: Processing ended: Sun Jun 15 01:06:16 2014
     Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 Info: *******************************************************************
@@ -150,13 +153,13 @@ Info: Running Quartus II Shell
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:53 2014
+    Info: Processing started: Sun Jun 15 01:06:16 2014
 Info: Command: quartus_sh -t /home/ece327/lib/pins-NULL.tcl lab3
 Info: Quartus(args): lab3
 Info: Evaluation of Tcl script /home/ece327/lib/pins-NULL.tcl was successful
 Info: Quartus II Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 50 megabytes
-    Info: Processing ended: Sat Jun 14 19:03:53 2014
+    Info: Processing ended: Sun Jun 15 01:06:16 2014
     Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
@@ -176,7 +179,7 @@ Info: Running Quartus II Analysis & Synthesis
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:54 2014
+    Info: Processing started: Sun Jun 15 01:06:17 2014
 Info: Command: quartus_map lab3 --source=lab3_logic.edf --family=CycloneII
 Info: Found 3 design units, including 3 entities, in source file lab3_logic.edf
     Info: Found entity 1: modgen_counter_8_0
@@ -202,9 +205,9 @@ Info: Implemented 58 device resources after synthesis - the final resource count
     Info: Implemented 8 output pins
     Info: Implemented 39 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 184 megabytes
-    Info: Processing ended: Sat Jun 14 19:03:55 2014
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 185 megabytes
+    Info: Processing ended: Sun Jun 15 01:06:19 2014
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
 Info: *******************************************************************
@@ -223,7 +226,7 @@ Info: Running Quartus II Fitter
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:56 2014
+    Info: Processing started: Sun Jun 15 01:06:19 2014
 Info: Command: quartus_fit lab3 --effort=fast --part=EP2C35F672C7
 Info: Parallel compilation is enabled and will use 4 of the 8 processors detected
 Info: Selected device EP2C35F672C7 for design "lab3"
@@ -279,7 +282,7 @@ Info: I/O bank details before I/O pin placement
         Info: I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 1 total pin(s) used --  58 pins available
         Info: I/O bank number 7 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  58 pins available
         Info: I/O bank number 8 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  56 pins available
-Info: Fitter preparation operations ending: elapsed time is 00:00:00
+Info: Fitter preparation operations ending: elapsed time is 00:00:01
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
@@ -347,7 +350,7 @@ Info: Delay annotation completed successfully
 Warning: The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info: Quartus II Fitter was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 314 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:03 2014
+    Info: Processing ended: Sun Jun 15 01:06:26 2014
     Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:07
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
@@ -367,7 +370,7 @@ Info: Running Quartus II TimeQuest Timing Analyzer
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:04 2014
+    Info: Processing started: Sun Jun 15 01:06:27 2014
 Info: Command: quartus_sta -t uw-chip-synth-quartus-timing.tcl lab3
 Info: Quartus(args): lab3
 Info: Detected changes in Quartus II Settings File (.qsf).
@@ -577,8 +580,8 @@ Info: Path #5: Setup slack is -2.885 (VIOLATED)
     Info: 
 Info: Evaluation of Tcl script uw-chip-synth-quartus-timing.tcl was successful
 Info: Quartus II TimeQuest Timing Analyzer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 143 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:04 2014
+    Info: Peak virtual memory: 142 megabytes
+    Info: Processing ended: Sun Jun 15 01:06:27 2014
     Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
@@ -598,13 +601,13 @@ Info: Running Quartus II Assembler
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:05 2014
+    Info: Processing started: Sun Jun 15 01:06:28 2014
 Info: Command: quartus_asm lab3
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 234 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:13 2014
+    Info: Processing ended: Sun Jun 15 01:06:36 2014
     Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:08
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
@@ -624,12 +627,12 @@ Info: Running Quartus II EDA Netlist Writer
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:14 2014
+    Info: Processing started: Sun Jun 15 01:06:37 2014
 Info: Command: quartus_eda lab3 --simulation=on --tool=modelsim --format=vhdl
 Info: Generated files "lab3.vho" and "lab3_vhd.sdo" in directory "simulation/modelsim/" for EDA simulation tool
 Info: Quartus II EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 166 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:15 2014
+    Info: Processing ended: Sun Jun 15 01:06:38 2014
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:00
 Warning: Can't contact license server "7417@maxwell5.uwaterloo.ca" -- this server will be ignored
@@ -649,12 +652,12 @@ Info: Running Quartus II EDA Netlist Writer
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:16 2014
+    Info: Processing started: Sun Jun 15 01:06:39 2014
 Info: Command: quartus_eda lab3 --simulation=on --tool=modelsim --format=verilog
 Info: Generated files "lab3.vo" and "lab3_v.sdo" in directory "simulation/modelsim/" for EDA simulation tool
 Info: Quartus II EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 166 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:16 2014
+    Info: Processing ended: Sun Jun 15 01:06:39 2014
     Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 Warning: vmap will not overwrite local modelsim.ini.

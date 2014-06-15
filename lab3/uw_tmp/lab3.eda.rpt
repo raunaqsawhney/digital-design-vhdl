@@ -1,5 +1,5 @@
 EDA Netlist Writer report for lab3
-Sat Jun 14 19:04:16 2014
+Sun Jun 15 01:06:39 2014
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Sat Jun 14 19:04:16 2014 ;
+; EDA Netlist Writer Status ; Successful - Sun Jun 15 01:06:39 2014 ;
 ; Revision Name             ; lab3                                  ;
 ; Top-level Entity Name     ; lab3                                  ;
 ; Family                    ; Cyclone II                            ;
@@ -95,12 +95,12 @@ Info: Running Quartus II EDA Netlist Writer
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:16 2014
+    Info: Processing started: Sun Jun 15 01:06:39 2014
 Info: Command: quartus_eda lab3 --simulation=on --tool=modelsim --format=verilog
 Info: Generated files "lab3.vo" and "lab3_v.sdo" in directory "/home/rsawhney/ece327/ece327/lab3/uw_tmp/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II EDA Netlist Writer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 166 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:16 2014
+    Info: Processing ended: Sun Jun 15 01:06:39 2014
     Info: Elapsed time: 00:00:00
     Info: Total CPU time (on all processors): 00:00:00
 

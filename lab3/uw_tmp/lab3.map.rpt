@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab3
-Sat Jun 14 19:03:55 2014
+Sun Jun 15 01:06:19 2014
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +------------------------------------+------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jun 14 19:03:55 2014    ;
+; Analysis & Synthesis Status        ; Successful - Sun Jun 15 01:06:19 2014    ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Full Version ;
 ; Revision Name                      ; lab3                                     ;
 ; Top-level Entity Name              ; lab3                                     ;
@@ -213,7 +213,7 @@ Info: Running Quartus II Analysis & Synthesis
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:54 2014
+    Info: Processing started: Sun Jun 15 01:06:17 2014
 Info: Command: quartus_map lab3 --source=lab3_logic.edf --family=CycloneII
 Info: Found 3 design units, including 3 entities, in source file lab3_logic.edf
     Info: Found entity 1: modgen_counter_8_0
@@ -239,9 +239,9 @@ Info: Implemented 58 device resources after synthesis - the final resource count
     Info: Implemented 8 output pins
     Info: Implemented 39 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 184 megabytes
-    Info: Processing ended: Sat Jun 14 19:03:55 2014
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 185 megabytes
+    Info: Processing ended: Sun Jun 15 01:06:19 2014
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

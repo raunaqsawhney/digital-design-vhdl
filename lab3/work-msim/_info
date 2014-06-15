@@ -3,132 +3,235 @@ K3
 13
 cModel Technology
 Z0 d/home/rsawhney/ece327/ece327/lab3
+T_opt
+Z1 VJJ43X^LT?bN2e58gDEi<B1
+Z2 04 7 4 work lab3_tb main 1
+Z3 =1-14dae9740792-539d2031-be180-1e68
+Z4 o-quiet -auto_acc_if_foreign -work work-msim
+Z5 n@_opt
+Z6 OL;O;10.1;51
+Z7 d/home/rsawhney/ece327/ece327/lab3
+T_opt1
+Z8 VGcN71J_YmTAk8PK:23Sj83
+R2
+Z9 =1-14dae9740792-539d21c8-6cd-1f54
+R4
+Z10 n@_opt1
+R6
+R7
+T_opt2
+Z11 V_0TX05gT5T?bB>;nj_Hio3
+R2
+Z12 =1-14dae9740821-539d2320-5fd00-6f7f
+R4
+Z13 n@_opt2
+R6
+R7
 Elab3
-Z1 w1402786967
-Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
-Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
-Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
-Z5 d/home/rsawhney/ece327/ece327/lab3
-Z6 8lab3.vhd
-Z7 Flab3.vhd
+Z14 w1402806958
+Z15 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z16 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z17 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+R7
+Z18 8lab3.vhd
+Z19 Flab3.vhd
 l0
 L5
-Z8 VMDl:7lg7c8^=V[VH?hUXG0
-Z9 OL;C;10.1;51
+Z20 VMDl:7lg7c8^=V[VH?hUXG0
+Z21 OL;C;10.1;51
 31
-Z10 !s108 1402787057.424882
-Z11 !s90 -93|+acc|-work|work-msim|mem.vhd|lab3.vhd|
-Z12 !s107 lab3.vhd|mem.vhd|
-Z13 o-93 +acc -work work-msim
-Z14 tExplicit 1
-Z15 !s100 V2ADjo]XZD1?gd<m>IWXE3
+Z22 !s108 1402808800.404315
+Z23 !s90 -93|+acc|-work|work-msim|mem.vhd|lab3.vhd|
+Z24 !s107 lab3.vhd|mem.vhd|
+Z25 o-93 +acc -work work-msim
+Z26 tExplicit 1
+Z27 !s100 V2ADjo]XZD1?gd<m>IWXE3
 !i10b 1
 Amain
-Z16 DEx4 work 3 mem 0 22 7mhenKh9S9fz>WlS=KD<K2
-R2
-R3
-R4
-Z17 DEx4 work 4 lab3 0 22 MDl:7lg7c8^=V[VH?hUXG0
+Z28 DEx4 work 3 mem 0 22 7mhenKh9S9fz>WlS=KD<K2
+R15
+R16
+R17
+Z29 DEx4 work 4 lab3 0 22 MDl:7lg7c8^=V[VH?hUXG0
 l43
 L17
-Z18 V]?SImA1Df<nabTcP>Il061
-R9
+Z30 V]?SImA1Df<nabTcP>Il061
+R21
 31
-R10
-R11
-R12
-R13
-R14
-Z19 !s100 lLURl=Ej_AW5k>>^>Tn@Y2
+R22
+R23
+R24
+R25
+R26
+Z31 !s100 RFXcHV`NcVz0;7B;VRdaC0
 !i10b 1
 vlab3_chip
 !i10b 1
-!s100 4EgT1`nah0^4<3kHcC8H`1
-IW87hX8ZOUYA<l14La]Gf^1
-V[o]f@Edzdb=l52429Y[9R2
-R5
-w1402787057
-8uw_tmp/lab3_chip.v
-Fuw_tmp/lab3_chip.v
+Z32 !s100 4EgT1`nah0^4<3kHcC8H`1
+Z33 IW87hX8ZOUYA<l14La]Gf^1
+Z34 V[o]f@Edzdb=l52429Y[9R2
+R7
+w1402808800
+Z35 8uw_tmp/lab3_chip.v
+Z36 Fuw_tmp/lab3_chip.v
 L0 31
-Z20 OL;L;10.1;51
+Z37 OL;L;10.1;51
 r1
 !s85 0
 31
-!s108 1402787058.034346
+!s108 1402808800.973252
 !s107 uw_tmp/lab3_chip.v|
-!s90 -novopt|+acc|-work|work-msim|uw_tmp/lab3_chip.v|
-o+acc -work work-msim -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
-Emem
-Z21 w1402577388
-R2
-R3
-R4
-R5
-Z22 8mem.vhd
-Z23 Fmem.vhd
+Z38 !s90 -novopt|+acc|-work|work-msim|uw_tmp/lab3_chip.v|
+Z39 o+acc -work work-msim -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+Elab3_tb
+Z40 w1402780101
+Z41 DPx4 work 16 lab3_unsynth_pkg 0 22 RZze>kh[F`KN0g5XfobYN0
+R15
+R16
+R17
+R7
+Z42 8lab3_tb.vhd
+Z43 Flab3_tb.vhd
 l0
-L5
-Z24 V7mhenKh9S9fz>WlS=KD<K2
-R9
+L11
+Z44 VPYZMO0`N_:acz@P;;40Q31
+R21
 31
-R10
-R11
-R12
-R13
-R14
-Z25 !s100 jQNc8N:RSXiGN2_<X`P931
+Z45 !s108 1402807025.137443
+Z46 !s90 -93|+acc|-work|work-msim|mem.vhd|lab3.vhd|lab3_unsynth_pkg.vhd|lab3_tb.vhd|
+Z47 !s107 lab3_tb.vhd|lab3_unsynth_pkg.vhd|lab3.vhd|mem.vhd|
+R25
+R26
+Z48 !s100 l8CWli?>FDo8U:S>hVIcF0
 !i10b 1
 Amain
-R2
-R3
-R4
+R29
+R41
+R15
 R16
+R17
+Z49 DEx4 work 7 lab3_tb 0 22 PYZMO0`N_:acz@P;;40Q31
+l65
+L18
+Z50 V<64U3?Yj5?[Dm]Az`:z:B2
+R21
+31
+R45
+R46
+R47
+R25
+R26
+Z51 !s100 6L_Lj0_?l=a?I@Q0FMZ7K2
+!i10b 1
+Plab3_unsynth_pkg
+R15
+R16
+R17
+Z52 w1401888717
+R7
+Z53 8lab3_unsynth_pkg.vhd
+Z54 Flab3_unsynth_pkg.vhd
+l0
+L16
+Z55 VRZze>kh[F`KN0g5XfobYN0
+R21
+31
+b1
+R45
+R46
+R47
+R25
+R26
+Z56 !s100 fkH3j9:9e]PFnWD9NHNZ^2
+!i10b 1
+Bbody
+R41
+R15
+R16
+R17
+l0
+L43
+Z57 VL[DBa]RKjc<[M`7:7@Gj42
+R21
+31
+R45
+R46
+R47
+R25
+R26
+nbody
+Z58 !s100 =[O][c^@Xj43N2K5nJ^890
+!i10b 1
+Emem
+Z59 w1402577388
+R15
+R16
+R17
+R7
+Z60 8mem.vhd
+Z61 Fmem.vhd
+l0
+L5
+Z62 V7mhenKh9S9fz>WlS=KD<K2
+R21
+31
+R22
+R23
+R24
+R25
+R26
+Z63 !s100 jQNc8N:RSXiGN2_<X`P931
+!i10b 1
+Amain
+R15
+R16
+R17
+R28
 l25
 L19
-Z26 V9OAEDkdDVS0YMDg98V9oK1
-R9
+Z64 V9OAEDkdDVS0YMDg98V9oK1
+Z65 !s100 6Zn4K5PXCT7a7BNN]T[Xg1
+R21
 31
-R10
-R11
-R12
-R13
-R14
-Z27 !s100 6Zn4K5PXCT7a7BNN]T[Xg1
+R22
+R23
+R24
+R25
+R26
 !i10b 1
 vmodgen_counter_8_0
-Z28 IIm685g;alUB8]cn;eO9[j0
-Z29 VAce4J7QL?h:GUmJfa_CB92
-R5
-Z30 w1402787031
-Z31 8uw_tmp/lab3_logic.v
-Z32 Fuw_tmp/lab3_logic.v
-Z33 L0 374
-R20
+Z66 IIm685g;alUB8]cn;eO9[j0
+Z67 VAce4J7QL?h:GUmJfa_CB92
+R7
+Z68 w1402808775
+Z69 8uw_tmp/lab3_logic.v
+Z70 Fuw_tmp/lab3_logic.v
+Z71 L0 374
+R37
 r1
 31
-Z34 !s108 1402787056.976551
-Z35 !s107 uw_tmp/lab3_logic.v|
-Z36 !s90 -novopt|-work|work-msim|uw_tmp/lab3_logic.v|
-Z37 o-work work-msim -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+Z72 !s108 1402808799.899163
+Z73 !s107 uw_tmp/lab3_logic.v|
+Z74 !s90 -novopt|-work|work-msim|uw_tmp/lab3_logic.v|
+Z75 o-work work-msim -L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+Z76 !s100 <eGak<`mF8jD9eLZIoGZS2
 !i10b 1
-Z38 !s100 <eGak<`mF8jD9eLZIoGZS2
 !s85 0
 vmodgen_counter_9_0
-Z39 IQA40b:l0MDJfOeXW2cOoS3
-Z40 VTf@PGTlP?0Al@JImREJ2B1
-R5
-R30
-R31
-R32
-Z41 L0 255
-R20
+Z77 IQA40b:l0MDJfOeXW2cOoS3
+Z78 VTf@PGTlP?0Al@JImREJ2B1
+R7
+R68
+R69
+R70
+Z79 L0 255
+R37
 r1
 31
-R34
-R35
-R36
-R37
+R72
+R73
+R74
+R75
+Z80 !s100 WhnnTf39;hh8g@XKPh?213
 !i10b 1
-Z42 !s100 WhnnTf39;hh8g@XKPh?213
 !s85 0

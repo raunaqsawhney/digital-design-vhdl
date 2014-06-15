@@ -26,7 +26,7 @@ db|lab3.(0).cnf
 # case_insensitive
 # source_file
 lab3_logic.edf
-df1b4137fd4721e1339af6b33eff485
+97994f2ebb5d74ecaa72cb779e9d5147
 10
 # hierarchies {
 |
@@ -42,7 +42,7 @@ db|lab3.(1).cnf
 # case_insensitive
 # source_file
 lab3_logic.edf
-df1b4137fd4721e1339af6b33eff485
+97994f2ebb5d74ecaa72cb779e9d5147
 10
 # hierarchies {
 modgen_counter_9_0:modgen_counter_counter
@@ -58,7 +58,7 @@ db|lab3.(2).cnf
 # case_insensitive
 # source_file
 lab3_logic.edf
-df1b4137fd4721e1339af6b33eff485
+97994f2ebb5d74ecaa72cb779e9d5147
 10
 # hierarchies {
 modgen_counter_8_0:modgen_counter_o_data

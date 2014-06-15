@@ -1,5 +1,5 @@
 Fitter report for lab3
-Sat Jun 14 19:04:03 2014
+Sun Jun 15 01:06:26 2014
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -61,7 +61,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +------------------------------------+------------------------------------------+
-; Fitter Status                      ; Successful - Sat Jun 14 19:04:03 2014    ;
+; Fitter Status                      ; Successful - Sun Jun 15 01:06:26 2014    ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Full Version ;
 ; Revision Name                      ; lab3                                     ;
 ; Top-level Entity Name              ; lab3                                     ;
@@ -1326,7 +1326,7 @@ Info: Running Quartus II Fitter
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:03:56 2014
+    Info: Processing started: Sun Jun 15 01:06:19 2014
 Info: Command: quartus_fit lab3 --effort=fast --part=EP2C35F672C7
 Info: Parallel compilation is enabled and will use 4 of the 8 processors detected
 Info: Selected device EP2C35F672C7 for design "lab3"
@@ -1382,7 +1382,7 @@ Info: I/O bank details before I/O pin placement
         Info: I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 1 total pin(s) used --  58 pins available
         Info: I/O bank number 7 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  58 pins available
         Info: I/O bank number 8 does not use VREF pins and has undetermined VCCIO pins. 0 total pin(s) used --  56 pins available
-Info: Fitter preparation operations ending: elapsed time is 00:00:00
+Info: Fitter preparation operations ending: elapsed time is 00:00:01
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
@@ -1450,7 +1450,7 @@ Info: Delay annotation completed successfully
 Warning: The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
 Info: Quartus II Fitter was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 314 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:03 2014
+    Info: Processing ended: Sun Jun 15 01:06:26 2014
     Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:07
 

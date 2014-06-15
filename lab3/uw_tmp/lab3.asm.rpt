@@ -1,5 +1,5 @@
 Assembler report for lab3
-Sat Jun 14 19:04:13 2014
+Sun Jun 15 01:06:36 2014
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Jun 14 19:04:13 2014 ;
+; Assembler Status      ; Successful - Sun Jun 15 01:06:36 2014 ;
 ; Revision Name         ; lab3                                  ;
 ; Top-level Entity Name ; lab3                                  ;
 ; Family                ; Cyclone II                            ;
@@ -128,13 +128,13 @@ Info: Running Quartus II Assembler
     Info: programming logic devices manufactured by Altera and sold by 
     Info: Altera or its authorized distributors.  Please refer to the 
     Info: applicable agreement for further details.
-    Info: Processing started: Sat Jun 14 19:04:05 2014
+    Info: Processing started: Sun Jun 15 01:06:28 2014
 Info: Command: quartus_asm lab3
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 234 megabytes
-    Info: Processing ended: Sat Jun 14 19:04:13 2014
+    Info: Processing ended: Sun Jun 15 01:06:36 2014
     Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:08
 

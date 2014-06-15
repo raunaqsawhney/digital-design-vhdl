@@ -154,14 +154,20 @@ begin
 end architecture main;
 
 -- Q1: number of flip flops and lookup tables?
---
+-- 23 LUTs, and 25 Flop Flops
 
 -- Q2: maximum clock frequency?
 -- Fmax = 257.4 MHz
 
 -- Q3: source and destination signals of critical path?
--- 
+-- reg_out_o_data_obuf_7 /clk -> o_data(7)
+
 
 -- Q4: does your implementation function correctly?  If not,
 -- explain bug and how you would fix it if you had more time.
--- 
+-- No, we were not able to get the implementation functioning correctly.
+-- If given more time, we would use a proper dataflow diagram to map out
+-- the datapath components, as well as, use an FSM approach as opposed to the
+-- current implementation. An FSM would improve performance by synchronizing all
+-- possible states of FSM. Although, the current implementation compiles, simulates, and 
+-- synthesizes, it does not produce the correct results required by the test cases

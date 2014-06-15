@@ -1,5 +1,5 @@
 Flow report for lab3
-Sat Jun 14 19:04:16 2014
+Sun Jun 15 01:06:39 2014
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +------------------------------------+------------------------------------------+
-; Flow Status                        ; Successful - Sat Jun 14 19:04:16 2014    ;
+; Flow Status                        ; Successful - Sun Jun 15 01:06:39 2014    ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Full Version ;
 ; Revision Name                      ; lab3                                     ;
 ; Top-level Entity Name              ; lab3                                     ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/14/2014 19:03:54 ;
+; Start date & time ; 06/15/2014 01:06:18 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; lab3                ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 ; Assignment Name                    ; Value                          ; Default Value ; Entity Name ; Section Id     ;
 +------------------------------------+--------------------------------+---------------+-------------+----------------+
 ; AUTO_SHIFT_REGISTER_RECOGNITION    ; Off                            ; Auto          ; --          ; --             ;
-; COMPILER_SIGNATURE_ID              ; 22930452121633.140278703419456 ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 22930452121490.140280877708601 ; --            ; --          ; --             ;
 ; EDA_MAP_ILLEGAL_CHARACTERS         ; On                             ; --            ; --          ; eda_simulation ;
 ; POWER_DEFAULT_INPUT_IO_TOGGLE_RATE ; 0 %                            ; 12.5%         ; --          ; --             ;
 ; POWER_DEFAULT_TOGGLE_RATE          ; 0 %                            ; 12.5%         ; --          ; --             ;
@@ -102,11 +102,11 @@ applicable agreement for further details.
 +----------------------+------------------------+---------+------------+----------------+
 ; Module Name          ; Machine Hostname       ; OS Name ; OS Version ; Processor type ;
 +----------------------+------------------------+---------+------------+----------------+
-; Analysis & Synthesis ; eceLinux1.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
-; Fitter               ; eceLinux1.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
-; Assembler            ; eceLinux1.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
-; EDA Netlist Writer   ; eceLinux1.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
-; EDA Netlist Writer   ; eceLinux1.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
+; Analysis & Synthesis ; eceLinux2.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
+; Fitter               ; eceLinux2.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
+; Assembler            ; eceLinux2.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
+; EDA Netlist Writer   ; eceLinux2.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
+; EDA Netlist Writer   ; eceLinux2.uwaterloo.ca ; Red Hat ; 5          ; x86_64         ;
 +----------------------+------------------------+---------+------------+----------------+
 
 
