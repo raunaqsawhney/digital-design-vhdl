@@ -1,0 +1,83 @@
+***********************************************
+Device Utilization for EP2C35F672C
+***********************************************
+Resource                Used    Avail   Utilization
+-----------------------------------------------
+IOs                     19      475       4.00%
+LUTs                    23      33216     0.07%
+Registers               25      33216     0.08%
+Memory Bits             0       483340    0.00%
+DSP block 9-bit elems   0       70        0.00%
+
+-----------------------------------------------
+
+**********************************************************************
+
+Library: OPERATORS    Cell: modgen_counter_9_0    View: IMPLEMENTATION
+
+**********************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii    10 x      1     10 LUTs
+ cycloneii_lcell_ff      cycloneii     9 x      1      9 Registers
+
+ Number of ports :                      26
+ Number of nets :                       31
+ Number of instances :                  20
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                       10
+ Number of Registers :                   9
+ Number of accumulated instances :      20
+
+**********************************************************************
+
+Library: OPERATORS    Cell: modgen_counter_8_0    View: IMPLEMENTATION
+
+**********************************************************************
+
+  Cell                   Library  References     Total Area
+
+ VCC                     cycloneii     1 x
+ cycloneii_lcell_comb    cycloneii     9 x      1      9 LUTs
+ cycloneii_lcell_ff      cycloneii     8 x      1      8 Registers
+
+ Number of ports :                      33
+ Number of nets :                       28
+ Number of instances :                  18
+ Number of references to this view :     1
+
+Total accumulated area : 
+ Number of LUTs :                        9
+ Number of Registers :                   8
+ Number of accumulated instances :      18
+
+*****************************************
+
+Library: work    Cell: lab3    View: main
+
+*****************************************
+
+  Cell                   Library  References     Total Area
+
+ cycloneii_io            cycloneii    11 x      1     11 IOs
+ cycloneii_lcell_comb    cycloneii     4 x      1      4 LUTs
+ cycloneii_lcell_ff      cycloneii     8 x      1      8 Registers
+ modgen_counter_8_0      OPERATORS     1 x      9      9 LUTs
+                                                8      8 Registers
+ modgen_counter_9_0      OPERATORS     1 x     10     10 LUTs
+                                                9      9 Registers
+
+ Number of ports :                      19
+ Number of nets :                       44
+ Number of instances :                  25
+ Number of references to this view :     0
+
+Total accumulated area : 
+ Number of IOs :                        19
+ Number of LUTs :                       23
+ Number of Registers :                  25
+ Number of accumulated instances :      61
