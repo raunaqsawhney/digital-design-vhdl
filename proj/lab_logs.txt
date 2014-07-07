@@ -1,0 +1,14 @@
+Jul/6
+-----
+We have all a,b,c,d,e,f,g,h in the first process.
+Second process only takes in the computed values from the first.
+
+1 process for memory select.
+1 process each for pipeline stage.
+
+In our data flow diagram we get the value, of the edge.
+We have a,b,c,d,e,f,g,h then we calculate which of the three are multiple of 5
+and which are multiple of 3.
+
+Probably have a LUT to tell which combos of the three correspond to which
+direction.
