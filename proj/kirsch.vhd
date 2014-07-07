@@ -46,5 +46,44 @@ begin
 
   debug_led_red <= (others => '0');
   debug_led_grn <= (others => '0');
+
+  -- Custom Functions
+  function "rol" (a : std_logic_vector; n : natural)
+    return std_logic_vector
+  is
+  begin
+    return std_logic_vector(unsigned(a) rol n);
+  end function;
   
+  -- Defined Signals
+  signal col        :   std_logic_vector(7 downto 0);
+  signal mem_wren   :   std_logic_vector(2 downto 0);
+
+  -- Memories
+  mem0  :   entity work.mem(main)
+    port map (
+        address => col,
+        clock   => i_clock,
+        data    => i_pixel,
+        wren    => mem_wren(0),
+        q       => 
+    );
+
+  mem1  :   entity work.mem(main)
+    port map (
+        address => col,
+        clock   => i_clock,
+        data    => i_pixel,
+        wren    => mem_wren(1),
+        q       =>
+    );
+
+  mem2  :   entity work.mem(main)
+    port map (
+        address => col,
+        clock   => i_clock,
+        data    => i_pixel,
+        wren    => mem_wren(2),
+        q       =>
+    );
 end architecture;
