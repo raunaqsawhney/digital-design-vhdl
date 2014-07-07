@@ -1,0 +1,40 @@
+Jul/6
+-----
+We have all a,b,c,d,e,f,g,h in the first process.
+Second process only takes in the computed values from the first.
+
+1 process for memory select.
+1 process each for pipeline stage.
+
+In our data flow diagram we get the value, of the edge.
+We have a,b,c,d,e,f,g,h then we calculate which of the three are multiple of 5
+and which are multiple of 3.
+
+Probably have a LUT to tell which combos of the three correspond to which
+direction.
+
+Steps for the thin line implementation:
+	1) Read from file
+	2) Read from file --> write to memory
+	3) Read from memory
+	4) Read from memory --> write to the convolation table
+
+Convolation Table:
+	1) Convolulation table is basically a 8 element matrix (3x3 less 1 for
+pixel)
+	2) We have two for loops for 1-254 for rows and columns
+		for row 1 to 254:
+			for col 1 to 254:
+	3) Then within these we have two more loops to control the location within
+the convolulation table.
+
+cur_mem_in_use = 100
+
+	for i = 1 to 254
+		rol(cur_mem_in_use, 1)
+		for j = 1 to 254
+			counter_until_65535++
+			if counter_until_65535 has reached 515: <-- this means we are at r2c2
+				for m = 0 to 2
+					for n = 0 to 2
+						table[m,n] = image[i+m-1, j+n-1];	 
