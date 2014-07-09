@@ -56,9 +56,16 @@ begin
   end function;
   
   -- Defined Signals
-  signal col        :   std_logic_vector(7 downto 0);
+  signal col        :   unsigned(7 downto 0);
+  signal row        :   unsigned(7 downto 0);
   signal mem_wren   :   std_logic_vector(2 downto 0);
+  signal count      :   unsigned(17 downto 0);
+  signal busy       :   std_logic;
 
+  -- Memory Array
+  type mem_array is array (2 downto 0) of std_logic_vector(7 downto 0);
+  signal mem_out    :   mem_array;
+  
   -- Memories
   mem0  :   entity work.mem(main)
     port map (
@@ -66,7 +73,7 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(0),
-        q       => 
+        q       => mem_out(0) 
     );
 
   mem1  :   entity work.mem(main)
@@ -75,7 +82,7 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(1),
-        q       =>
+        q       => mem_out(1)
     );
 
   mem2  :   entity work.mem(main)
@@ -84,6 +91,44 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(2),
-        q       =>
+        q       => mem_out(2)
     );
+
+  -- Stage 1
+  process begin
+      wait until rising_edge(i_clock);
+
+        if (i_reset = '1') then
+            count     <= x"00";
+            col       <= x"00";
+            row       <= x"00";
+            busy      <= '0';
+            mem_wren  <= "001";
+
+        else
+            if (i_valid = '1') then
+
+                -- filled all columns in a row 
+                if (col = '255') then
+
+                    -- rotate mem_wren to point to next memory
+                    mem_wren <= mem_wren rol 1;
+
+                    -- increment row counter
+                    row <= (row + 1);
+            end if
+
+        end if
+
+  -- System Modes
+  process begin
+      if (i_reset = '1') then
+          o_mode <= '01';
+      elsif (busy = '1') then
+          o_mode <= '10';
+      else 
+          o_mode <= '11';
+      end if;
+  end process;
+
 end architecture;
