@@ -54,13 +54,49 @@ begin
   begin
     return std_logic_vector(unsigned(a) rol n);
   end function;
+
+  function "max" (a : std_logic_vector; b : std_logic_vector)
+    return std_logic_vector
+  is
+  begin
+      if (a > b) then 
+          return a;
+      else
+          return b;
+      end if;
+  end function;
   
   -- Defined Signals
-  signal col        :   unsigned(7 downto 0);
-  signal row        :   unsigned(7 downto 0);
+  signal col        :   unsigned(2 downto 0);
+  signal row        :   unsigned(2 downto 0);
   signal mem_wren   :   std_logic_vector(2 downto 0);
-  signal count      :   unsigned(17 downto 0);
+  signal mem_data   :   std_logic_vector(7 downto 0);
+  signal count      :   unsigned(15 downto 0);
   signal busy       :   std_logic;
+  signal a, b, c, d, e, f, g, h, i     : std_logic_vector(7 downto 0);
+  signal v          :   std_logic_vector(4 downto 0);
+  signal current_row:   std_logic_vector(3 downto 0);
+  signal direction  :   std_logic_vector(3 downto 0);
+  
+  -- Direction LUT --
+  -- 000    E
+  -- 001    W
+  -- 010    N
+  -- 011    S
+  -- 100    NW
+  -- 101    SE
+  -- 110    NE
+  -- 111    SW
+  -------------------
+
+  -- Registers
+  -- Stage 1 Inputs
+  signal r0, r1, r2, r3, r4, r5, r6, r7     : std_logic_vector(7 downto 0); 
+   
+  -- Stage 1 Data (also used Stage 2 Inputs)
+  signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
+  signal sum0, sum1, sum2, sum3     : std_logic_vector(8 downto 0);
+  -- Total Registers: 16
 
   -- Memory Array
   type mem_array is array (2 downto 0) of std_logic_vector(7 downto 0);
@@ -73,7 +109,7 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(0),
-        q       => mem_out(0) 
+        q       => mem_data 
     );
 
   mem1  :   entity work.mem(main)
@@ -82,7 +118,7 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(1),
-        q       => mem_out(1)
+        q       => mem_data
     );
 
   mem2  :   entity work.mem(main)
@@ -91,34 +127,43 @@ begin
         clock   => i_clock,
         data    => i_pixel,
         wren    => mem_wren(2),
-        q       => mem_out(2)
+        q       => mem_data
     );
 
-  -- Stage 1
+  -- Valid Bit Generator
+  v(0) <= i_valid;
+  v_gen : for i in 1 to 4 generate
+      process begin
+          wait until rising_edge(i_clock);
+          v(i) <= '0';
+      end process;
+  end generate;
+
+  -- Initialize System
   process begin
       wait until rising_edge(i_clock);
 
         if (i_reset = '1') then
-            count     <= x"00";
-            col       <= x"00";
-            row       <= x"00";
-            busy      <= '0';
-            mem_wren  <= "001";
-
+            count        <= '0;
+            col          <= '0';
+            row          <= '0';
+            busy         <= '0';
+            curren_row   <= "001";
         else
             if (i_valid = '1') then
-
-                -- filled all columns in a row 
+                busy    <= '1';
+                col     <= col + 1;
                 if (col = '255') then
-
-                    -- rotate mem_wren to point to next memory
-                    mem_wren <= mem_wren rol 1;
-
-                    -- increment row counter
-                    row <= (row + 1);
-            end if
-
-        end if
+                    current_row <= current_row rol 1;
+                    if (row = '255') then
+                        busy = '0';
+                    else
+                        row <= (row + 1);
+                    end if;
+                end if;
+            end if;
+        end if;
+  end process;
 
   -- System Modes
   process begin
@@ -129,6 +174,28 @@ begin
       else 
           o_mode <= '11';
       end if;
+  end process;
+
+  -- Populate Memory
+  process begin
+      wait until rising_edge(i_clock);
+      if (v(0) = '1') then
+          case current_row is
+              when "001" =>
+                  mem_wren(1) <= '1';
+                  mem_data    <= i_pixel;
+              when "010" =>
+                  mem_wren(2) <= '1';
+                  mem_data    <= i_pixel;
+              when "100" =>
+                  mem_wren(3) <= '1';
+                  mem_data    <= i_pixel;
+              when others =>
+                  mem_wren    <= x"00";
+                  mem_data    <= i_pixel;
+        end case;
+        mem_wren    <= x"00";
+    end if;
   end process;
 
 end architecture;
