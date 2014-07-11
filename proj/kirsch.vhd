@@ -92,7 +92,12 @@ begin
   -- Registers
   -- Stage 1 Inputs
   signal r0, r1, r2, r3, r4, r5, r6, r7     : std_logic_vector(7 downto 0); 
-   
+  
+  signal a1    : std_logic_vector(8 downto 0); 
+  signal a2    : std_logic_vector(7 downto 0); 
+  
+  signal _ce    : std_logic_vector(8 downto 0); 
+  signal a2    : std_logic_vector(7 downto 0); 
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
   signal sum0, sum1, sum2, sum3     : std_logic_vector(8 downto 0);
@@ -135,7 +140,7 @@ begin
   v_gen : for i in 1 to 4 generate
       process begin
           wait until rising_edge(i_clock);
-          v(i) <= '0';
+		  v(i) <= v(i-1);
       end process;
   end generate;
 
@@ -197,5 +202,57 @@ begin
         mem_wren    <= x"00";
     end if;
   end process;
+  
+  -- dataflow stuff
+  
+  --stage 1
+  process begin
+  wait until rising_edge(i_clock);
+   --if(v(0) = '1') then
+		r0 <= a; 
+		r1 <= b; 
+		r2 <= c;
+		r3 <= d; 
+		r4 <= e; 
+		r5 <= f; 
+		r6 <= g;
+		r7 <= h; 
+	--end if; 
+	
+  if(v(1) = '1') then
+		max_sum0 <= a1; 
+		sum0 <= a2; 
+		r0 <= e; 
+		r3 <= h;
+		r1 <= f;
+		r2 <= g; 	
+  end if;
+   
+   if(v(2) = '1') then
+	   max_sum1 <= a1; 
+	   sum1 <= a2; 
+	   r0 <= c; 
+	   r3 <= f; 
+	   r1 <= d; 
+	   r2 <= e; 
+  end if;
+  
+   if(v(3) = '1') then
+		sum2 <= a2; 
+		max_sum2 <= a1; 
+		r0 <= b; 
+		r3 <= g; 
+		r1 <= h; 
+		r2 <= a; 
+  end if;
+  
+   if(v(4) = '1') then
+  	sum3 <= a2; 
+	max_sum3 <= a1;
+  end if;
+  end process; 
+  
+  a1 <= max(r0, r3) + a2;
+  a2 <= r1 + r2; 
 
 end architecture;
