@@ -107,27 +107,27 @@ begin
     port map (
         address => col,
         clock   => i_clock,
-        data    => i_pixel,
+        data    => mem_data,
         wren    => mem_wren(0),
-        q       => mem_data 
+        q       => mem_out(0) 
     );
 
   mem1  :   entity work.mem(main)
     port map (
         address => col,
         clock   => i_clock,
-        data    => i_pixel,
+        data    => mem_data,
         wren    => mem_wren(1),
-        q       => mem_data
+        q       => mem_out(1)
     );
 
   mem2  :   entity work.mem(main)
     port map (
         address => col,
         clock   => i_clock,
-        data    => i_pixel,
+        data    => mem_data,
         wren    => mem_wren(2),
-        q       => mem_data
+        q       => mem_out(2)
     );
 
   -- Valid Bit Generator
@@ -148,7 +148,7 @@ begin
             col          <= '0';
             row          <= '0';
             busy         <= '0';
-            curren_row   <= "001";
+            current_row   <= "001";
         else
             if (i_valid = '1') then
                 busy    <= '1';
