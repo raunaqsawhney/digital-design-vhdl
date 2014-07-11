@@ -76,6 +76,7 @@ begin
   signal a, b, c, d, e, f, g, h, i     : std_logic_vector(7 downto 0);
   signal v          :   std_logic_vector(4 downto 0);
   signal current_row:   std_logic_vector(3 downto 0);
+  signal edge_value :   std_logic;
   signal direction  :   std_logic_vector(3 downto 0);
   
   -- Direction LUT --
@@ -95,7 +96,7 @@ begin
    
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
-  signal sum0, sum1, sum2, sum3     : std_logic_vector(8 downto 0);
+  signal sum0, sum1, sum2, sum3     : std_logic_vector(10 downto 0);
   -- Total Registers: 16
 
   -- Memory Array
@@ -132,10 +133,10 @@ begin
 
   -- Valid Bit Generator
   v(0) <= i_valid;
-  v_gen : for i in 1 to 4 generate
+  v_gen : for i in 1 to 8 generate
       process begin
           wait until rising_edge(i_clock);
-          v(i) <= '0';
+          v(i) <= v(i-1);
       end process;
   end generate;
 
@@ -166,7 +167,7 @@ begin
   end process;
 
   -- System Modes
-  process begin
+  process begin (i_reset, busy)
       if (i_reset = '1') then
           o_mode <= '01';
       elsif (busy = '1') then
@@ -197,5 +198,42 @@ begin
         mem_wren    <= x"00";
     end if;
   end process;
+
+  -- Stage 2 Pipeline
+  proces s begin
+      wait until rising_edge(i_clock);
+      if (v(1) = '1') then
+        ms_a     <=  max_sum0;
+        ms_b     <=  max_sum1;
+        s_a      <=  sum0;
+        s_b      <=  sum1;
+
+        m_ab     <=  ms_a max ms_b;
+        s_ab     <=  s_a + s_b;
+
+      elsif (v(3) = '1') then
+        ms_a     <=  max_sum2;
+        ms_b     <=  max_sum3;
+        s_a      <=  sum2;
+        s_b      <=  sum3;
+
+        m_cd     <=  ms_a max ms_b;
+        s_cd     <=  s_a + s_b;
+
+      elsif (v(6) = '1') then
+        m_ab     <=  m_ab max m_cd;
+        s_ab     <=  s_ab + s_cd;
+
+      elsif (v(7) = '1') then
+--      m_ab     <=  m_ab sla 3;
+        s_cd     <=  ((m_ab sla 3) - s_ab) + (s_ab sla 1));
+        
+        if (s_cd > '383') then
+            edge_value    <= '1';
+        end if;
+    end if;
+  end process;
+  
+  o_edge    <=  edge_value;
 
 end architecture;
