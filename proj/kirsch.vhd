@@ -78,8 +78,50 @@ begin
   signal current_row:   std_logic_vector(3 downto 0);
   signal edge_value :   std_logic;
   signal direction  :   std_logic_vector(3 downto 0);
+ 
+	-- Definining Convolation Table
+	--  -------------------
+	--  |	a		|	b		|	c		|
+	--	|			|			|			|
+	--	|	h		|	i		|	d		|
+	--	|			|			|			|
+	--	|	g		|	f		|	e		|
+	--	|			|			|			|
+	--	-------------------
   
-  -- Direction LUT --
+	-- A simple 2d array for VHDL
+	-- Usage: array_name(0,0) <= 1000;
+	type two_dim_arr is array (0 to 2, 0 to 2) of integer range 0 to 400;
+	signal conv_table: two_dim_arr;
+
+	-- Signal Help:
+	-- row = row index of input image
+	-- col = col index of input image
+	-- m = 
+	-- n = 
+	signal row, col, m, n : natural 
+	-- to signal pass across first two rows
+	signal first_pass : natural 
+
+	-- simar
+	-- Memory Process
+	process (i_clock) 
+	begin
+		for row = 0 to 255 {
+			for col = 0 to 255 {
+				for m = 0 to 2 {
+					for n = 0 to 2 {
+						wait until rising_edge(i_clock);
+						if (i_valid = '1') then
+							mem (row) <= i_pixel;
+						if ( (row > 1) AND (col > 1) AND first_pass = '1') then
+							 
+					}
+				}
+			}
+		} 
+		
+	-- Direction LUT --
   -- 000    E
   -- 001    W
   -- 010    N
