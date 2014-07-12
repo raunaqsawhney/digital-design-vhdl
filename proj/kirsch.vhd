@@ -79,20 +79,6 @@ begin
   signal edge_value :   std_logic;
   signal direction  :   std_logic_vector(3 downto 0);
  
-	-- Definining Convolation Table
-	--  -------------------
-	--  |	a		|	b		|	c		|
-	--	|			|			|			|
-	--	|	h		|	i		|	d		|
-	--	|			|			|			|
-	--	|	g		|	f		|	e		|
-	--	|			|			|			|
-	--	-------------------
-  
-	-- A simple 2d array for VHDL
-	-- Usage: array_name(0,0) <= 1000;
-	type two_dim_arr is array (0 to 2, 0 to 2) of integer range 0 to 400;
-	signal conv_table: two_dim_arr;
 
 	-- Signal Help:
 	-- row = row index of input image
@@ -121,7 +107,7 @@ begin
 			}
 		} 
 		
-	-- Direction LUT --
+  -- Direction LUT --
   -- 000    E
   -- 001    W
   -- 010    N
@@ -141,6 +127,7 @@ begin
   
   signal _ce    : std_logic_vector(8 downto 0); 
   signal a2    : std_logic_vector(7 downto 0); 
+  
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
   signal sum0, sum1, sum2, sum3     : std_logic_vector(10 downto 0);
@@ -187,16 +174,33 @@ begin
       end process;
   end generate;
 
+
+
+-- Definining Convolation Table
+--  -------------------------------------
+--  |	a		|	b		|	c		|
+--	|			|			|			|
+--	|	h		|	i		|	d		|
+--	|			|			|			|
+--	|	g		|	f		|	e		|
+--	|			|			|			|
+--	-------------------------------------
+
+-- A simple 2d array for VHDL
+-- Usage: array_name(0,0) <= 1000;
+type two_dim_arr is array (0 to 2, 0 to 2) of integer range 0 to 400;
+signal conv_table: two_dim_arr;
+
   -- Initialize System
   process begin
       wait until rising_edge(i_clock);
 
         if (i_reset = '1') then
-            count        <= '0;
+            count        <= '0';
             col          <= '0';
             row          <= '0';
             busy         <= '0';
-            current_row   <= "001";
+            current_row  <= "001";
         else
             if (i_valid = '1') then
                 busy    <= '1';
@@ -230,13 +234,23 @@ begin
       if (v(0) = '1') then
           case current_row is
               when "001" =>
-                  mem_wren(0) <= '1';
+                  mem_wren(0) <= '1';                  
+                  mem_wren(1) <= '0';
+                  mem_wren(2) <= '0';
+
                   mem_data    <= i_pixel;
               when "010" =>
+                  mem_wren(0) <= '0';
                   mem_wren(1) <= '1';
+                  mem_wren(2) <= '0';
+                  
                   mem_data    <= i_pixel;
               when "100" =>
+
+                  mem_wren(0) <= '0';
+                  mem_wren(1) <= '0';
                   mem_wren(2) <= '1';
+
                   mem_data    <= i_pixel;
               when others =>
                   mem_wren    <= x"00";
