@@ -80,33 +80,9 @@ begin
   signal direction  :   std_logic_vector(3 downto 0);
  
 
-	-- Signal Help:
-	-- row = row index of input image
-	-- col = col index of input image
-	-- m = 
-	-- n = 
-	signal row, col, m, n : natural 
 	-- to signal pass across first two rows
-	signal first_pass : natural 
+	signal first_pass :	std_logic; 
 
-	-- simar
-	-- Memory Process
-	process (i_clock) 
-	begin
-		for row = 0 to 255 {
-			for col = 0 to 255 {
-				for m = 0 to 2 {
-					for n = 0 to 2 {
-						wait until rising_edge(i_clock);
-						if (i_valid = '1') then
-							mem (row) <= i_pixel;
-						if ( (row > 1) AND (col > 1) AND first_pass = '1') then
-							 
-					}
-				}
-			}
-		} 
-		
   -- Direction LUT --
   -- 000    E
   -- 001    W
@@ -140,7 +116,7 @@ begin
   -- Memories
   mem0  :   entity work.mem(main)
     port map (
-        address => col,
+        address => std_logic_vector(col),
         clock   => i_clock,
         data    => mem_data,
         wren    => mem_wren(0),
@@ -149,7 +125,7 @@ begin
 
   mem1  :   entity work.mem(main)
     port map (
-        address => col,
+        address => std_logic_vector(col),
         clock   => i_clock,
         data    => mem_data,
         wren    => mem_wren(1),
@@ -158,7 +134,7 @@ begin
 
   mem2  :   entity work.mem(main)
     port map (
-        address => col,
+        address => std_logic_vector(col),
         clock   => i_clock,
         data    => mem_data,
         wren    => mem_wren(2),
@@ -191,33 +167,54 @@ begin
 type two_dim_arr is array (0 to 2, 0 to 2) of integer range 0 to 400;
 signal conv_table: two_dim_arr;
 
-  -- Initialize System
+-- Initialization code with Memory logic.
   process begin
       wait until rising_edge(i_clock);
+      if (i_reset = '1') then
+          count        <= '0';
+          col          <= '0';
+          row          <= '0';
+          busy         <= '0';
+          current_row  <= "001";
+			else
+	
+				if row > 1 AND col > 1 then
+						first_pass <= '1';
+				end if;
+				if (i_valid = '1') then
+						busy <= '1';
+				end if;
+				if (col = '255') then
+						current_row <= current_row(1 downto 0) & current_row(2);
+						row <= row + 1;
+				end if;
+			
+				a <= b;
+				h <= i;
+				g <= f;
+				b <= c;
+				i <= d;
+				f <= e;
+				c <= tmp_next_one;
+				d <= tmp_next_two;
+				e <= i_pixel;
 
-        if (i_reset = '1') then
-            count        <= '0';
-            col          <= '0';
-            row          <= '0';
-            busy         <= '0';
-            current_row  <= "001";
-        else
-            if (i_valid = '1') then
-                busy    <= '1';
-                col     <= col + 1;
-                if (col = '255') then
-                    current_row <= current_row rol 1;
-                    if (row = '255') then
-                        busy = '0';
-                    else
-                        row <= (row + 1);
-                    end if;
-                end if;
-            end if;
-        end if;
-  end process;
+				col	<= col + 1;
+				o_row <= std_logic_vector(row);
 
-  -- System Modes
+				else
+						first_pass <= '0';
+				end if;
+			end if;
+	end process;
+
+	mem_wren <= current_row when i_valid = '1' else "000";	
+	tmp_next_one <= mem_out(0) when mem_wren(2) = '1' else mem_out(1) when mem_wren(0) = '1' else
+	mem_out(2);
+	tmp_next_two <= mem_out(1) when mem_wren(2) = '1' else mem_out(2) when mem_wren(0) = '1' else
+	mem_out(0);
+	
+  - System Modes
   process begin (i_reset, busy)
       if (i_reset = '1') then
           o_mode <= '01';
