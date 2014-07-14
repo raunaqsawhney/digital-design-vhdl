@@ -285,7 +285,10 @@ begin
 		r0          <= a; 
 		r3          <= d;
 		r1          <= b;
-		r2          <= c; 	
+		r2          <= c;
+        r4          <= '010'; --N
+        r5          <= '110'; --NE
+
   end if;
    
    if(v(1) = '1') then
@@ -295,6 +298,9 @@ begin
 	   r3           <= h; 
 	   r1           <= f; 
 	   r2           <= g; 
+       r4           <= '011'; --S
+       r5           <= '111'; --SW
+
   end if;
   
    if(v(2) = '1') then
@@ -303,7 +309,10 @@ begin
 		r0          <= c; 
 		r3          <= f; 
 		r1          <= d; 
-		r2          <= e; 
+		r2          <= e;
+        r4          <= '000'; --E
+        r5          <= '101'; --SE
+
   end if;
   
    if(v(3) = '1') then
@@ -313,10 +322,15 @@ begin
        r3           <= g;
        r1           <= h;
        r2           <= a;
+       r4           <= '001'; --W
+       r5           <= '100'; --NW
+
   end if;
 
-  a0    <= r1 + r2;
-  a1    <= (r0 max r3) + a0;
+  a0            <= r1 + r2;
+  a1            <= (r0 max r3) + a0;
+  max_edge      <= r5 when r0 >= r3 else r4;
+
   end process; 
   
   -- End of Stage 1 --
@@ -350,11 +364,12 @@ begin
         s_ab     <=  s_ab + s_cd;
 
       elsif (v(7) = '1') then
-        s_cd     <= s_ab << 1;
+        s_cd     <= s_ab sla 1;
         s_ab     <= s_ab + s_cd;
 
-        sub      <= signed((unsigned(m_ab << 3)) - unsigned(s_ab)); 
+        sub      <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab)); 
     end if;
+  
   end process;
   
   o_edge        <= '1' when sub > 383 else '0';;
