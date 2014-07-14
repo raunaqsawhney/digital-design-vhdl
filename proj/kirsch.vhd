@@ -330,15 +330,12 @@ begin
 
   end if;
 
-<<<<<<< HEAD
   a0            <= r1 + r2;
   a1            <= (r0 max r3) + a0;
   max_edge      <= r5 when r0 >= r3 else r4;
 
-=======
   a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
   a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
->>>>>>> e4488775fba8a76d39c9a46521be89f1771bbdb6
   end process; 
   
   -- End of Stage 1 --
@@ -372,13 +369,10 @@ begin
         s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
       elsif (v(7) = '1') then
-<<<<<<< HEAD
         s_cd     <= s_ab sla 1;
         s_ab     <= s_ab + s_cd;
-=======
         s_cd     <= std_logic_vector(to_bitvector(s_ab) sla 1);
         s_ab     <= std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
->>>>>>> e4488775fba8a76d39c9a46521be89f1771bbdb6
 
         sub      <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab)); 
     end if;
