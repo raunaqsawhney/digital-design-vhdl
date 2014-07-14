@@ -40,9 +40,6 @@ architecture main of lab3 is
   end function;
 
 begin
-
-  
-end architecture main;
     
     o_data  <= unsigned(p_counter);
 
@@ -81,7 +78,7 @@ end architecture main;
             counter         <= "000000000"; 
 
             -- Initialize memory index  --
-            cur_mem_in_use  <= "001";
+            cur_mem_in_use  <= "100";
 
             -- Initialize Row and Col counters --
             row             <= "0000";

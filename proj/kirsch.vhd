@@ -35,6 +35,26 @@ end entity;
 
 
 architecture main of kirsch is
+
+  -- Custom Functions
+  function "rol" (a : std_logic_vector; n : natural)
+    return std_logic_vector
+  is
+  begin
+    return std_logic_vector(unsigned(a) rol n);
+  end function;
+
+  function max (a : std_logic_vector; b : std_logic_vector)
+    return std_logic_vector
+  is
+  begin
+      if (a > b) then 
+          return a;
+      else
+          return b;
+      end if;
+  end function;
+
 begin  
 
   debug_num_5 <= X"E";
@@ -47,25 +67,6 @@ begin
   debug_led_red <= (others => '0');
   debug_led_grn <= (others => '0');
 
-  -- Custom Functions
-  function "rol" (a : std_logic_vector; n : natural)
-    return std_logic_vector
-  is
-  begin
-    return std_logic_vector(unsigned(a) rol n);
-  end function;
-
-  function "max" (a : std_logic_vector; b : std_logic_vector)
-    return std_logic_vector
-  is
-  begin
-      if (a > b) then 
-          return a;
-      else
-          return b;
-      end if;
-  end function;
-  
   -- Defined Signals
   signal col        :   unsigned(2 downto 0);
   signal row        :   unsigned(2 downto 0);
@@ -277,53 +278,47 @@ begin
 
   process begin
   wait until rising_edge(i_clock);
-   --if(v(0) = '1') then
-		r0          <= a; 
-		r1          <= b; 
-		r2          <= c;
-		r3          <= d; 
-		r4          <= e; 
-		r5          <= f; 
-		r6          <= g;
-		r7          <= h; 
-	--end if; 
 	
-  if(v(1) = '1') then
+  if(v(0) = '1') then
 	    sum0        <= a0;
         max_sum0    <= a1;
-		r0          <= e 
-		r3          <= h;
-		r1          <= f;
-		r2          <= g; 	
+		r0          <= a; 
+		r3          <= d;
+		r1          <= b;
+		r2          <= c; 	
   end if;
    
-   if(v(2) = '1') then
+   if(v(1) = '1') then
 	   sum1         <= a0;
        max_sum1     <= a1; 
-	   r0           <= c; 
-	   r3           <= f; 
-	   r1           <= d; 
-	   r2           <= e; 
+	   r0           <= e; 
+	   r3           <= h; 
+	   r1           <= f; 
+	   r2           <= g; 
+  end if;
+  
+   if(v(2) = '1') then
+		sum2        <= a0; 
+		max_sum2    <= a1; 
+		r0          <= c; 
+		r3          <= f; 
+		r1          <= d; 
+		r2          <= e; 
   end if;
   
    if(v(3) = '1') then
-		sum2        <= a0; 
-		max_sum2    <= a1; 
-		r0          <= b; 
-		r3          <= g; 
-		r1          <= h; 
-		r2          <= a; 
+       sum3         <= a0; 
+       max_sum3     <= a1;
+       r0           <= b;
+       r3           <= g;
+       r1           <= h;
+       r2           <= a;
   end if;
-  
-   if(v(4) = '1') then
-  	sum3            <= a0; 
-	max_sum3        <= a1;
-  end if;
+
+  a0    <= r1 + r2;
+  a1    <= (r0 max r3) + a0;
   end process; 
   
-    a0 <= r1 + r2; 
-    a1 <= (r0 max r3) + a0;
-
   -- End of Stage 1 --
 
   -- Stage 2 --
@@ -336,6 +331,7 @@ begin
         s_a      <=  sum0;
         s_b      <=  sum1;
 
+        -- Optimization Possible
         m_ab     <=  ms_a max ms_b;
         s_ab     <=  s_a + s_b;
 
@@ -344,7 +340,8 @@ begin
         ms_b     <=  max_sum3;
         s_a      <=  sum2;
         s_b      <=  sum3;
-
+  
+        -- Optimization Possible
         m_cd     <=  ms_a max ms_b;
         s_cd     <=  s_a + s_b;
 
@@ -353,15 +350,13 @@ begin
         s_ab     <=  s_ab + s_cd;
 
       elsif (v(7) = '1') then
-        s_cd     <=  s_ab sla 1;
-        s_ab     < = s_ab + s_cd;
+        s_cd     <= s_ab << 1;
+        s_ab     <= s_ab + s_cd;
 
+        sub      <= signed((unsigned(m_ab << 3)) - unsigned(s_ab)); 
     end if;
   end process;
   
-  
-  sub           <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab));
-  edge_value    <= '1' when sub > 383 else '0';
-  o_edge        <=  edge_value;
+  o_edge        <= '1' when sub > 383 else '0';;
 
 end architecture;
