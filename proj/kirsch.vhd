@@ -54,28 +54,15 @@ architecture main of kirsch is
           return b;
       end if;
   end function;
-
-begin  
-
-  debug_num_5 <= X"E";
-  debug_num_4 <= X"C";
-  debug_num_3 <= X"E";
-  debug_num_2 <= X"3";
-  debug_num_1 <= X"2";
-  debug_num_0 <= X"7";
-
-  debug_led_red <= (others => '0');
-  debug_led_grn <= (others => '0');
-
   -- Defined Signals
   signal col        :   unsigned(2 downto 0);
   signal row        :   unsigned(2 downto 0);
   signal mem_wren   :   std_logic_vector(2 downto 0);
   signal mem_data   :   std_logic_vector(7 downto 0);
   signal busy       :   std_logic;
-  signal a, b, c, d, e, f, g, h, i     : std_logic_vector(7 downto 0);
+  signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
   signal v          :   std_logic_vector(4 downto 0);
-  signal current_row:   std_logic_vector(3 downto 0);
+  signal current_row:   std_logic_vector(2 downto 0);
   signal edge_value :   std_logic;
   signal direction  :   std_logic_vector(3 downto 0);
  
@@ -102,13 +89,28 @@ begin
   signal a1    : std_logic_vector(8 downto 0); 
   
   -- Stage 1 Data (also used Stage 2 Inputs)
-  signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
-  signal sum0, sum1, sum2, sum3     : std_logic_vector(10 downto 0);
+  signal max_sum0, max_sum1, max_sum2, max_sum3,  ms_a, ms_b : std_logic_vector(9 downto 0);  
+  signal sum0, sum1, sum2, sum3, s_a, s_b     : std_logic_vector(10 downto 0);
+  
+ signal m_ab, m_cd :std_logic_vector(10 downto 0);
+  
+  signal s_ab, s_cd :std_logic_vector(11 downto 0);
   -- Total Registers: 16
 
   -- Memory Array
   type mem_array is array (2 downto 0) of std_logic_vector(7 downto 0);
   signal mem_out    :   mem_array;
+begin  
+
+  debug_num_5 <= X"E";
+  debug_num_4 <= X"C";
+  debug_num_3 <= X"E";
+  debug_num_2 <= X"3";
+  debug_num_1 <= X"2";
+  debug_num_0 <= X"7";
+
+  debug_led_red <= (others => '0');
+  debug_led_grn <= (others => '0');
   
   -- Memories
   mem0  :   entity work.mem(main)
@@ -170,16 +172,16 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (i_reset = '1') then
-          col          <= '0';
-          row          <= '0';
+          col          <= "000";
+          row          <= "000";
           busy         <= '0';
           current_row  <= "001";
 			else
                 if (i_valid = '1') then
                     busy <= '1';
 
-				    if (col = '255') then
-                            col <= '0';
+				    if (col = 255) then
+                            col <= "000";
 						    current_row <= current_row rol 1;
 						    row <= row + 1;
 				    end if;
@@ -225,13 +227,14 @@ begin
   -- System Modes --
   ------------------
                      
-  process begin (i_reset, busy)
+  process(i_reset, busy)
+  begin
       if (i_reset = '1') then
-          o_mode <= '01';
+          o_mode <= "01";
       elsif (busy = '1') then
-          o_mode <= '10';
+          o_mode <= "10";
       else 
-          o_mode <= '11';
+          o_mode <= "11";
       end if;
   end process;
 
@@ -263,10 +266,10 @@ begin
 
                   mem_data    <= i_pixel;
               when others =>
-                  mem_wren    <= x"00";
+                  mem_wren    <= "000";
                   mem_data    <= i_pixel;
         end case;
-        mem_wren    <= x"00";
+        mem_wren    <= "000";
     end if;
   end process;
   
@@ -315,8 +318,8 @@ begin
        r2           <= a;
   end if;
 
-  a0    <= r1 + r2;
-  a1    <= (r0 max r3) + a0;
+  a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
+  a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
   end process; 
   
   -- End of Stage 1 --
@@ -332,8 +335,8 @@ begin
         s_b      <=  sum1;
 
         -- Optimization Possible
-        m_ab     <=  ms_a max ms_b;
-        s_ab     <=  s_a + s_b;
+        m_ab     <=  max(ms_a, ms_b);
+        s_ab     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
 
       elsif (v(3) = '1') then
         ms_a     <=  max_sum2;
@@ -342,21 +345,21 @@ begin
         s_b      <=  sum3;
   
         -- Optimization Possible
-        m_cd     <=  ms_a max ms_b;
-        s_cd     <=  s_a + s_b;
+        m_cd     <=  max(ms_a, ms_b);
+        s_cd     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
 
       elsif (v(6) = '1') then
-        m_ab     <=  m_ab max m_cd;
-        s_ab     <=  s_ab + s_cd;
+        m_ab     <=  max(m_ab, m_cd);
+        s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
       elsif (v(7) = '1') then
-        s_cd     <= s_ab << 1;
-        s_ab     <= s_ab + s_cd;
+        s_cd     <= std_logic_vector(to_bitvector(s_ab) sla 1);
+        s_ab     <= std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
         sub      <= signed((unsigned(m_ab << 3)) - unsigned(s_ab)); 
     end if;
   end process;
   
-  o_edge        <= '1' when sub > 383 else '0';;
+  o_edge        <= '1' when sub > 383 else '0';
 
 end architecture;
