@@ -71,7 +71,6 @@ begin
   signal row        :   unsigned(2 downto 0);
   signal mem_wren   :   std_logic_vector(2 downto 0);
   signal mem_data   :   std_logic_vector(7 downto 0);
-  signal count      :   unsigned(15 downto 0);
   signal busy       :   std_logic;
   signal a, b, c, d, e, f, g, h, i     : std_logic_vector(7 downto 0);
   signal v          :   std_logic_vector(4 downto 0);
@@ -100,8 +99,6 @@ begin
   
   signal a0    : std_logic_vector(7 downto 0); 
   signal a1    : std_logic_vector(8 downto 0); 
-  
-  signal _ce    : std_logic_vector(8 downto 0); 
   
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
@@ -172,7 +169,6 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (i_reset = '1') then
-          count        <= '0';
           col          <= '0';
           row          <= '0';
           busy         <= '0';
@@ -182,7 +178,8 @@ begin
                     busy <= '1';
 
 				    if (col = '255') then
-						    current_row <= current_row rol current_row;
+                            col <= '0';
+						    current_row <= current_row rol 1;
 						    row <= row + 1;
 				    end if;
 			
@@ -196,7 +193,7 @@ begin
 				    d <= tmp_next_one;
 				    e <= i_pixel;
 
-				    col <= col + 1;
+				    col     <= col + 1;
 
                     if (row > 1 and col > 1) then
                         first_pass <= '1';
