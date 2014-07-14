@@ -199,7 +199,7 @@ begin
 				    col <= col + 1;
 
                     if (row > 1 and col > 1) then
-                        first_pass <= '0';
+                        first_pass <= '1';
                     end if;
                     o_row <= std_logic_vector(row);
 				else
