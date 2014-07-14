@@ -98,11 +98,10 @@ begin
   -- Stage 1 Inputs
   signal r0, r1, r2, r3, r4, r5, r6, r7     : std_logic_vector(7 downto 0); 
   
+  signal a0    : std_logic_vector(7 downto 0); 
   signal a1    : std_logic_vector(8 downto 0); 
-  signal a2    : std_logic_vector(7 downto 0); 
   
   signal _ce    : std_logic_vector(8 downto 0); 
-  signal a2    : std_logic_vector(7 downto 0); 
   
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(9 downto 0);  
@@ -141,18 +140,22 @@ begin
         q       => mem_out(2)
     );
 
-  -- Valid Bit Generator
-  v(0) <= i_valid;
+
+  -------------------------  
+  -- Valid Bit Generator --
+  -------------------------
+ 
   v_gen : for i in 1 to 8 generate
       process begin
           wait until rising_edge(i_clock);
-		  v(i) <= v(i-1);
+		  if i_reset = '1' then
+              v(i) <= '0';
+          else
+            v(i) <= v(i-1);
+        end if;
       end process;
   end generate;
 
-
-
--- Definining Convolation Table
 --  -------------------------------------
 --  |	a		|	b		|	c		|
 --	|			|			|			|
@@ -162,12 +165,10 @@ begin
 --	|			|			|			|
 --	-------------------------------------
 
--- A simple 2d array for VHDL
--- Usage: array_name(0,0) <= 1000;
-type two_dim_arr is array (0 to 2, 0 to 2) of integer range 0 to 400;
-signal conv_table: two_dim_arr;
-
--- Initialization code with Memory logic.
+  ---------------------------
+  -- System Initialization --
+  ---------------------------
+  
   process begin
       wait until rising_edge(i_clock);
       if (i_reset = '1') then
@@ -177,31 +178,30 @@ signal conv_table: two_dim_arr;
           busy         <= '0';
           current_row  <= "001";
 			else
-	
-				if row > 1 AND col > 1 then
-						first_pass <= '1';
-				end if;
-				if (i_valid = '1') then
-						busy <= '1';
-				end if;
-				if (col = '255') then
-						current_row <= current_row(1 downto 0) & current_row(2);
-						row <= row + 1;
-				end if;
+                if (i_valid = '1') then
+                    busy <= '1';
+
+				    if (col = '255') then
+						    current_row <= current_row rol current_row;
+						    row <= row + 1;
+				    end if;
 			
-				a <= b;
-				h <= i;
-				g <= f;
-				b <= c;
-				i <= d;
-				f <= e;
-				c <= tmp_next_one;
-				d <= tmp_next_two;
-				e <= i_pixel;
+				    a <= b;
+				    h <= i;
+				    g <= f;
+				    b <= c;
+				    i <= d;
+				    f <= e;
+				    c <= tmp_next_one;
+				    d <= tmp_next_two;
+				    e <= i_pixel;
 
-				col	<= col + 1;
-				o_row <= std_logic_vector(row);
+				    col <= col + 1;
 
+                    if (row > 1 and col > 1) then
+                        first_pass <= '0';
+                    end if;
+                    o_row <= std_logic_vector(row);
 				else
 						first_pass <= '0';
 				end if;
@@ -209,12 +209,24 @@ signal conv_table: two_dim_arr;
 	end process;
 
 	mem_wren <= current_row when i_valid = '1' else "000";	
-	tmp_next_one <= mem_out(0) when mem_wren(2) = '1' else mem_out(1) when mem_wren(0) = '1' else
-	mem_out(2);
-	tmp_next_two <= mem_out(1) when mem_wren(2) = '1' else mem_out(2) when mem_wren(0) = '1' else
-	mem_out(0);
-	
-  - System Modes
+	tmp_next_one <= mem_out(0) when mem_wren(2) = '1' 
+        else
+            mem_out(1) when mem_wren(0) = '1'
+        else
+	        mem_out(2);
+
+	tmp_next_two <= mem_out(1) when mem_wren(2) = '1'
+                 else
+                     mem_out(2) when mem_wren(0) = '1'
+                 else
+                     mem_out(0);
+
+    v(0)    <= first_pass when i_reset = '0' else '0';
+
+  ------------------
+  -- System Modes --
+  ------------------
+                     
   process begin (i_reset, busy)
       if (i_reset = '1') then
           o_mode <= '01';
@@ -225,7 +237,10 @@ signal conv_table: two_dim_arr;
       end if;
   end process;
 
-  -- Populate Memory
+  ---------------------
+  -- Populate Memory --
+  ---------------------
+
   process begin
       wait until rising_edge(i_clock);
       if (v(0) = '1') then
@@ -257,9 +272,12 @@ signal conv_table: two_dim_arr;
     end if;
   end process;
   
-  -- dataflow stuff
+  --------------
+  -- Dataflow --
+  --------------
   
-  --stage 1
+  -- Stage 1 ---
+
   process begin
   wait until rising_edge(i_clock);
    --if(v(0) = '1') then
@@ -274,8 +292,8 @@ signal conv_table: two_dim_arr;
 	--end if; 
 	
   if(v(1) = '1') then
-		max_sum0    <= a1; 
-		sum0        <= a2; 
+	    sum0        <= a0;
+        max_sum0    <= a1;
 		r0          <= e 
 		r3          <= h;
 		r1          <= f;
@@ -283,8 +301,8 @@ signal conv_table: two_dim_arr;
   end if;
    
    if(v(2) = '1') then
-	   max_sum1     <= a1; 
-	   sum1         <= a2; 
+	   sum1         <= a0;
+       max_sum1     <= a1; 
 	   r0           <= c; 
 	   r3           <= f; 
 	   r1           <= d; 
@@ -292,7 +310,7 @@ signal conv_table: two_dim_arr;
   end if;
   
    if(v(3) = '1') then
-		sum2        <= a2; 
+		sum2        <= a0; 
 		max_sum2    <= a1; 
 		r0          <= b; 
 		r3          <= g; 
@@ -301,18 +319,19 @@ signal conv_table: two_dim_arr;
   end if;
   
    if(v(4) = '1') then
-  	sum3            <= a2; 
+  	sum3            <= a0; 
 	max_sum3        <= a1;
   end if;
   end process; 
   
-  a1 <= max(r0, r3) + a2;
-  a2 <= r1 + r2; 
+    a0 <= r1 + r2; 
+    a1 <= (r0 max r3) + a0;
 
-  -- End of Stage 1 Pipeline --
+  -- End of Stage 1 --
 
-  -- Start of Stage 2 Pipeline
-  proces s begin
+  -- Stage 2 --
+
+  process begin
       wait until rising_edge(i_clock);
       if (v(1) = '1') then
         ms_a     <=  max_sum0;
@@ -337,15 +356,15 @@ signal conv_table: two_dim_arr;
         s_ab     <=  s_ab + s_cd;
 
       elsif (v(7) = '1') then
---      m_ab     <=  m_ab sla 3;
-        s_cd     <=  ((m_ab sla 3) - s_ab) + (s_ab sla 1));
-        
-        if (s_cd > '383') then
-            edge_value    <= '1';
-        end if;
+        s_cd     <=  s_ab sla 1;
+        s_ab     < = s_ab + s_cd;
+
     end if;
   end process;
   
-  o_edge    <=  edge_value;
+  
+  sub           <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab));
+  edge_value    <= '1' when sub > 383 else '0';
+  o_edge        <=  edge_value;
 
 end architecture;
