@@ -192,8 +192,8 @@ begin
 				    b <= c;
 				    i <= d;
 				    f <= e;
-				    c <= tmp_next_one;
-				    d <= tmp_next_two;
+				    c <= tmp_next_zero;
+				    d <= tmp_next_one;
 				    e <= i_pixel;
 
 				    col <= col + 1;
@@ -209,13 +209,13 @@ begin
 	end process;
 
 	mem_wren <= current_row when i_valid = '1' else "000";	
-	tmp_next_one <= mem_out(0) when mem_wren(2) = '1' 
+	tmp_next_zero <= mem_out(0) when mem_wren(2) = '1' 
         else
             mem_out(1) when mem_wren(0) = '1'
         else
 	        mem_out(2);
 
-	tmp_next_two <= mem_out(1) when mem_wren(2) = '1'
+	tmp_next_one <= mem_out(1) when mem_wren(2) = '1'
                  else
                      mem_out(2) when mem_wren(0) = '1'
                  else
