@@ -44,38 +44,18 @@ architecture main of kirsch is
     return std_logic_vector(unsigned(a) rol n);
   end function;
 
-<<<<<<< HEAD
-  function "sla" (a : std_logic_vector; n : natural)
-    return std_logic_vector
-  is
-  begin
-	return std_logic_vector(a sla n);
-=======
-function max (a : std_logic_vector; b : std_logic_vector)
-   return std_logic_vector
- is
-  begin
-      if (a > b) then 
-          return a;
-      else
-          return b;
-      end if;
->>>>>>> 97d85a1913c7539f04c01c4978358f9d4643c4e5
-  end function;
-
   -- Defined Signals
-  signal col        :   unsigned(7 downto 0);
-  signal row        :   unsigned(7 downto 0);
-  signal mem_wren   :   std_logic_vector(2 downto 0);
-  signal mem_data   :   std_logic_vector(7 downto 0);
-  signal busy       :   std_logic;
+  signal col                                                        : unsigned(7 downto 0);
+  signal row                                                        : unsigned(7 downto 0);
+  signal mem_wren                                                   : std_logic_vector(2 downto 0);
+  signal mem_data                                                   : std_logic_vector(7 downto 0);
+  signal busy                                                       : std_logic;
   signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
-  signal v          :   std_logic_vector(8 downto 0);
-  signal current_row:   std_logic_vector(2 downto 0);
-  signal edge_value :   std_logic;
-  signal first_pass :	std_logic; 
-  
-  signal direction  :   std_logic_vector(2 downto 0); 
+  signal v                                                          : std_logic_vector(8 downto 0);
+  signal current_row                                                : std_logic_vector(2 downto 0);
+  signal edge_present                                               : std_logic;
+  signal first_pass                                                 : std_logic; 
+  signal direction                                                  : std_logic_vector(2 downto 0); 
   -- Direction LUT --
   -- 000    E
   -- 001    W
@@ -91,31 +71,28 @@ function max (a : std_logic_vector; b : std_logic_vector)
   -- Registers --
   ---------------
 
-  -- Stage 1 Inputs
-  signal r0, r1, r2, r3, r6, r7     : std_logic_vector(7 downto 0); 
-  signal r4, r5 : std_logic_vector(2 downto 0); 
-  signal a0    : std_logic_vector(8 downto 0); 
-  signal a1    : std_logic_vector(9 downto 0); 
-  signal sub   : std_logic_vector(14 downto 0);
+  signal r0, r1, r2, r3, r6, r7                     : std_logic_vector(7 downto 0);  -- values
+  signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
+  signal a0                                         : std_logic_vector(8 downto 0);  -- sum
+  signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
+  signal sub                                        : std_logic_vector(14 downto 0); -- subtractor
  
-  -- Stage 1 Data (also used Stage 2 Inputs)
-  signal max_sum0, max_sum1, max_sum2, max_sum3,  ms_a, ms_b : std_logic_vector(9 downto 0);  
-  signal sum0, sum1, sum2, sum3, s_a, s_b     : std_logic_vector(10 downto 0);
-  
-  signal m_ab :std_logic_vector(9 downto 0);
-  signal m_ab_inter : std_logic_vector(10 downto 0);
-  signal m_cd :std_logic_vector(9 downto 0);
-  
-<<<<<<< HEAD
-  signal s_ab, s_cd :std_logic_vector(11 downto 0);
-=======
-  signal s_ab :std_logic_vector(11 downto 0);
-  signal s_ab_inter :std_logic_vector(12 downto 0);
-  signal s_ab_new :std_logic_vector(14 downto 0);
-  signal s_cd :std_logic_vector(13 downto 0);
-  -- Total Registers: 16
->>>>>>> 97d85a1913c7539f04c01c4978358f9d4643c4e5
+  signal max_sum0, max_sum1, max_sum2, max_sum3     : std_logic_vector(9 downto 0);  -- max sum (individual)  
+  signal sum0, sum1, sum2, sum3                     : std_logic_vector(8 downto 0);  -- sum (individual)
 
+  signal ms_a, ms_b                                 : std_logic_vector(9 downto 0);
+  signal s_a, s_b                                   : std_logic_vector(8 downto 0);
+  
+  signal m_ab, m_cd                                 : std_logic_vector(9 downto 0);
+  signal s_ab, s_cd                                 : std_logic_vector(9 downto 0);
+
+  signal f_s_ab                                     : std_logic_vector(10 downto 0);
+  signal f_max_edge                                 : std_logic_vector(2 downto 0);
+  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(2 downto 0);
+  signal max_edge01, max_edge23                     : std_logic_vector(2 downto 0);
+
+  signal max_val                                    : std_logic_vector(9 downto 0);
+  
   ------------------
   -- Memory Array --
   ------------------
@@ -374,15 +351,8 @@ begin
   
  end process; 
 
-<<<<<<< HEAD
-  	a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
-    a1    <= max_val + unsigned(a0));
-=======
-	-- Direction Detection Logic
   	a0    <= std_logic_vector(unsigned("0" & r1)+unsigned(r2));
-  	a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned("0" & a0));
-  	direction      <= r4 when r0 >= r3 else r5;
->>>>>>> 97d85a1913c7539f04c01c4978358f9d4643c4e5
+    a1    <= max_val + unsigned("0" & a0);
 		  
   -- End of Stage 1 --
 
@@ -391,78 +361,55 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (v(1) = '1') then
-        r0       <=  max_sum0;
-        r3       <=  max_sum1;
-        s_a      <=  sum0;
-        s_b      <=  sum1;
+        r0          <=  max_sum0;
+        r3          <=  max_sum1;
+        s_a         <=  sum0;
+        s_b         <=  sum1;
 
-<<<<<<< HEAD
-    -- m_ab      <=  max(ms_a, ms_b);
-        m_ab     <=  max_val;
+        s_ab        <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
+        m_ab        <=  max_val;
 
-        r4       <= max_edge0;
-        r5       <= max_edge1;
-        s_ab     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
-=======
-        -- Optimization Possible
-        m_ab     <=  max(ms_a, ms_b);
-        s_ab     <=  std_logic_vector(unsigned("0" & s_a) + unsigned(s_b));
->>>>>>> 97d85a1913c7539f04c01c4978358f9d4643c4e5
-
-    -- max_edge01  <= max_edge0 max max_edge1;
-        max_edge01 <= direction;
+        r4          <= max_edge0;
+        r5          <= max_edge1;
+        max_edge01  <= direction;
 
       elsif (v(3) = '1') then
-        r0       <=  max_sum2;
-        r3       <=  max_sum3;
-        s_a      <=  sum2;
-        s_b      <=  sum3;
+        r0          <=  max_sum2;
+        r3          <=  max_sum3;
+        s_a         <=  sum2;
+        s_b         <=  sum3;
   
-<<<<<<< HEAD
-     -- m_cd     <=  max(ms_a, ms_b);
-        m_cd     <=  max_val;
+        s_cd        <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
+        m_cd        <=  max_val;
 
-        r4       <= max_edge2;
-        r5       <= max_edge3;
-        s_cd     <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
-
-    --  max_edge23  <= max_edge2 max max_edge3;
+        r4          <= max_edge2;
+        r5          <= max_edge3;
         max_edge23  <= direction;
 
       elsif (v(6) = '1') then
-        r0      <= m_ab;
-        r1      <= m_cd;
+        r0          <= m_ab;
+        r3          <= m_cd;
 
-        m_ab     <=  max_val;
-        s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
-=======
-        -- Optimization Possible
-        m_cd     <=  max(ms_a, ms_b);
-        s_cd     <=  std_logic_vector(unsigned("000" & s_a) + unsigned(s_b));
+        m_ab        <=  max_val;
+        f_s_ab      <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
-      elsif (v(6) = '1') then
-        m_ab     <=  max(m_ab, m_cd);
-        s_ab_inter  <=  std_logic_vector(unsigned("0" & s_ab) + unsigned(s_cd));
->>>>>>> 97d85a1913c7539f04c01c4978358f9d4643c4e5
+        r4          <= max_edge01;
+        r5          <= max_edge23;
 
         -- Final MAX Edge
-        r4      <= max_edge01;
-        r5      <= max_edge23;
-
-     -- f_max_edge  <= max_edge01 max max_edge23;
         f_max_edge  <= direction;
 
       elsif (v(7) = '1') then
-        s_cd     <= s_ab_inter & "0";
-        s_ab_new     <= std_logic_vector(unsigned(s_ab_inter) + unsigned("0" & s_cd));
-		m_ab_inter	 <= m_ab & "0";
-        sub      <= std_logic_vector((unsigned("0" & m_ab) + unsigned(m_ab_inter)) - unsigned(s_ab_new));
+        m_cd        <= m_ab sll 3;
+        s_cd        <= f_s_ab;
+        s_ab        <= (s_cd sll 1) + f_s_ab;
+        sub         <= std_logic_vector(signed((unsigned(m_cd) - unsigned(s_ab))));
 
     end if;
   
   end process;
   
-  edge_present  <= '1' when to_integer(unsigned(sub)) > 383 else '0');
+  edge_present  <= '1' when sub > 383 else '0';
   o_edge        <= edge_present;
   o_dir         <= f_max_edge when edge_present = '1' else "000";
 
