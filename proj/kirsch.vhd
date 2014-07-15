@@ -44,16 +44,16 @@ architecture main of kirsch is
     return std_logic_vector(unsigned(a) rol n);
   end function;
 
-  function "sla" (a : std_logic_vector; n : natural)
-    return std_logic_vector
-  is
-  begin
-	return std_logic_vector(a sla n);
-  end function;
+ -- function "sla" (a : std_logic_vector; n : natural)
+  --  return std_logic_vector
+  --is
+  --begin
+--	return std_logic_vector(a sla n);
+  --end function;
 
-  function max (a : std_logic_vector; b : std_logic_vector)
-    return std_logic_vector
-  is
+function max (a : std_logic_vector; b : std_logic_vector)
+   return std_logic_vector
+ is
   begin
       if (a > b) then 
           return a;
@@ -69,7 +69,7 @@ architecture main of kirsch is
   signal mem_data   :   std_logic_vector(7 downto 0);
   signal busy       :   std_logic;
   signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
-  signal v          :   std_logic_vector(4 downto 0);
+  signal v          :   std_logic_vector(8 downto 0);
   signal current_row:   std_logic_vector(2 downto 0);
   signal edge_value :   std_logic;
   signal direction  :   std_logic_vector(2 downto 0);
@@ -93,15 +93,15 @@ architecture main of kirsch is
   -- Stage 1 Inputs
   signal r0, r1, r2, r3, r6, r7     : std_logic_vector(7 downto 0); 
   signal r4, r5 : std_logic_vector(2 downto 0); 
-  signal a0    : std_logic_vector(7 downto 0); 
-  signal a1    : std_logic_vector(8 downto 0); 
+  signal a0    : std_logic_vector(8 downto 0); 
+  signal a1    : std_logic_vector(9 downto 0); 
   signal sub   : std_logic_vector(12 downto 0);
  
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3,  ms_a, ms_b : std_logic_vector(9 downto 0);  
   signal sum0, sum1, sum2, sum3, s_a, s_b     : std_logic_vector(10 downto 0);
   
-  signal m_ab, m_cd :std_logic_vector(10 downto 0);
+  signal m_ab, m_cd :std_logic_vector(9 downto 0);
   
   signal s_ab, s_cd :std_logic_vector(11 downto 0);
   -- Total Registers: 16
@@ -160,7 +160,7 @@ begin
 		  if i_reset = '1' then
               v(i) <= '0';
           else
-            v(i) <= v(i-1);
+              v(i) <= v(i-1);
         end if;
       end process;
   end generate;
@@ -292,7 +292,7 @@ begin
   wait until rising_edge(i_clock);
 	
   if(v(0) = '1') then
-	sum0        <= a0;
+	sum0        <= "00" & a0;
     max_sum0    <= a1;
 	r0          <= a; 
 	r3          <= d;
@@ -304,7 +304,7 @@ begin
    end if;
    
    if(v(1) = '1') then
-	sum1         <= a0;
+	sum1         <= "00" & a0;
     max_sum1     <= a1; 
 	r0           <= e; 
 	r3           <= h; 
@@ -316,7 +316,7 @@ begin
    end if;
   
    if(v(2) = '1') then
-	sum2        <= a0; 
+	sum2        <= "00" & a0; 
 	max_sum2    <= a1; 
 	r0          <= c; 
 	r3          <= f; 
@@ -328,7 +328,7 @@ begin
    end if;
   
    if(v(3) = '1') then
-    sum3         <= a0; 
+    sum3         <= "00" & a0; 
     max_sum3     <= a1;
     r0           <= b;
     r3           <= g;
@@ -342,8 +342,8 @@ begin
  end process; 
 
 	-- Direction Detection Logic
-  	a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
-  	a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
+  	a0    <= std_logic_vector(unsigned("0" & r1)+unsigned(r2));
+  	a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned("0" & a0));
   	direction      <= r4 when r0 >= r3 else r5;
 		  
   -- End of Stage 1 --
@@ -360,7 +360,7 @@ begin
 
         -- Optimization Possible
         m_ab     <=  max(ms_a, ms_b);
-        s_ab     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
+        s_ab     <=  std_logic_vector(unsigned("0" & s_a) + unsigned(s_b));
 
       elsif (v(3) = '1') then
         ms_a     <=  max_sum2;
@@ -370,7 +370,7 @@ begin
   
         -- Optimization Possible
         m_cd     <=  max(ms_a, ms_b);
-        s_cd     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
+        s_cd     <=  std_logic_vector(unsigned("0" & s_a) + unsigned(s_b));
 
       elsif (v(6) = '1') then
         m_ab     <=  max(m_ab, m_cd);
