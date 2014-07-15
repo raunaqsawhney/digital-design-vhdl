@@ -385,6 +385,6 @@ begin
   
   end process;
   
-  o_edge        <= '1' when sub > "383" else '0';
+  o_edge        <= '1' when to_integer(unsigned(sub)) > 383  else '0';
 
 end architecture;
