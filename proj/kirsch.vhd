@@ -44,13 +44,6 @@ architecture main of kirsch is
     return std_logic_vector(unsigned(a) rol n);
   end function;
 
- -- function "sla" (a : std_logic_vector; n : natural)
-  --  return std_logic_vector
-  --is
-  --begin
---	return std_logic_vector(a sla n);
-  --end function;
-
 function max (a : std_logic_vector; b : std_logic_vector)
    return std_logic_vector
  is
@@ -95,15 +88,20 @@ function max (a : std_logic_vector; b : std_logic_vector)
   signal r4, r5 : std_logic_vector(2 downto 0); 
   signal a0    : std_logic_vector(8 downto 0); 
   signal a1    : std_logic_vector(9 downto 0); 
-  signal sub   : std_logic_vector(12 downto 0);
+  signal sub   : std_logic_vector(14 downto 0);
  
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3,  ms_a, ms_b : std_logic_vector(9 downto 0);  
   signal sum0, sum1, sum2, sum3, s_a, s_b     : std_logic_vector(10 downto 0);
   
-  signal m_ab, m_cd :std_logic_vector(9 downto 0);
+  signal m_ab :std_logic_vector(9 downto 0);
+  signal m_ab_inter : std_logic_vector(10 downto 0);
+  signal m_cd :std_logic_vector(9 downto 0);
   
-  signal s_ab, s_cd :std_logic_vector(11 downto 0);
+  signal s_ab :std_logic_vector(11 downto 0);
+  signal s_ab_inter :std_logic_vector(12 downto 0);
+  signal s_ab_new :std_logic_vector(14 downto 0);
+  signal s_cd :std_logic_vector(13 downto 0);
   -- Total Registers: 16
 
   -- Memory Array
@@ -370,16 +368,17 @@ begin
   
         -- Optimization Possible
         m_cd     <=  max(ms_a, ms_b);
-        s_cd     <=  std_logic_vector(unsigned("0" & s_a) + unsigned(s_b));
+        s_cd     <=  std_logic_vector(unsigned("000" & s_a) + unsigned(s_b));
 
       elsif (v(6) = '1') then
         m_ab     <=  max(m_ab, m_cd);
-        s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
+        s_ab_inter  <=  std_logic_vector(unsigned("0" & s_ab) + unsigned(s_cd));
 
       elsif (v(7) = '1') then
-        s_cd     <= s_ab sla 1;
-        s_ab     <= std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
-        sub      <= std_logic_vector(unsigned(m_ab sla 3) - unsigned(s_ab));
+        s_cd     <= s_ab_inter & "0";
+        s_ab_new     <= std_logic_vector(unsigned(s_ab_inter) + unsigned("0" & s_cd));
+		m_ab_inter	 <= m_ab & "0";
+        sub      <= std_logic_vector((unsigned("0" & m_ab) + unsigned(m_ab_inter)) - unsigned(s_ab_new));
 
     end if;
   
