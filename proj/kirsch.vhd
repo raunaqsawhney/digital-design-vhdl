@@ -37,11 +37,18 @@ end entity;
 architecture main of kirsch is
 
   -- Custom Functions
-  function "rol" (a : std_logic_vector; n : natural)
+  function roller (a : std_logic_vector; n : natural)
     return std_logic_vector
   is
   begin
     return std_logic_vector(unsigned(a) rol n);
+  end function;
+
+  function sla_custom (a : std_logic_vector; n : natural)
+    return std_logic_vector
+  is
+  begin
+    return std_logic_vector(unsigned(a) sla n);
   end function;
 
   function max (a : std_logic_vector; b : std_logic_vector)
@@ -54,9 +61,10 @@ architecture main of kirsch is
           return b;
       end if;
   end function;
+
   -- Defined Signals
-  signal col        :   unsigned(2 downto 0);
-  signal row        :   unsigned(2 downto 0);
+  signal col        :   unsigned(7 downto 0);
+  signal row        :   unsigned(7 downto 0);
   signal mem_wren   :   std_logic_vector(2 downto 0);
   signal mem_data   :   std_logic_vector(7 downto 0);
   signal busy       :   std_logic;
@@ -64,7 +72,7 @@ architecture main of kirsch is
   signal v          :   std_logic_vector(4 downto 0);
   signal current_row:   std_logic_vector(2 downto 0);
   signal edge_value :   std_logic;
-  signal direction  :   std_logic_vector(3 downto 0);
+  signal direction  :   std_logic_vector(2 downto 0);
  
 
 	-- to signal pass across first two rows
@@ -83,8 +91,8 @@ architecture main of kirsch is
 
   -- Registers
   -- Stage 1 Inputs
-  signal r0, r1, r2, r3, r4, r5, r6, r7     : std_logic_vector(7 downto 0); 
-  
+  signal r0, r1, r2, r3, r6, r7     : std_logic_vector(7 downto 0); 
+  signal r4, r5 : std_logic_vector(2 downto 0); 
   signal a0    : std_logic_vector(7 downto 0); 
   signal a1    : std_logic_vector(8 downto 0); 
   
@@ -172,8 +180,8 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (i_reset = '1') then
-          col          <= "000";
-          row          <= "000";
+          col          <= "00000000";
+          row          <= "00000000";
           busy         <= '0';
           current_row  <= "001";
 			else
@@ -181,8 +189,8 @@ begin
                     busy <= '1';
 
 				    if (col = 255) then
-                            col <= "000";
-						    current_row <= current_row rol 1;
+                            col <= "00000000";
+						    current_row <= roller(current_row, '1');
 						    row <= row + 1;
 				    end if;
 			
@@ -283,59 +291,60 @@ begin
   wait until rising_edge(i_clock);
 	
   if(v(0) = '1') then
-	    sum0        <= a0;
-        max_sum0    <= a1;
-		r0          <= a; 
-		r3          <= d;
-		r1          <= b;
-		r2          <= c;
-        r4          <= '010'; --N
-        r5          <= '110'; --NE
+	sum0        <= a0;
+    max_sum0    <= a1;
+	r0          <= a; 
+	r3          <= d;
+	r1          <= b;
+	r2          <= c;
+    r4          <= "010"; --N
+    r5          <= "110"; --NE
 
-  end if;
+   end if;
    
    if(v(1) = '1') then
-	   sum1         <= a0;
-       max_sum1     <= a1; 
-	   r0           <= e; 
-	   r3           <= h; 
-	   r1           <= f; 
-	   r2           <= g; 
-       r4           <= '011'; --S
-       r5           <= '111'; --SW
+	sum1         <= a0;
+    max_sum1     <= a1; 
+	r0           <= e; 
+	r3           <= h; 
+	r1           <= f; 
+	r2           <= g; 
+    r4           <= "011"; --S
+    r5           <= "111"; --SW
 
-  end if;
+   end if;
   
    if(v(2) = '1') then
-		sum2        <= a0; 
-		max_sum2    <= a1; 
-		r0          <= c; 
-		r3          <= f; 
-		r1          <= d; 
-		r2          <= e;
-        r4          <= '000'; --E
-        r5          <= '101'; --SE
+	sum2        <= a0; 
+	max_sum2    <= a1; 
+	r0          <= c; 
+	r3          <= f; 
+	r1          <= d; 
+	r2          <= e;
+    r4          <= "000"; --E
+    r5          <= "101"; --SE
 
-  end if;
+   end if;
   
    if(v(3) = '1') then
-       sum3         <= a0; 
-       max_sum3     <= a1;
-       r0           <= b;
-       r3           <= g;
-       r1           <= h;
-       r2           <= a;
-       r4           <= '001'; --W
-       r5           <= '100'; --NW
+    sum3         <= a0; 
+    max_sum3     <= a1;
+    r0           <= b;
+    r3           <= g;
+    r1           <= h;
+    r2           <= a;
+    r4           <= "001"; --W
+    r5           <= "100"; --NW
 
-  end if;
-
-  a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
-  a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
-  max_edge      <= r5 when r0 >= r3 else r4;
-
-  end process; 
+   end if;
   
+ end process; 
+
+	-- Direction Detection Logic
+  	a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
+  	a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
+  	direction      <= r4 when r0 >= r3 else r5;
+		  
   -- End of Stage 1 --
 
   -- Stage 2 --
@@ -367,7 +376,7 @@ begin
         s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
       elsif (v(7) = '1') then
-        s_cd     <= std_logic_vector(to_bitvector(s_ab) sla 1);
+        s_cd     <= std_logic_vector(sla_custom(s_ab, '1'));
         s_ab     <= std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
         sub      <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab)); 
     end if;
