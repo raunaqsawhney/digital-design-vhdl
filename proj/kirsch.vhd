@@ -37,18 +37,18 @@ end entity;
 architecture main of kirsch is
 
   -- Custom Functions
-  function roller (a : std_logic_vector; n : natural)
+  function "rol" (a : std_logic_vector; n : natural)
     return std_logic_vector
   is
   begin
     return std_logic_vector(unsigned(a) rol n);
   end function;
 
-  function sla_custom (a : std_logic_vector; n : natural)
+  function "sla" (a : std_logic_vector; n : natural)
     return std_logic_vector
   is
   begin
-    return std_logic_vector(unsigned(a) sla n);
+	return std_logic_vector(a sla n);
   end function;
 
   function max (a : std_logic_vector; b : std_logic_vector)
@@ -95,12 +95,13 @@ architecture main of kirsch is
   signal r4, r5 : std_logic_vector(2 downto 0); 
   signal a0    : std_logic_vector(7 downto 0); 
   signal a1    : std_logic_vector(8 downto 0); 
-  
+  signal sub   : std_logic_vector(12 downto 0);
+ 
   -- Stage 1 Data (also used Stage 2 Inputs)
   signal max_sum0, max_sum1, max_sum2, max_sum3,  ms_a, ms_b : std_logic_vector(9 downto 0);  
   signal sum0, sum1, sum2, sum3, s_a, s_b     : std_logic_vector(10 downto 0);
   
- signal m_ab, m_cd :std_logic_vector(10 downto 0);
+  signal m_ab, m_cd :std_logic_vector(10 downto 0);
   
   signal s_ab, s_cd :std_logic_vector(11 downto 0);
   -- Total Registers: 16
@@ -190,7 +191,7 @@ begin
 
 				    if (col = 255) then
                             col <= "00000000";
-						    current_row <= roller(current_row, '1');
+						    current_row <= current_row rol 1;
 						    row <= row + 1;
 				    end if;
 			
@@ -376,13 +377,14 @@ begin
         s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
       elsif (v(7) = '1') then
-        s_cd     <= std_logic_vector(sla_custom(s_ab, '1'));
+        s_cd     <= s_ab sla 1;
         s_ab     <= std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
-        sub      <= signed((unsigned(m_ab sla 3)) - unsigned(s_ab)); 
+        sub      <= std_logic_vector(unsigned(m_ab sla 3) - unsigned(s_ab));
+
     end if;
   
   end process;
   
-  o_edge        <= '1' when sub > 383 else '0';
+  o_edge        <= '1' when sub > "383" else '0';
 
 end architecture;
