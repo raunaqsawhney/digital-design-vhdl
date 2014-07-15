@@ -1,0 +1,124 @@
+Copying /opt/ModelSim101/modeltech/linux_x86_64/../modelsim.ini to modelsim.ini
+DEBUG: modelsim_pfx: testing: /opt/ModelSim101/modeltech/bin/
+DEBUG: try_set: altera_sim_lib: True: /home/ece327/altera
+DEBUG: default_board: DE2
+** Warning: (vlib-34) Library already exists at "work-msim".
+** Warning: (vlib-34) Library already exists at "work-msim".
+  Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+Model Technology ModelSim SE-64 vcom 10.1 Compiler 2011.12 Dec  5 2011
+-- Loading package STANDARD
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package NUMERIC_STD
+-- Compiling entity kirsch
+-- Compiling entity kirsch
+-- Compiling architecture main of kirsch
+-- Compiling architecture main of kirsch
+** Error: (vcom-11) Could not find work.mem.
+** Error: (vcom-11) Could not find work.mem.
+** Error: kirsch.vhd(116): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(116): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(116): Unknown expanded name.
+** Error: kirsch.vhd(116): Unknown expanded name.
+** Error: (vcom-11) Could not find work.mem.
+** Error: (vcom-11) Could not find work.mem.
+** Error: kirsch.vhd(125): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(125): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(125): Unknown expanded name.
+** Error: kirsch.vhd(125): Unknown expanded name.
+** Error: (vcom-11) Could not find work.mem.
+** Error: (vcom-11) Could not find work.mem.
+** Error: kirsch.vhd(134): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(134): (vcom-1195) Cannot find expanded name "work.mem".
+** Error: kirsch.vhd(134): Unknown expanded name.
+** Error: kirsch.vhd(134): Unknown expanded name.
+** Error: kirsch.vhd(292): near "'": syntax error
+** Error: kirsch.vhd(292): near "'": syntax error
+** Error: kirsch.vhd(293): near "'": syntax error
+** Error: kirsch.vhd(293): near "'": syntax error
+** Error: kirsch.vhd(304): near "'": syntax error
+** Error: kirsch.vhd(304): near "'": syntax error
+** Error: kirsch.vhd(305): near "'": syntax error
+** Error: kirsch.vhd(305): near "'": syntax error
+** Error: kirsch.vhd(316): near "'": syntax error
+** Error: kirsch.vhd(316): near "'": syntax error
+** Error: kirsch.vhd(317): near "'": syntax error
+** Error: kirsch.vhd(317): near "'": syntax error
+** Error: kirsch.vhd(328): near "'": syntax error
+** Error: kirsch.vhd(328): near "'": syntax error
+** Error: kirsch.vhd(329): near "'": syntax error
+** Error: kirsch.vhd(329): near "'": syntax error
+** Error: kirsch.vhd(333): No feasible entries for infix operator "+".
+** Error: kirsch.vhd(333): No feasible entries for infix operator "+".
+** Error: kirsch.vhd(333): Type error resolving infix expression "+" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(333): Type error resolving infix expression "+" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(334): near "max": expecting ')'
+** Error: kirsch.vhd(334): near "max": expecting ')'
+** Error: kirsch.vhd(335): Illegal target for signal assignment.
+** Error: kirsch.vhd(335): Illegal target for signal assignment.
+** Error: kirsch.vhd(335): (vcom-1136) Unknown identifier "max_edge".
+** Error: kirsch.vhd(335): (vcom-1136) Unknown identifier "max_edge".
+** Error: kirsch.vhd(335): Illegal sequential statement.
+** Error: kirsch.vhd(335): Illegal sequential statement.
+** Error: kirsch.vhd(335): Signal "r4" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: kirsch.vhd(335): Signal "r4" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+** Error: kirsch.vhd(372): No feasible entries for infix operator "sla".
+** Error: kirsch.vhd(372): No feasible entries for infix operator "sla".
+** Error: kirsch.vhd(372): Type error resolving infix expression "sla" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(372): Type error resolving infix expression "sla" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(373): No feasible entries for infix operator "+".
+** Error: kirsch.vhd(373): No feasible entries for infix operator "+".
+** Error: kirsch.vhd(373): Type error resolving infix expression "+" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(373): Type error resolving infix expression "+" as type ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(374): Illegal type conversion from std.STANDARD.BIT_VECTOR to ieee.std_logic_1164.STD_LOGIC_VECTOR (array element type difference).
+** Error: kirsch.vhd(374): Illegal type conversion from std.STANDARD.BIT_VECTOR to ieee.std_logic_1164.STD_LOGIC_VECTOR (array element type difference).
+** Error: kirsch.vhd(377): Illegal target for signal assignment.
+** Error: kirsch.vhd(377): Illegal target for signal assignment.
+** Error: kirsch.vhd(377): No feasible entries for infix operator "sla".
+** Error: kirsch.vhd(377): No feasible entries for infix operator "sla".
+** Error: kirsch.vhd(377): Target type std.STANDARD.CHARACTER in signal assignment is different from expression type ieee.NUMERIC_STD.UNRESOLVED_SIGNED.
+** Error: kirsch.vhd(377): Target type std.STANDARD.CHARACTER in signal assignment is different from expression type ieee.NUMERIC_STD.UNRESOLVED_SIGNED.
+** Error: kirsch.vhd(377): Cannot resolve expression type of infix expression.
+** Error: kirsch.vhd(377): Cannot resolve expression type of infix expression.
+** Error: kirsch.vhd(377): Illegal type conversion to ieee.NUMERIC_STD.UNSIGNED (operand type is not known).
+** Error: kirsch.vhd(377): Illegal type conversion to ieee.NUMERIC_STD.UNSIGNED (operand type is not known).
+** Error: kirsch.vhd(377): Target of signal assignment is not a signal.
+** Error: kirsch.vhd(377): Target of signal assignment is not a signal.
+** Error: kirsch.vhd(382): No feasible entries for infix operator ">".
+** Error: kirsch.vhd(382): No feasible entries for infix operator ">".
+** Error: kirsch.vhd(382): Type error resolving infix expression ">" as type std.STANDARD.BOOLEAN.
+** Error: kirsch.vhd(382): Type error resolving infix expression ">" as type std.STANDARD.BOOLEAN.
+** Warning: [14] kirsch.vhd(204): (vcom-1272) Length of expected is 8; length of actual is 3.
+** Warning: [14] kirsch.vhd(204): (vcom-1272) Length of expected is 8; length of actual is 3.
+** Warning: [14] kirsch.vhd(286): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(286): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(287): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(287): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(298): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(298): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(299): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(299): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(310): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(310): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(311): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(311): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(322): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(322): (vcom-1272) Length of expected is 11; length of actual is 8.
+** Warning: [14] kirsch.vhd(323): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(323): (vcom-1272) Length of expected is 10; length of actual is 9.
+** Warning: [14] kirsch.vhd(355): (vcom-1272) Length of expected is 12; length of actual is 11.
+** Warning: [14] kirsch.vhd(355): (vcom-1272) Length of expected is 12; length of actual is 11.
+** Warning: [14] kirsch.vhd(365): (vcom-1272) Length of expected is 12; length of actual is 11.
+** Warning: [14] kirsch.vhd(365): (vcom-1272) Length of expected is 12; length of actual is 11.
+** Warning: [14] kirsch.vhd(367): (vcom-1152) Index value 6 is out of index range 4 downto 0 of ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Warning: [14] kirsch.vhd(367): (vcom-1152) Index value 6 is out of index range 4 downto 0 of ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Warning: [14] kirsch.vhd(371): (vcom-1152) Index value 7 is out of index range 4 downto 0 of ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Warning: [14] kirsch.vhd(371): (vcom-1152) Index value 7 is out of index range 4 downto 0 of ieee.std_logic_1164.STD_LOGIC_VECTOR.
+** Error: kirsch.vhd(384): VHDL Compiler exiting
+** Error: kirsch.vhd(384): VHDL Compiler exiting
+  ERROR: Failure when running `vcom -93 +acc -work work-msim kirsch.vhd'
+ ERROR: Failure when running `uw-msim-com  kirsch.vhd '

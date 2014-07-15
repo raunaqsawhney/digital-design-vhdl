@@ -51,17 +51,6 @@ architecture main of kirsch is
 	return std_logic_vector(a sla n);
   end function;
 
-  function max (a : std_logic_vector; b : std_logic_vector)
-    return std_logic_vector
-  is
-  begin
-      if (a > b) then 
-          return a;
-      else
-          return b;
-      end if;
-  end function;
-
   -- Defined Signals
   signal col        :   unsigned(7 downto 0);
   signal row        :   unsigned(7 downto 0);
@@ -72,12 +61,9 @@ architecture main of kirsch is
   signal v          :   std_logic_vector(4 downto 0);
   signal current_row:   std_logic_vector(2 downto 0);
   signal edge_value :   std_logic;
-  signal direction  :   std_logic_vector(2 downto 0);
- 
-
-	-- to signal pass across first two rows
-	signal first_pass :	std_logic; 
-
+  signal first_pass :	std_logic; 
+  
+  signal direction  :   std_logic_vector(2 downto 0); 
   -- Direction LUT --
   -- 000    E
   -- 001    W
@@ -89,7 +75,10 @@ architecture main of kirsch is
   -- 111    SW
   -------------------
 
-  -- Registers
+  ---------------
+  -- Registers --
+  ---------------
+
   -- Stage 1 Inputs
   signal r0, r1, r2, r3, r6, r7     : std_logic_vector(7 downto 0); 
   signal r4, r5 : std_logic_vector(2 downto 0); 
@@ -104,9 +93,11 @@ architecture main of kirsch is
   signal m_ab, m_cd :std_logic_vector(10 downto 0);
   
   signal s_ab, s_cd :std_logic_vector(11 downto 0);
-  -- Total Registers: 16
 
-  -- Memory Array
+  ------------------
+  -- Memory Array --
+  ------------------
+
   type mem_array is array (2 downto 0) of std_logic_vector(7 downto 0);
   signal mem_out    :   mem_array;
 begin  
@@ -121,7 +112,10 @@ begin
   debug_led_red <= (others => '0');
   debug_led_grn <= (others => '0');
   
-  -- Memories
+  ---------------------
+  -- Memory Entities --
+  ---------------------
+
   mem0  :   entity work.mem(main)
     port map (
         address => std_logic_vector(col),
@@ -149,6 +143,19 @@ begin
         q       => mem_out(2)
     );
 
+    ----------------
+    -- MAX Entity --
+    ----------------
+
+    max     :   entity work.max(main)
+        port map (
+            i_v1    =>  r0,
+            i_v2    =>  r3,
+            i_d1    =>  r4,
+            i_d2    =>  r5,
+            o_val   =>  max_val,
+            o_dir   =>  direction
+    );
 
   -------------------------  
   -- Valid Bit Generator --
@@ -300,6 +307,7 @@ begin
 	r2          <= c;
     r4          <= "010"; --N
     r5          <= "110"; --NE
+    max_edge0   <= direction;
 
    end if;
    
@@ -312,6 +320,7 @@ begin
 	r2           <= g; 
     r4           <= "011"; --S
     r5           <= "111"; --SW
+    max_edge1    <= direction;
 
    end if;
   
@@ -324,6 +333,7 @@ begin
 	r2          <= e;
     r4          <= "000"; --E
     r5          <= "101"; --SE
+    max_edge2   <= direction;
 
    end if;
   
@@ -336,15 +346,14 @@ begin
     r2           <= a;
     r4           <= "001"; --W
     r5           <= "100"; --NW
+    max_edge3    <= direction;
 
    end if;
   
  end process; 
 
-	-- Direction Detection Logic
   	a0    <= std_logic_vector(unsigned(r1)+unsigned(r2));
-  	a1    <= std_logic_vector(unsigned(max(r0, r3)) + unsigned(a0));
-  	direction      <= r4 when r0 >= r3 else r5;
+    a1    <= max_val + unsigned(a0));
 		  
   -- End of Stage 1 --
 
@@ -353,28 +362,50 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (v(1) = '1') then
-        ms_a     <=  max_sum0;
-        ms_b     <=  max_sum1;
+        r0       <=  max_sum0;
+        r3       <=  max_sum1;
         s_a      <=  sum0;
         s_b      <=  sum1;
 
-        -- Optimization Possible
-        m_ab     <=  max(ms_a, ms_b);
+    -- m_ab      <=  max(ms_a, ms_b);
+        m_ab     <=  max_val;
+
+        r4       <= max_edge0;
+        r5       <= max_edge1;
         s_ab     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
 
+    -- max_edge01  <= max_edge0 max max_edge1;
+        max_edge01 <= direction;
+
       elsif (v(3) = '1') then
-        ms_a     <=  max_sum2;
-        ms_b     <=  max_sum3;
+        r0       <=  max_sum2;
+        r3       <=  max_sum3;
         s_a      <=  sum2;
         s_b      <=  sum3;
   
-        -- Optimization Possible
-        m_cd     <=  max(ms_a, ms_b);
-        s_cd     <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
+     -- m_cd     <=  max(ms_a, ms_b);
+        m_cd     <=  max_val;
+
+        r4       <= max_edge2;
+        r5       <= max_edge3;
+        s_cd     <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
+
+    --  max_edge23  <= max_edge2 max max_edge3;
+        max_edge23  <= direction;
 
       elsif (v(6) = '1') then
-        m_ab     <=  max(m_ab, m_cd);
+        r0      <= m_ab;
+        r1      <= m_cd;
+
+        m_ab     <=  max_val;
         s_ab     <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
+
+        -- Final MAX Edge
+        r4      <= max_edge01;
+        r5      <= max_edge23;
+
+     -- f_max_edge  <= max_edge01 max max_edge23;
+        f_max_edge  <= direction;
 
       elsif (v(7) = '1') then
         s_cd     <= s_ab sla 1;
@@ -385,6 +416,8 @@ begin
   
   end process;
   
-  o_edge        <= '1' when to_integer(unsigned(sub)) > 383  else '0';
+  edge_present  <= '1' when to_integer(unsigned(sub)) > 383 else '0');
+  o_edge        <= edge_present;
+  o_dir         <= f_max_edge when edge_present = '1' else "000";
 
 end architecture;
