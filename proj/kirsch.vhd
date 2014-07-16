@@ -409,8 +409,9 @@ begin
   
   end process;
   
-  edge_present  <= '1' when sub > 383 else '0';
+  edge_present  <= '1' when (unsigned(sub) > 383) else '0';
   o_edge        <= edge_present;
   o_dir         <= f_max_edge when edge_present = '1' else "000";
+  o_valid       <= v(7);
 
 end architecture;
