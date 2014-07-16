@@ -2,10 +2,13 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity max is 
-    port (i_v1, i_v2, i_d1, i_d2    : in std_logic;
-            o_val, o_dir            : out std_logic
+    port (
+            i_v1, i_v2      : in std_logic_vector(9 downto 0);
+            i_d1, i_d2      : in std_logic_vector(2 downto 0);
+            o_val           : out std_logic_vector(9 downto 0);
+            o_dir           : out std_logic_vector(2 downto 0)
     );
-end sum;
+end max;
 
 
 architecture main of max is

@@ -18,4 +18,4 @@ DESIGN_ARCH = main
 #------------------------------------------------------------------
 # for normal kirsch
 i
-DESIGN_VHDL = mem.vhd kirsch_synth_pkg.vhd kirsch.vhd max.vhd
+DESIGN_VHDL = mem.vhd kirsch_synth_pkg.vhd max.vhd kirsch.vhd
