@@ -100,6 +100,9 @@ architecture main of kirsch is
   signal f_max_edge                                 : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
   signal max_val                                    : std_logic_vector(9 downto 0);  -- intermediate register holding current max value
   
+  signal max2_val                                   : std_logic_vector(9 downto 0);
+  signal direction2                                 : std_logic_vector(2 downto 0);
+  signal me_a, me_b                                 : std_logic_vector(2 downto 0);
   ------------------
   -- Memory Array --
   ------------------
@@ -165,12 +168,12 @@ begin
 	
 	max2    :   entity work.max(main)
         port map (
-            i_v1    =>  r0,
-            i_v2    =>  r3,
-            i_d1    =>  r4,
-            i_d2    =>  r5,
-            o_val   =>  max_val,
-            o_dir   =>  direction
+            i_v1    =>  ms_a,
+            i_v2    =>  ms_b,
+            i_d1    =>  me_a,
+            i_d2    =>  me_b,
+            o_val   =>  max2_val,
+            o_dir   =>  direction2
     );
 
   -------------------------  
@@ -345,43 +348,43 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (v(1) = '1') then
-        r0          <=  max_sum0;
-        r3          <=  max_sum1;
+        ms_a          <=  max_sum0;
+        ms_b          <=  max_sum1;
         s_a         <=  sum0;
         s_b         <=  sum1;
 
         s_ab        <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_ab        <=  max_val;
+        m_ab        <=  max2_val;
 
-        r4          <= max_edge0;
-        r5          <= max_edge1;
-        max_edge01  <= direction;
+        me_a          <= max_edge0;
+        me_b          <= max_edge1;
+        max_edge01  <= direction2;
 
       elsif (v(3) = '1') then
-        r0          <=  max_sum2;
-        r3          <=  max_sum3;
+        ms_a          <=  max_sum2;
+        ms_b          <=  max_sum3;
         s_a         <=  sum2;
         s_b         <=  sum3;
   
         s_cd        <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_cd        <=  max_val;
+        m_cd        <=  max2_val;
 
-        r4          <= max_edge2;
-        r5          <= max_edge3;
-        max_edge23  <= direction;
+        me_a          <= max_edge2;
+        me_b          <= max_edge3;
+        max_edge23  <= direction2;
 
       elsif (v(6) = '1') then
-        r0          <= m_ab;
-        r3          <= m_cd;
+        ms_a          <= m_ab;
+        ms_b          <= m_cd;
 
-        m_ab        <=  max_val;
+        m_ab        <=  max2_val;
         f_s_ab      <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
-        r4          <= max_edge01;
-        r5          <= max_edge23;
+        me_a          <= max_edge01;
+        me_b          <= max_edge23;
 
         -- Final MAX Edge
-        f_max_edge  <= direction;
+        f_max_edge  <= direction2;
 
       elsif (v(7) = '1') then
         m_cd        <= to_stdlogicvector(to_bitvector(m_ab) sla 3);
