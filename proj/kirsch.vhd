@@ -55,7 +55,7 @@ architecture main of kirsch is
      return std_logic_vector
    is
    begin
-    if (unsigned(a) > unsgined(b)) then
+    if (unsigned(a) > unsigned(b)) then
 		return std_logic_vector(a);
 	else
 		return std_logic_vector(b);
@@ -83,7 +83,8 @@ architecture main of kirsch is
   signal current_row                                                : std_logic_vector(2 downto 0);
   signal edge_present                                               : std_logic;
   signal first_pass                                                 : std_logic; 
-  signal direction                                                  : std_logic_vector(2 downto 0); 
+  signal max_edge0_dir, max_edge1_dir, max_edge2_dir, max_edge3_dir    : std_logic_vector(2 downto 0); 
+  signal max_edge01_dir, max_edge23_dir    : std_logic_vector(2 downto 0); 
 
   -- Direction LUT --
   -- 000    E
@@ -100,7 +101,7 @@ architecture main of kirsch is
   -- Registers --
   ---------------
 
-  signal r0, r1, r2, r3		                        : std_logic_vector(9 downto 0);  -- values
+  signal r0, r1, r2, r3		                        : std_logic_vector(7 downto 0);  -- values
   signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
   signal a0                                         : std_logic_vector(9 downto 0);  -- sum
   signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
@@ -113,17 +114,17 @@ architecture main of kirsch is
   signal s_a, s_b                                   : std_logic_vector(9 downto 0);  -- stage 2 registers holding sum0-1/2-3
   
   signal m_ab, m_cd                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get max from 0-1/2-3)
-  signal s_ab, s_cd                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get sum from 0+1, 2+3)
+  signal s_ab, s_cd,s_ab_inter                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get sum from 0+1, 2+3)
   signal f_s_ab                                     : std_logic_vector(9 downto 0); -- stage 2 cycle 3(6) output register with final sum
   
-  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(7 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
-  signal max_edge01, max_edge23                     : std_logic_vector(2 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
+  signal max_edge0, max_edge1, max_edge2, max_edge3, max_edge0123 : std_logic_vector(7 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
+  signal max_edge01, max_edge23                     : std_logic_vector(7 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
   signal f_max_edge                                 : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
-  signal max_val                                    : std_logic_vector(9 downto 0);  -- intermediate register holding current max value
+  signal max_val                                    : std_logic_vector(7 downto 0);  -- intermediate register holding current max value
   
   signal max2_val                                   : std_logic_vector(9 downto 0);
   signal direction2                                 : std_logic_vector(2 downto 0);
-  signal me_a, me_b                                 : std_logic_vector(2 downto 0);
+  signal me_a, me_b                                 : std_logic_vector(7 downto 0);
   ------------------
   -- Memory Array --
   ------------------
@@ -287,10 +288,10 @@ begin
   wait until rising_edge(i_clock);
 	
   if(v(0) = '1') then
-	r0          <= "00" & a; 
-	r3          <= "00" & d;
-	r1          <= "00" & b;
-	r2          <= "00" & c;
+	r0          <= a; 
+	r3          <= d;
+	r1          <= b;
+	r2          <= c;
     r4          <= "010"; --N
     r5          <= "110"; --NE
 
@@ -305,10 +306,10 @@ begin
     end if;
    
    if(v(1) = '1') then
-	r0           <= "00" & e; 
-	r3           <= "00" & h; 
-	r1           <= "00" & f; 
-	r2           <= "00" & g; 
+	r0           <= e; 
+	r3           <= h; 
+	r1           <= f; 
+	r2           <= g; 
     r4           <= "011"; --S
     r5           <= "111"; --SW
     
@@ -322,10 +323,10 @@ begin
    end if;
   
    if(v(2) = '1') then
-	r0          <= "00" & c; 
-	r3          <= "00" & f; 
-	r1          <= "00" & d; 
-	r2          <= "00" & e;
+	r0          <= c; 
+	r3          <= f; 
+	r1          <= d; 
+	r2          <= e;
     r4          <= "000"; --E
     r5          <= "101"; --SE
     
@@ -340,10 +341,10 @@ begin
     end if;
   
    if(v(3) = '1') then
-    r0           <= "00" & b;
-    r3           <= "00" & g;
-    r1           <= "00" & h;
-    r2           <= "00" & a;
+    r0           <= b;
+    r3           <= g;
+    r1           <= h;
+    r2           <= a;
     r4           <= "001"; --W
     r5           <= "100"; --NW
     
@@ -358,7 +359,7 @@ begin
   
  end process; 
 
-  	a0    <= std_logic_vector(unsigned(r1) + unsigned(r2));
+  	a0    <= std_logic_vector(unsigned("00" & unsigned(r1)) + unsigned(r2));
     a1    <= std_logic_vector(unsigned(max_val) + unsigned(a0));
 		  
   -- End of Stage 1 --
@@ -417,7 +418,7 @@ begin
         m_cd        <= to_stdlogicvector(to_bitvector(m_ab) sla 3);
         s_cd        <= f_s_ab;
         s_ab_inter  <= to_stdlogicvector(to_bitvector(s_cd) sla 1);
-        s_ab        <= to_stdlogicvector(unsigned( s_ab_inter) + (unsigned(f_s_ab)));
+        s_ab        <= std_logic_vector(unsigned( s_ab_inter) + (unsigned(f_s_ab)));
         
         sub         <= std_logic_vector(signed((unsigned(m_cd) - unsigned(s_ab))));
 
