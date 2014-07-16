@@ -153,7 +153,17 @@ begin
     -- MAX Entity --
     ----------------
 
-    max     :   entity work.max(main)
+    max1    :   entity work.max(main)
+        port map (
+            i_v1    =>  r0,
+            i_v2    =>  r3,
+            i_d1    =>  r4,
+            i_d2    =>  r5,
+            o_val   =>  max_val,
+            o_dir   =>  direction
+    );
+	
+	max2    :   entity work.max(main)
         port map (
             i_v1    =>  r0,
             i_v2    =>  r3,
@@ -260,40 +270,7 @@ begin
       end if;
   end process;
 
-  ---------------------
-  -- Populate Memory --
-  ---------------------
-
-  process begin
-      wait until rising_edge(i_clock);
-      if (v(0) = '1') then
-          case current_row is
-              when "001" =>
-                  mem_wren(0) <= '1';                  
-                  mem_wren(1) <= '0';
-                  mem_wren(2) <= '0';
-
-                  mem_data    <= i_pixel;
-              when "010" =>
-                  mem_wren(0) <= '0';
-                  mem_wren(1) <= '1';
-                  mem_wren(2) <= '0';
-                  
-                  mem_data    <= i_pixel;
-              when "100" =>
-
-                  mem_wren(0) <= '0';
-                  mem_wren(1) <= '0';
-                  mem_wren(2) <= '1';
-
-                  mem_data    <= i_pixel;
-              when others =>
-                  mem_wren    <= "000";
-                  mem_data    <= i_pixel;
-        end case;
-        mem_wren    <= "000";
-    end if;
-  end process;
+ 
   
   --------------
   -- Dataflow --
