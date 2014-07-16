@@ -55,7 +55,6 @@ architecture main of kirsch is
   signal col                                                        : unsigned(7 downto 0);
   signal row                                                        : unsigned(7 downto 0);
   signal mem_wren                                                   : std_logic_vector(2 downto 0);
-  signal mem_data                                                   : std_logic_vector(7 downto 0);
   signal busy                                                       : std_logic;
   signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
   signal v                                                          : std_logic_vector(8 downto 0);
@@ -79,7 +78,7 @@ architecture main of kirsch is
   -- Registers --
   ---------------
 
-  signal r0, r1, r2, r3, r6, r7                     : std_logic_vector(9 downto 0);  -- values
+  signal r0, r1, r2, r3		                        : std_logic_vector(9 downto 0);  -- values
   signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
   signal a0                                         : std_logic_vector(9 downto 0);  -- sum
   signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
@@ -129,7 +128,7 @@ begin
     port map (
         address => std_logic_vector(col),
         clock   => i_clock,
-        data    => mem_data,
+        data    => i_pixel,
         wren    => mem_wren(0),
         q       => mem_out(0) 
     );
@@ -138,7 +137,7 @@ begin
     port map (
         address => std_logic_vector(col),
         clock   => i_clock,
-        data    => mem_data,
+        data    => i_pixel,
         wren    => mem_wren(1),
         q       => mem_out(1)
     );
@@ -147,7 +146,7 @@ begin
     port map (
         address => std_logic_vector(col),
         clock   => i_clock,
-        data    => mem_data,
+        data    => i_pixel,
         wren    => mem_wren(2),
         q       => mem_out(2)
     );
