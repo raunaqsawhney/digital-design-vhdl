@@ -87,13 +87,13 @@ architecture main of kirsch is
   signal max_edge01_dir, max_edge23_dir    : std_logic_vector(2 downto 0); 
 
   -- Direction LUT --
-  -- 000    E
   -- 001    W
-  -- 010    N
-  -- 011    S
   -- 100    NW
-  -- 101    SE
+  -- 010    N
   -- 110    NE
+  -- 000    E
+  -- 101    SE
+  -- 011    S
   -- 111    SW
   -------------------
 
@@ -102,7 +102,7 @@ architecture main of kirsch is
   ---------------
 
   signal r0, r1, r2, r3		                        : std_logic_vector(7 downto 0);  -- values
-  signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
+  --signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
   signal a0                                         : std_logic_vector(9 downto 0);  -- sum
   signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
   signal sub                                        : std_logic_vector(9 downto 0); -- subtractor
@@ -292,11 +292,11 @@ begin
 	r3          <= d;
 	r1          <= b;
 	r2          <= c;
-    r4          <= "010"; --N
-    r5          <= "110"; --NE
+    --r4          <= "010"; --N
+    --r5          <= "110"; --NE
 
     max_edge0           <= max_input(r0, r3);
-    max_edge0_dir       <= max_dir(r0, r3, r4, r5);
+    max_edge0_dir       <= max_dir(r0, r3, "010", "110");
     max_val             <= max_edge0;
 
    
@@ -310,11 +310,11 @@ begin
 	r3           <= h; 
 	r1           <= f; 
 	r2           <= g; 
-    r4           <= "011"; --S
-    r5           <= "111"; --SW
+    --r4           <= "011"; --S
+    --r5           <= "111"; --SW
     
     max_edge1    <= max_input(r0, r3);
-    max_edge1_dir <= max_dir(r0, r3, r4, r5);
+    max_edge1_dir <= max_dir(r0, r3, "011", "111");
     max_val         <= max_edge1;
 
 	sum1         <= a0;
@@ -327,11 +327,11 @@ begin
 	r3          <= f; 
 	r1          <= d; 
 	r2          <= e;
-    r4          <= "000"; --E
-    r5          <= "101"; --SE
+    --r4          <= "000"; --E
+    --r5          <= "101"; --SE
     
     max_edge2   <= max_input(r0, r3);
-    max_edge2_dir <= max_dir(r0, r3,r4, r5);
+    max_edge2_dir <= max_dir(r0, r3,"000", "101");
     max_val         <= max_edge2;
    
 
@@ -345,11 +345,11 @@ begin
     r3           <= g;
     r1           <= h;
     r2           <= a;
-    r4           <= "001"; --W
-    r5           <= "100"; --NW
+    --r4           <= "001"; --W
+    --r5           <= "100"; --NW
     
     max_edge3    <= max_input(r0, r3);
-    max_edge3_dir <= max_dir(r0, r3, r4, r5);
+    max_edge3_dir <= max_dir(r0, r3, "001", "100");
     max_val         <= max_edge3;
 
     sum3         <= a0; 
