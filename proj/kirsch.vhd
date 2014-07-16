@@ -74,19 +74,19 @@ architecture main of kirsch is
 
   signal r0, r1, r2, r3, r6, r7                     : std_logic_vector(9 downto 0);  -- values
   signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
-  signal a0                                         : std_logic_vector(8 downto 0);  -- sum
+  signal a0                                         : std_logic_vector(9 downto 0);  -- sum
   signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
   signal sub                                        : std_logic_vector(9 downto 0); -- subtractor
  
   signal max_sum0, max_sum1, max_sum2, max_sum3     : std_logic_vector(9 downto 0);  -- max sum (individual)  
-  signal sum0, sum1, sum2, sum3                     : std_logic_vector(8 downto 0);  -- sum (individual)
+  signal sum0, sum1, sum2, sum3                     : std_logic_vector(9 downto 0);  -- sum (individual)
 
   signal ms_a, ms_b                                 : std_logic_vector(9 downto 0);  -- stage 2 registers holding max_sum0-1/2-3
-  signal s_a, s_b                                   : std_logic_vector(8 downto 0);  -- stage 2 registers holding sum0-1/2-3
+  signal s_a, s_b                                   : std_logic_vector(9 downto 0);  -- stage 2 registers holding sum0-1/2-3
   
   signal m_ab, m_cd                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get max from 0-1/2-3)
-  signal s_ab, s_cd                                 : std_logic_vector(8 downto 0);  -- stage 2 cycle 3(6) input registers (get sum from 0+1, 2+3)
-  signal f_s_ab                                     : std_logic_vector(8 downto 0); -- stage 2 cycle 3(6) output register with final sum
+  signal s_ab, s_cd                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get sum from 0+1, 2+3)
+  signal f_s_ab                                     : std_logic_vector(9 downto 0); -- stage 2 cycle 3(6) output register with final sum
   
   signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(2 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
   signal max_edge01, max_edge23                     : std_logic_vector(2 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
@@ -351,8 +351,8 @@ begin
   
  end process; 
 
-  	a0    <= std_logic_vector(unsigned("0" & r1) + unsigned(r2));
-    a1    <= max_val + unsigned("0" & a0);
+  	a0    <= std_logic_vector(unsigned(r1) + unsigned(r2));
+    a1    <= std_logic_vector(unsigned(max_val) + unsigned(a0));
 		  
   -- End of Stage 1 --
 
@@ -402,7 +402,7 @@ begin
       elsif (v(7) = '1') then
         m_cd        <= to_stdlogicvector(to_bitvector(m_ab)) sla to_integer(unsigned(3));
         s_cd        <= f_s_ab;
-        s_ab        <= (s_cd & '0') + f_s_ab;
+        s_ab        <= std_logic_vector(unsigned(s_cd) + unsigned(f_s_ab));
         sub         <= std_logic_vector(signed((unsigned(m_cd) - unsigned(s_ab))));
 
     end if;
