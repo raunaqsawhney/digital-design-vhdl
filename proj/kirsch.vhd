@@ -51,7 +51,7 @@ architecture main of kirsch is
     return std_logic_vector(a sla n);
    end function;
 
-  function max_dir (a : std_logic_vector; b : std_logic_vector)
+  function max_input (a : std_logic_vector; b : std_logic_vector)
      return std_logic_vector
    is
    begin
@@ -62,6 +62,17 @@ architecture main of kirsch is
     end if;
    end function;
   
+  function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : std_logic_vector; dir2 : std_logic_vector)
+     return std_logic_vector
+   is
+   begin
+    if (a > b) then
+		return std_logic_vector(dir1);
+	else
+		return std_logic_vector(dir2);
+    end if;
+   end function;
+
   -- Defined Signals
   signal col                                                        : unsigned(7 downto 0);
   signal row                                                        : unsigned(7 downto 0);
