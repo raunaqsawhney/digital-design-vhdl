@@ -51,7 +51,7 @@ architecture main of kirsch is
     return std_logic_vector(a sla n);
    end function;
 
-  function max_val (a : std_logic_vector; b : std_logic_vector)
+  function max_input (a : std_logic_vector; b : std_logic_vector)
      return std_logic_vector
    is
    begin
