@@ -55,7 +55,7 @@ architecture main of kirsch is
      return std_logic_vector
    is
    begin
-    if (a > b) then
+    if (unsigned(a) > unsgined(b)) then
 		return std_logic_vector(a);
 	else
 		return std_logic_vector(b);
@@ -66,7 +66,7 @@ architecture main of kirsch is
      return std_logic_vector
    is
    begin
-    if (a > b) then
+    if (unsigned(a) > unsigned(b)) then
 		return std_logic_vector(dir1);
 	else
 		return std_logic_vector(dir2);
