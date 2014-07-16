@@ -105,7 +105,7 @@ architecture main of kirsch is
   signal s_ab, s_cd                                 : std_logic_vector(9 downto 0);  -- stage 2 cycle 3(6) input registers (get sum from 0+1, 2+3)
   signal f_s_ab                                     : std_logic_vector(9 downto 0); -- stage 2 cycle 3(6) output register with final sum
   
-  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(2 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
+  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(7 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
   signal max_edge01, max_edge23                     : std_logic_vector(2 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
   signal f_max_edge                                 : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
   signal max_val                                    : std_logic_vector(9 downto 0);  -- intermediate register holding current max value
@@ -166,26 +166,7 @@ begin
     -- MAX Entity --
     ----------------
 
-    max1    :   entity work.max(main)
-        port map (
-            i_v1    =>  r0,
-            i_v2    =>  r3,
-            i_d1    =>  r4,
-            i_d2    =>  r5,
-            o_val   =>  max_val,
-            o_dir   =>  direction
-    );
-	
-	max2    :   entity work.max(main)
-        port map (
-            i_v1    =>  ms_a,
-            i_v2    =>  ms_b,
-            i_d1    =>  me_a,
-            i_d2    =>  me_b,
-            o_val   =>  max2_val,
-            o_dir   =>  direction2
-    );
-
+  
   -------------------------  
   -- Valid Bit Generator --
   -------------------------
@@ -299,11 +280,14 @@ begin
     max_sum0    <= a1;
 	r0          <= "00" & a; 
 	r3          <= "00" & d;
-	r1          <= "00" &  b;
+	r1          <= "00" & b;
 	r2          <= "00" & c;
     r4          <= "010"; --N
     r5          <= "110"; --NE
-    max_edge0   <= direction;
+
+    max_edge0           <= max_input(r0, r3);
+    max_edge0_dir       <= max_dir(r0, r3, r4, r5);
+    max_val             <= max_edge0;
 
    end if;
    
@@ -316,7 +300,10 @@ begin
 	r2           <= "00" & g; 
     r4           <= "011"; --S
     r5           <= "111"; --SW
-    max_edge1    <= direction;
+    
+    max_edge1    <= max_input(r0, r3);
+    max_edge1_dir <= max_dir(r0, r3, r4, r5);
+    max_val         <= max_edge1;
 
    end if;
   
@@ -329,8 +316,10 @@ begin
 	r2          <= "00" & e;
     r4          <= "000"; --E
     r5          <= "101"; --SE
-    max_edge2   <= direction;
-
+    
+    max_edge2   <= max_input(r0, r3);
+    max_edge2_dir <= max_dir(r0, r3,r4, r5);
+    max_val         <= max_edge2;
    end if;
   
    if(v(3) = '1') then
@@ -342,7 +331,10 @@ begin
     r2           <= "00" & a;
     r4           <= "001"; --W
     r5           <= "100"; --NW
-    max_edge3    <= direction;
+    
+    max_edge3    <= max_input(r0, r3);
+    max_edge3_dir <= max_dir(r0, r3, r4, r5);
+    max_val         <= max_edge3;
 
    end if;
   
