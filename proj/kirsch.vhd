@@ -44,6 +44,13 @@ architecture main of kirsch is
     return std_logic_vector(unsigned(a) rol n);
   end function;
 
+  function "sla" (a : std_logic_vector; n : natural)
+     return std_logic_vector
+   is
+   begin
+    return std_logic_vector(a sla n);
+   end function;
+
   -- Defined Signals
   signal col                                                        : unsigned(7 downto 0);
   signal row                                                        : unsigned(7 downto 0);
@@ -400,7 +407,7 @@ begin
         f_max_edge  <= direction;
 
       elsif (v(7) = '1') then
-        m_cd        <= to_stdlogicvector(to_bitvector(m_ab)) sla to_integer(unsigned(3));
+        m_cd        <= to_stdlogicvector(to_bitvector(m_ab) sla 3);
         s_cd        <= f_s_ab;
         s_ab        <= std_logic_vector(unsigned(s_cd) + unsigned(f_s_ab));
         sub         <= std_logic_vector(signed((unsigned(m_cd) - unsigned(s_ab))));
