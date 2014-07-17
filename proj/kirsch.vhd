@@ -42,32 +42,25 @@ architecture main of kirsch is
   begin
     return std_logic_vector(unsigned(a) rol n);
   end function;
-
-  function "sla" (a : std_logic_vector; n : natural)
-     return std_logic_vector
-   is
-   begin
-    return std_logic_vector(a sla n);
-   end function;
    
    function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : std_logic_vector; dir2 : std_logic_vector)
      return std_logic_vector
    is
    begin
-    if (unsigned(a) = unsigned(b)) then
-		if (unsigned(a) = "001") then
-			return std_logic_vector(dir1);
-		elsif (unsigned(b) = "001") then
-			return std_logic_vector(dir2);
-		else
-			return std_logic_vector(dir1);
-		end if;
-	end if;
+     if (unsigned(a) = unsigned(b)) then
+		 if (unsigned(a) = "001") then
+			 return std_logic_vector(dir1);
+		 elsif (unsigned(b) = "001") then
+			 return std_logic_vector(dir2);
+		 else
+			 return std_logic_vector(dir1);
+		 end if;
+	 end if;
 	
 	if (unsigned(a) > unsigned(b)) then
-		return std_logic_vector(dir1);
+		return dir1;
 	else
-		return std_logic_vector(dir2);
+		return dir2;
     end if;
    end function;
    
@@ -92,7 +85,6 @@ architecture main of kirsch is
   signal current_row                                                : std_logic_vector(2 downto 0);
   signal edge_present                                               : std_logic;
   signal first_pass                                                 : std_logic; 
-  signal direction                                                  : std_logic_vector(2 downto 0); 
 
   -- Direction LUT --
   -- 000    E
@@ -108,39 +100,39 @@ architecture main of kirsch is
   ---------------
   -- Registers --
   ---------------
-  signal sum0, sum1, sum2, sum3                  		: std_logic_vector(8 downto 0);  -- sum [9 BITS](computed in Stage 1)
-  signal max_sum0, max_sum1, max_sum2, max_sum3     	: std_logic_vector(9 downto 0);  -- max sum [10 BITS] (computed in Stage 1)
+  signal sum0, sum1, sum2, sum3                  		: std_logic_vector(12 downto 0);  -- sum [9 BITS](computed in Stage 1)
+  signal max_sum0, max_sum1, max_sum2, max_sum3     	: std_logic_vector(12 downto 0);  -- max sum [10 BITS] (computed in Stage 1)
 
-  signal ms_a, ms_b, ms_c, ms_d							: std_logic_vector(9 downto 0);  -- max sum [10 BITS] (inputs to max in Stage 2)
-  signal m_ab, m_cd										: std_logic_vector(9 downto 0);	 -- max of ab and cd (outputs of max in Stage 2)
+  signal ms_a, ms_b, ms_c, ms_d							: std_logic_vector(12 downto 0);  -- max sum [10 BITS] (inputs to max in Stage 2)
+  signal m_ab, m_cd										: std_logic_vector(12 downto 0);	 -- max of ab and cd (outputs of max in Stage 2)
   
-  signal s_a, s_b, s_c, s_d								: std_logic_vector(8 downto 0);  -- sum [9 bits] (inputs to adder in Stage 2)
-  signal s_ab, s_cd										: std_logic_vector(9 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
+  signal s_a, s_b, s_c, s_d								: std_logic_vector(12 downto 0);  -- sum [9 bits] (inputs to adder in Stage 2)
+  signal s_ab, s_cd										: std_logic_vector(12 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
 
-  signal m_ab2, m_cd2									: std_logic_vector(9 downto 0);  -- max [10 bits] (inputs to final max in Stage 2)
-  signal m_abcd											: std_logic_vector(9 downto 0);  -- max [10 bits] (out of final max in Stage 2)
+  signal m_ab2, m_cd2									: std_logic_vector(12 downto 0);  -- max [10 bits] (inputs to final max in Stage 2)
+  signal m_abcd											: std_logic_vector(12 downto 0);  -- max [10 bits] (out of final max in Stage 2)
  
-  signal s_ab2, s_cd2									: std_logic_vector(9 downto 0);  -- sum [10 bits] (inputs to final sum in Stage 2)
-  signal s_abcd, temp											: std_logic_vector(10 downto 0); -- sum [11 bits] (output of final sum in Stage 2)
+  signal s_ab2, s_cd2									: std_logic_vector(12 downto 0);  -- sum [10 bits] (inputs to final sum in Stage 2)
+  signal s_abcd, temp											: std_logic_vector(12 downto 0); -- sum [11 bits] (output of final sum in Stage 2)
  
   signal final_max							: std_logic_vector(12 downto 0); -- final max and final sum [13 bits] (in Stage 2)
   signal final_sum						: std_logic_vector(12 downto 0);
  
   signal sub											: signed(12 downto 0); -- sub [13 bits] holds derivative
   
-  signal r0, r1, r2, r3		                        	: std_logic_vector(7 downto 0);  -- values
+  signal r0, r1, r2, r3		                        	: std_logic_vector(12 downto 0);  -- values
   signal max_edge0_dir, max_edge1_dir, max_edge2_dir, max_edge3_dir    : std_logic_vector(2 downto 0); 
   signal max_edge01_dir, max_edge23_dir    : std_logic_vector(2 downto 0); 
   signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
-  signal a0                                         : std_logic_vector(8 downto 0);  -- sum
-  signal a1                                         : std_logic_vector(9 downto 0);  -- max sum
+  signal a0                                         : std_logic_vector(12 downto 0);  -- sum
+  signal a1                                         : std_logic_vector(12 downto 0);  -- max sum
   
-  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(7 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
-  signal max_edge01, max_edge23                     : std_logic_vector(7 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
+  signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(12 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
+  signal max_edge01, max_edge23                     : std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
   signal f_max_edge                                 : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
-  signal max_val                                    : std_logic_vector(7 downto 0);  -- intermediate register holding current max value
+  signal max_val                                    : std_logic_vector(12 downto 0);  -- intermediate register holding current max value
   
-  signal me_a, me_b, me_c, me_d, me_e, me_f                                 : std_logic_vector(7 downto 0);
+  signal me_a, me_b, me_c, me_d, me_e, me_f         : std_logic_vector(12 downto 0);
   
 
 
@@ -197,7 +189,7 @@ begin
   -- Valid Bit Generator --
   -------------------------
  
-  v_gen : for i in 1 to 8 generate
+  v_gen : for i in 1 to 7 generate
       process begin
           wait until rising_edge(i_clock);
 		  if i_reset = '1' then
@@ -303,12 +295,12 @@ begin
 
   if(v(0) = '1') then
 	
-	r0          <= a; 
-	r3          <= d;
-	r1          <= b;
-	r2          <= c;
-    r4          <= "010"; --N
-    r5          <= "110"; --NE
+	r0          <= "00000" & a; 
+	r3          <= "00000" & d;
+	r1          <= "00000" & b;
+	r2          <= "00000" & c;
+    --r4          <= "010"; --N
+    --r5          <= "110"; --NE
     
 	max_edge0   <= max_input(r0, r3);
 	max_val <= max_edge0;
@@ -321,12 +313,12 @@ begin
    
    if(v(1) = '1') then
 	
-	r0           <= e; 
-	r3           <= h; 
-	r1           <= f; 
-	r2           <= g; 
-    r4           <= "011"; --S
-    r5           <= "111"; --SW
+	r0           <= "00000" & e; 
+	r3           <= "00000" & h; 
+	r1           <= "00000" & f; 
+	r2           <= "00000" & g; 
+    --r4           <= "011"; --S
+    --r5           <= "111"; --SW
     
 	max_edge1    <= max_input(r0, r3);
 	max_val <= max_edge1;
@@ -339,12 +331,12 @@ begin
   
    if(v(2) = '1') then
 	
-	r0          <= c; 
-	r3          <= f; 
-	r1          <= d; 
-	r2          <= e;
-    r4          <= "000"; --E
-    r5          <= "101"; --SE
+	r0          <= "00000" & c; 
+	r3          <= "00000" & f; 
+	r1          <= "00000" & d; 
+	r2          <= "00000" & e;
+    --r4          <= "000"; --E
+    --r5          <= "101"; --SE
     
 	max_edge2   <= max_input(r0, r3);
 	max_val 	<= max_edge2;
@@ -357,12 +349,12 @@ begin
   
    if(v(3) = '1') then
     
-    r0           <= b;
-    r3           <= g;
-    r1           <= h;
-    r2           <= a;
-    r4           <= "001"; --W
-    r5           <= "100"; --NW
+    r0           <= "00000" & b;
+    r3           <= "00000" & g;
+    r1           <= "00000" & h;
+    r2           <= "00000" & a;
+    --r4           <= "001"; --W
+    --r5           <= "100"; --NW
     
 	max_edge3    <= max_input(r0, r3);
 	max_val		<= max_edge3;
@@ -375,8 +367,8 @@ begin
   
  end process; 
 
-  	a0    <= std_logic_vector(("0" & unsigned(r1)) + unsigned(r2));
-    a1    <= std_logic_vector(("00" & unsigned(max_val)) + unsigned(a0));
+  	a0    <= std_logic_vector(unsigned(r1) + unsigned(r2));
+    a1    <= std_logic_vector(unsigned(max_val) + unsigned(a0));
 
   -- End of Stage 1 --
 
@@ -391,13 +383,13 @@ begin
         s_b         	<= sum1;
 
 		m_ab        	<= max_input(ms_a, ms_b);
-        s_ab        	<= std_logic_vector(("0" & unsigned(s_a)) + unsigned(s_b));
+        s_ab        	<= std_logic_vector(unsigned(s_a) + unsigned(s_b));
 
         me_a			<= max_edge0;
         me_b			<= max_edge1;
 		
         max_edge01  	<= max_input(me_a, me_b);
-		max_edge01_dir 	<= max_dir(me_a, me_b, max_edge0_dir, max_edge1_dir);
+		max_edge01_dir 	<= max_dir(s_a, s_b, max_edge0_dir, max_edge1_dir);
 
       elsif (v(3) = '1') then
         ms_c			<=  max_sum2;
@@ -406,13 +398,13 @@ begin
         s_d				<=  sum3;
   
         m_cd        	<= max_input(ms_c, ms_d);
-        s_cd        	<= std_logic_vector(("0" & unsigned(s_c)) + unsigned(s_d));
+        s_cd        	<= std_logic_vector(unsigned(s_c) + unsigned(s_d));
 
         me_c          	<= max_edge2;
         me_d          	<= max_edge3;
 		
         max_edge23  	<= max_input(me_c, me_d);
-        max_edge23_dir 	<= max_dir(me_c, me_d, max_edge2_dir, max_edge3_dir);
+        max_edge23_dir 	<= max_dir(s_c, s_d, max_edge2_dir, max_edge3_dir);
 
       elsif (v(6) = '1') then
         m_ab2          	<= m_ab;
@@ -422,19 +414,31 @@ begin
 		s_cd2			<= s_cd;
 		
         m_abcd        	<=  max_input(m_ab2, m_cd2);
-        s_abcd      	<=  std_logic_vector(("0" & unsigned(s_ab2)) + unsigned(s_cd2));
+        s_abcd      	<=  std_logic_vector(unsigned(s_ab2) + unsigned(s_cd2));
 
         me_e          	<= max_edge01;
         me_f          	<= max_edge23;
 
         -- Final MAX Edge
-        f_max_edge  	<= max_dir(me_e, me_f, max_edge01_dir, max_edge23_dir);
+        f_max_edge  	<= max_dir(s_ab2, s_cd2, max_edge01_dir, max_edge23_dir);
 
       elsif (v(7) = '1') then
+	    --o_valid       <= '1';
+		
         final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
         temp        	 <= s_abcd;
-        final_sum        <= std_logic_vector(("0" & (unsigned(s_abcd(10 downto 0)) & "0")) + unsigned(temp));
+        final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp));
         sub         	 <= signed(unsigned(final_max) - unsigned(final_sum));
+		
+		-- if unsigned(sub) > 383 then
+		-- o_edge        <= edge_present;
+		-- o_dir <= f_max_edge; 
+		-- else
+                -- o_edge <= '0';
+                -- o_dir <= "000";
+				
+		-- end if; 
+		
 		
     end if;
   
