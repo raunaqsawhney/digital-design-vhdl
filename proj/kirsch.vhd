@@ -67,7 +67,13 @@ architecture main of kirsch is
    is
    begin
     if (unsigned(a) = unsigned(b)) then
-		return std_logic_vector(dir1);
+		if (unsinged(a) = "001") then
+			return std_logic_vector(a);
+		elsif (unsigned(b) = "001") then
+			return std_logic_vector(b);
+		else
+			return std_logic_vector(dir1);
+		end if;
 	end if;
 	
 	if (unsigned(a) > unsigned(b)) then
