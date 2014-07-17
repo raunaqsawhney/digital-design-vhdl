@@ -67,10 +67,10 @@ architecture main of kirsch is
    is
    begin
     if (unsigned(a) = unsigned(b)) then
-		if (unsinged(a) = "001") then
-			return std_logic_vector(a);
+		if (unsigned(a) = "001") then
+			return std_logic_vector(dir1);
 		elsif (unsigned(b) = "001") then
-			return std_logic_vector(b);
+			return std_logic_vector(dir2);
 		else
 			return std_logic_vector(dir1);
 		end if;
@@ -385,7 +385,7 @@ begin
         s_b         <=  sum1;
 
         s_ab        <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_ab        <=  max2_val;
+        m_ab        <=  max_input(ms_a, ms_b);
 
         me_a          <= max_edge0;
         me_b          <= max_edge1;
@@ -399,7 +399,7 @@ begin
         s_b         <=  sum3;
   
         s_cd        <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_cd        <=  max2_val;
+        m_cd        <=  max_input(ms_a, ms_b);
 
         me_a          <= max_edge2;
         me_b          <= max_edge3;
@@ -410,7 +410,7 @@ begin
         ms_a          <= m_ab;
         ms_b          <= m_cd;
 
-        m_ab        <=  max2_val;
+        m_ab        <=  max_input(ms_a, ms_b);
         f_s_ab      <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
         me_a          <= max_edge01;
