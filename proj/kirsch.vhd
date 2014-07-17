@@ -358,9 +358,9 @@ begin
     --r4           <= "001"; --W
     --r5           <= "100"; --NW
     
-    max_edge3    <= max_input(r0, r3);
+    max_edge3     <= max_input(r0, r3);
     max_edge3_dir <= max_dir(r0, r3, "001", "100");
-    max_val         <= max_edge3;
+    max_val       <= max_edge3;
 
     sum3         <= a0; 
     max_sum3     <= a1;
@@ -379,58 +379,58 @@ begin
   process begin
       wait until rising_edge(i_clock);
       if (v(1) = '1') then
-        ms_a        <=  max_sum0;
-        ms_b        <=  max_sum1;
-        s_a         <=  sum0;
-        s_b         <=  sum1;
+        --ms_a        <=  max_sum0;
+        --ms_b        <=  max_sum1;
+        --s_a         <=  sum0;
+        --s_b         <=  sum1;
 
-        s_ab        <=  std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_ab        <=  max_input(ms_a, ms_b);
+        s_ab        <=  std_logic_vector(unsigned(sum0) + unsigned(sum1));
+        m_ab        <=  max_input(max_sum0, max_sum1);
 
-        me_a          <= max_edge0;
-        me_b          <= max_edge1;
-        max_edge01    <= max_input(me_a, me_b);
-        max_edge01_dir <= max_dir(me_a, me_b, max_edge0_dir, max_edge1_dir);
+       -- me_a          <= max_edge0;
+      --  me_b          <= max_edge1;
+        max_edge01    <= max_input(max_edge0, max_edge1);
+        max_edge01_dir <= max_dir(max_edge0, max_edge1, max_edge0_dir, max_edge1_dir);
 
       elsif (v(3) = '1') then
-        ms_a          <=  max_sum2;
-        ms_b          <=  max_sum3;
-        s_a         <=  sum2;
-        s_b         <=  sum3;
+       -- ms_a          <=  max_sum2;
+       -- ms_b          <=  max_sum3;
+       -- s_a         <=  sum2;
+       -- s_b         <=  sum3;
   
-        s_cd        <= std_logic_vector(unsigned(s_a) + unsigned(s_b));
-        m_cd        <=  max_input(ms_a, ms_b);
+        s_cd        <= std_logic_vector(unsigned(sum2) + unsigned(sum3));
+        m_cd        <=  max_input(max_sum2, max_sum3);
 
-        me_a          <= max_edge2;
-        me_b          <= max_edge3;
-        max_edge23  <= max_input(me_a, me_b);
-        max_edge23_dir <= max_dir(me_a, me_b, max_edge2_dir, max_edge3_dir);
+        --me_a          <= max_edge2;
+        --me_b          <= max_edge3;
+        max_edge23  <= max_input(max_edge2, max_edge3);
+        max_edge23_dir <= max_dir(max_edge2, max_edge3, max_edge2_dir, max_edge3_dir);
 
       elsif (v(6) = '1') then
-        ms_a          <= m_ab;
-        ms_b          <= m_cd;
+       -- ms_a          <= m_ab;
+       -- ms_b          <= m_cd;
 
-        m_ab        <=  max_input(ms_a, ms_b);
+        ms_a        <=  max_input(m_ab, m_cd);
         f_s_ab      <=  std_logic_vector(unsigned(s_ab) + unsigned(s_cd));
 
-        me_a          <= max_edge01;
-        me_b          <= max_edge23;
+       -- me_a          <= max_edge01;
+       -- me_b          <= max_edge23;
 
 
         -- FINAL 8 BIT DIRECTION VALUE
-        max_edge0123 <= max_input(me_a, me_b);
+       -- max_edge0123 <= max_input(me_a, me_b);
 
         -- FINAL 3 BIT DIRECTION VECTOR
-        f_max_edge <= max_dir(me_a, me_b, max_edge01_dir, max_edge23_dir);
+        f_max_edge <= max_dir(max_edge01, max_edge23, max_edge01_dir, max_edge23_dir);
 
 
       elsif (v(7) = '1') then
-        m_cd        <= to_stdlogicvector(to_bitvector(m_ab) sla 3);
+        m_cd        <= to_stdlogicvector(to_bitvector(ms_a) sla 3);
         s_cd        <= f_s_ab;
-        s_ab_inter  <= to_stdlogicvector(to_bitvector(s_cd) sla 1);
-        s_ab        <= std_logic_vector(unsigned( s_ab_inter) + (unsigned(f_s_ab)));
+        s_ab_inter  <= to_stdlogicvector(to_bitvector(f_s_ab) sla 1);
+        s_ab        <= std_logic_vector(unsigned( s_ab_inter) + (unsigned(s_cd)));
         
-        sub         <= std_logic_vector(signed((unsigned(m_cd) - unsigned(s_ab))));
+        sub         <= std_logic_vector(signed(m_cd) - signed(s_ab));
 
     end if;
   
