@@ -43,24 +43,22 @@ architecture main of kirsch is
     return std_logic_vector(unsigned(a) rol n);
   end function;
    
-   function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : std_logic_vector; dir2 : std_logic_vector)
-     return std_logic_vector
+   function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : natural; dir2 : natural)
+     return natural 
    is
    begin
      if (unsigned(a) = unsigned(b)) then
-		 if (unsigned(a) = "001") then
-			 return std_logic_vector(dir1);
-		 elsif (unsigned(b) = "001") then
-			 return std_logic_vector(dir2);
-		 else
-			 return std_logic_vector(dir1);
-		 end if;
-	 end if;
+		if ( natural(dir1) > natural(dir2) ) then
+			return natural(dir1);
+		else
+			return natural(dir2);
+		end if; 
+	end if;
 	
 	if (unsigned(a) > unsigned(b)) then
-		return dir1;
+		return natural(dir1);
 	else
-		return dir2;
+		return natural(dir2);
     end if;
    end function;
    
@@ -79,7 +77,7 @@ architecture main of kirsch is
   signal col                                                        : unsigned(7 downto 0);
   signal row                                                        : unsigned(7 downto 0);
   signal mem_wren                                                   : std_logic_vector(2 downto 0);
-  signal busy                                                       : std_logic;
+  --signal busy                                                       : std_logic;
   signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
   signal v                                                          : std_logic_vector(8 downto 0);
   signal current_row                                                : std_logic_vector(2 downto 0);
@@ -121,15 +119,16 @@ architecture main of kirsch is
   signal sub											: signed(12 downto 0); -- sub [13 bits] holds derivative
   
   signal r0, r1, r2, r3		                        	: std_logic_vector(12 downto 0);  -- values
-  signal max_edge0_dir, max_edge1_dir, max_edge2_dir, max_edge3_dir    : std_logic_vector(2 downto 0); 
-  signal max_edge01_dir, max_edge23_dir    : std_logic_vector(2 downto 0); 
+  signal max_edge0_dir, max_edge1_dir, max_edge2_dir, max_edge3_dir    : natural; 
+  signal max_edge01_dir, max_edge23_dir    : natural; 
   signal r4, r5                                     : std_logic_vector(2 downto 0);  -- directions 
   signal a0                                         : std_logic_vector(12 downto 0);  -- sum
   signal a1                                         : std_logic_vector(12 downto 0);  -- max sum
   
   signal max_edge0, max_edge1, max_edge2, max_edge3 : std_logic_vector(12 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
   signal max_edge01, max_edge23                     : std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
-  signal f_max_edge                                 : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
+  signal o_dir_inter                    : std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
+  signal f_max_edge : natural;
   signal max_val                                    : std_logic_vector(12 downto 0);  -- intermediate register holding current max value
   
   signal me_a, me_b, me_c, me_d, me_e, me_f         : std_logic_vector(12 downto 0);
@@ -218,15 +217,16 @@ begin
       if (i_reset = '1') then
           col          <= "00000000";
           row          <= "00000000";
-          busy         <= '0';
+         -- busy         <= '0';
           current_row  <= "001";
+		  first_pass   <= '0'; 
 			else
                 if (i_valid = '1') then
-                    busy <= '1';
+                    --busy <= '1';
 
 				    if (col = 255) then
-                            col <= "00000000";
-						    current_row <= current_row rol 1;
+                            -- col <= "00000000";
+						    current_row <= current_row(1 downto 0) & current_row(2); 
 						    row <= row + 1;
 				    end if;
 
@@ -271,11 +271,12 @@ begin
   -- System Modes --
   ------------------
                      
-  process(i_reset, busy)
+  process
   begin
+	wait until rising_edge(i_clock);
       if (i_reset = '1') then
           o_mode <= "01";
-      elsif (busy = '1') then
+      elsif (col = 0 and row = 0) then
           o_mode <= "10";
       else 
           o_mode <= "11";
@@ -304,7 +305,7 @@ begin
     
 	max_edge0   <= max_input(r0, r3);
 	max_val <= max_edge0;
-	max_edge0_dir  <= max_dir(r0, r3, "010", "110");
+	max_edge0_dir  <= max_dir(r0, r3, 6, 5);
 	
 	sum0        <= a0;
     max_sum0    <= a1;
@@ -322,7 +323,7 @@ begin
     
 	max_edge1    <= max_input(r0, r3);
 	max_val <= max_edge1;
-	max_edge1_dir  <= max_dir(r0, r3, "011", "111");
+	max_edge1_dir  <= max_dir(r0, r3, 2, 1);
 	
 	sum1         <= a0;
     max_sum1     <= a1; 
@@ -340,7 +341,7 @@ begin
     
 	max_edge2   <= max_input(r0, r3);
 	max_val 	<= max_edge2;
-	max_edge2_dir <= max_dir(r0, r3,"000", "101");
+	max_edge2_dir <= max_dir(r0, r3, 4, 3);
 	
 	sum2        <= a0; 
 	max_sum2    <= a1; 
@@ -358,7 +359,7 @@ begin
     
 	max_edge3    <= max_input(r0, r3);
 	max_val		<= max_edge3;
-	max_edge3_dir <= max_dir(r0, r3, "001", "100");
+	max_edge3_dir <= max_dir(r0, r3, 8, 7);
 	
 	sum3         <= a0; 
     max_sum3     <= a1;
@@ -446,7 +447,17 @@ begin
   
   edge_present  <= '1' when sub > 383 else '0';
   o_edge        <= edge_present;
-  o_dir         <= f_max_edge when edge_present = '1' else "000";
+  with f_max_edge select
+	o_dir_inter <= "001" when 8,
+			 "100" when 7,
+			 "010" when 6,
+			 "110" when 5,
+			 "000" when 4,
+			 "101" when 3,
+			 "011" when 2,
+			 "111" when 1,
+  			 "001" when OTHERS;
+  o_dir         <= o_dir_inter when edge_present = '1' else "000";
   o_valid       <= v(7);
 
 end architecture;
