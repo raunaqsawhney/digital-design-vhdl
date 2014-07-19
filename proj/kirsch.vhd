@@ -118,7 +118,7 @@ architecture main of kirsch is
  
   signal sub						: signed(12 downto 0); 		-- sub [13 bits] holds derivative
   
-  signal r0, r1, r2, r3, r4, r5, r6, r7		: std_logic_vector(12 downto 0);  -- values
+  signal r0, r1, r2, r3, r4, r5, r6, r7			: std_logic_vector(12 downto 0);  -- values
   signal max_edge0_dir, max_edge1_dir			: natural;
   signal max_edge2_dir, max_edge3_dir    		: natural;
   signal max_edge01_dir, max_edge23_dir    		: natural;
@@ -348,7 +348,7 @@ begin
 		--r1           	<= "00000" & h;
 		--r2           	<= "00000" & a;
 		
-		max_edge3_dir	<= max_dir(r2, r7, 2, 1);
+		max_edge3_dir	<= max_dir(r2, r7, 8, 7);
 		max_edge3   	<= max_input(r2, r7);
 		sum3            <= std_logic_vector(unsigned(r5) + unsigned(r0));
 
@@ -395,15 +395,19 @@ begin
 
 	elsif(v(7) = '1') then
 		-- problem could be here (in shifting)
-		final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
-		final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(std_logic_vector(unsigned(s_cd) + unsigned(sum3))));
+		--final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
+		--final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(std_logic_vector(unsigned(s_cd) + unsigned(sum3))));
+		
+		if (signed( (unsigned(m_abcd(9 downto 0)) & "000") - ((unsigned(s_abcd(10 downto 0)) & "0")) ) > 383) then
+			edge_present 	<= '1';
+		else
+			edge_present 	<= '0'; 
+		end if;
 
 	end if;
   
   end process;
   
-	sub		<= signed(unsigned(final_max) - unsigned(final_sum));
-	edge_present 	<= '1' when (sub > 383) else '0'; 
 	o_edge        	<= edge_present;
 	
 	--Verify this, not too sure about this (could cause problems)
