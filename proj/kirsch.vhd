@@ -304,9 +304,12 @@ begin
 		
 		max_edge0_dir	<= max_dir(g_0, b_0, 8, 7);
 		max_edge0   	<= max_input(g_0, b_0);
-
 		sum0           	<= std_logic_vector(unsigned(a_0) + unsigned(h_0));
-		max_sum0       	<= std_logic_vector(unsigned(max_edge0) + unsigned(sum0));
+		
+		temp_max	<= max_edge0;
+		temp_sum	<= sum0;
+		
+		max_sum0       	<= max_sum;
 		
 	elsif(v(2) = '1') then
 		--r0           	<= "00000" & e; 
@@ -316,9 +319,12 @@ begin
 		
 		max_edge1_dir	<= max_dir(a_0, d_0, 6, 5);
 		max_edge1   	<= max_input(a_0, d_0);
-
 		sum1            <= std_logic_vector(unsigned(b_0) + unsigned(c_0));
-		max_sum1        <= std_logic_vector(unsigned(max_edge1) + unsigned(sum1));
+		
+		temp_max	<= max_edge1;
+		temp_sum	<= sum1;
+		
+		max_sum1       	<= max_sum;
 		
 	elsif(v(3) = '1') then
 	
@@ -330,8 +336,10 @@ begin
 		max_edge2_dir	<= max_dir(c_0, f_0, 4, 3);
 		max_edge2   	<= max_input(c_0, f_0);
 
-		sum2            <= std_logic_vector(unsigned(d_0) + unsigned(e_0));
-		max_sum2        <= std_logic_vector(unsigned(max_edge2) + unsigned(sum2));
+		temp_max	<= max_edge2;
+		temp_sum	<= sum2;
+		
+		max_sum2       	<= max_sum;
 		
 	elsif(v(4) = '1') then 
 		--r0           	<= "00000" & b;
@@ -342,13 +350,15 @@ begin
 		max_edge3_dir	<= max_dir(e_0, h_0, 2, 1);
 		max_edge3   	<= max_input(e_0, h_0);
 
-		sum3            <= std_logic_vector(unsigned(f_0) + unsigned(g_0));
-		max_sum3        <= std_logic_vector(unsigned(max_edge3) + unsigned(sum3));
+		temp_max	<= max_edge3;
+		temp_sum	<= sum3;
+		
+		max_sum3       	<= max_sum;
    end if;  
  end process;
  
-  -- a0    		<= std_logic_vector(unsigned(r1) + unsigned(r2));
-  -- a1    		<= std_logic_vector(unsigned(max_input(r0, r3)) + unsigned(a0));
+  max_sum <= std_logic_vector(unsigned(temp_max) + unsigned(temp_sum));
+
 
   -- End of Stage 1 --
 
