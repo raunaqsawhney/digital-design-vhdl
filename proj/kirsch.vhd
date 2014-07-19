@@ -306,10 +306,10 @@ begin
 		max_edge0   	<= max_input(g_0, b_0);
 		sum0           	<= std_logic_vector(unsigned(a_0) + unsigned(h_0));
 		
-		temp_max	<= max_input(g_0, b_0);
-		temp_sum	<= std_logic_vector(unsigned(a_0) + unsigned(h_0));
+		--temp_max	<= max_input(g_0, b_0);
+		--temp_sum	<= std_logic_vector(unsigned(a_0) + unsigned(h_0));
 		
-		max_sum0       	<= max_sum;
+		max_sum0       	<= std_logic_vector(unsigned(max_input(g_0, b_0)) +(unsigned(a_0) + unsigned(h_0)));
 		
 	elsif(v(2) = '1') then
 		--r0           	<= "00000" & e; 
@@ -321,10 +321,10 @@ begin
 		max_edge1   	<= max_input(a_0, d_0);
 		sum1            <= std_logic_vector(unsigned(b_0) + unsigned(c_0));
 		
-		temp_max	<= max_input(a_0, d_0);
-		temp_sum	<= std_logic_vector(unsigned(b_0) + unsigned(c_0));
+		--temp_max	<= max_input(a_0, d_0);
+		--temp_sum	<= std_logic_vector(unsigned(b_0) + unsigned(c_0));
 		
-		max_sum1       	<= max_sum;
+		max_sum1       	<= std_logic_vector(unsigned(max_input(a_0, d_0)) +(unsigned(b_0) + unsigned(c_0)));
 		
 	elsif(v(3) = '1') then
 	
@@ -337,10 +337,10 @@ begin
 		max_edge2   	<= max_input(c_0, f_0);
 		sum2            <= std_logic_vector(unsigned(d_0) + unsigned(e_0));
 
-		temp_max	<= max_input(c_0, f_0);
-		temp_sum	<= std_logic_vector(unsigned(d_0) + unsigned(e_0));
+		--temp_max	<= max_input(c_0, f_0);
+		--temp_sum	<= std_logic_vector(unsigned(d_0) + unsigned(e_0));
 		
-		max_sum2       	<= max_sum;
+		max_sum2       	<= std_logic_vector(unsigned(max_input(c_0, f_0)) +(unsigned(d_0) + unsigned(e_0)));
 		
 	elsif(v(4) = '1') then 
 		--r0           	<= "00000" & b;
@@ -352,14 +352,14 @@ begin
 		max_edge3   	<= max_input(e_0, h_0);
 		sum3            <= std_logic_vector(unsigned(f_0) + unsigned(g_0));
 
-		temp_max	<= max_input(e_0, h_0);
-		temp_sum	<= std_logic_vector(unsigned(f_0) + unsigned(g_0));
+		--temp_max	<= max_input(e_0, h_0);
+		--temp_sum	<= std_logic_vector(unsigned(f_0) + unsigned(g_0));
 		
-		max_sum3       	<= max_sum;
+		max_sum3       	<= std_logic_vector((unsigned(max_input(e_0, h_0)) +(unsigned(f_0) + unsigned(g_0))));
    end if;  
  end process;
  
-  max_sum <= std_logic_vector(unsigned(temp_max) + unsigned(temp_sum));
+  --max_sum <= std_logic_vector(unsigned(temp_max) + unsigned(temp_sum));
 
 
   -- End of Stage 1 --
@@ -399,14 +399,14 @@ begin
 		final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
 		final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp));
 		--Clocked subtraction, but comb output of o_edge
-		sub         	 <= signed(unsigned(final_max) - unsigned(final_sum));
 
 	end if;
   
   end process;
-	
-	edge_present <= '1' when (sub > 383) else '0'; 
-	o_edge        <= edge_present;
+  
+	sub		<= signed(unsigned(final_max) - unsigned(final_sum));
+	edge_present 	<= '1' when (sub > 383) else '0'; 
+	o_edge        	<= edge_present;
 	
 	--Verify this, not too sure about this (could cause problems)
 	with f_max_edge select
