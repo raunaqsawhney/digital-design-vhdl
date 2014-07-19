@@ -126,7 +126,7 @@ architecture main of kirsch is
   --signal a0                                         	: std_logic_vector(12 downto 0);  -- sum
   --signal a1                                         	: std_logic_vector(12 downto 0);  -- max sum
   
-  signal max_edge0, max_edge1, max_edge2, max_edge3 	: std_logic_vector(12 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
+  signal max_edge0, max_edge1, max_edge2, max_edge3, temp_max, temp_sum, max_sum 	: std_logic_vector(12 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
   signal max_edge01, max_edge23                     	: std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
   signal o_dir_inter                    		: std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
   signal f_max_edge 					: natural;
