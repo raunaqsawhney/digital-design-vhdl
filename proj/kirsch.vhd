@@ -69,7 +69,7 @@ architecture main of kirsch is
   signal row                                                        : std_logic_vector(8 downto 0) ;
   signal mem_wren                                                   : std_logic_vector(2 downto 0);
   signal a, b, c, d, e, f, g, h, i, tmp_next_zero, tmp_next_one     : std_logic_vector(7 downto 0);
-  signal v                                                          : std_logic_vector(7 downto 0);
+  signal v                                                          : std_logic_vector(6 downto 0);
   signal current_row                                                : std_logic_vector(2 downto 0);
   signal edge_present                                               : std_logic;
   signal first_pass                                                 : std_logic; 
@@ -90,22 +90,22 @@ architecture main of kirsch is
   -- Registers --
   ---------------
   signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(12 downto 0);  -- max sum [10 BITS] (computed in Stage 1)
-  signal s_ab, s_cd								: std_logic_vector(12 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
-  signal m_abcd									: std_logic_vector(12 downto 0);  -- max [10 bits] (out of final max in Stage 2)
-  signal s_abcd, temp							: std_logic_vector(12 downto 0); -- sum [11 bits] (output of final sum in Stage 2)
+  signal s_ab, s_cd				: std_logic_vector(12 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
+  signal m_abcd					: std_logic_vector(12 downto 0);  -- max [10 bits] (out of final max in Stage 2)
+  signal s_abcd, temp				: std_logic_vector(12 downto 0);  -- sum [11 bits] (output of final sum in Stage 2)
  
-  signal final_sum								: std_logic_vector(12 downto 0);
+  signal final_sum				: std_logic_vector(12 downto 0);
   
-  signal r0, r1, r2, r3, r4, r5, r6, r7			: std_logic_vector(12 downto 0);  -- values
-  signal max_edge0_dir, max_edge1_dir			: natural;
-  signal max_edge2_dir, max_edge3_dir    		: natural;
-  signal max_edge01_dir, max_edge23_dir    		: natural;
+  signal r0, r1, r2, r3, r4, r5, r6, r7		: std_logic_vector(12 downto 0);  -- values
+  signal max_edge0_dir, max_edge1_dir		: natural;
+  signal max_edge2_dir, max_edge3_dir    	: natural;
+  signal max_edge01_dir, max_edge23_dir    	: natural;
 
   signal max_edge01, max_edge23                 : std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
-  signal o_dir_inter                    		: std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
-  signal f_max_edge 							: natural;
+  signal o_dir_inter                    	: std_logic_vector(2 downto 0);	  -- stage 2 cycle 3(6) output register with final max direction
+  signal f_max_edge 				: natural;
   
-  signal system_mode							: std_logic_vector(1 downto 0);
+  signal system_mode				: std_logic_vector(1 downto 0);
 
 
   ------------------
@@ -162,7 +162,7 @@ architecture main of kirsch is
   -- Valid Bit Generator --
   -------------------------
  
-  v_gen : for i in 1 to 7 generate
+  v_gen : for i in 1 to 6 generate
       process begin
           wait until rising_edge(i_clock);
 		  if i_reset = '1' then
@@ -270,32 +270,28 @@ architecture main of kirsch is
 	elsif(v(1) = '1') then
 
 		max_edge0_dir	<= max_dir(r1, r6, 7, 8);
-
-		max_sum0       	<= std_logic_vector(unsigned(max_input(r1, r6)) +((unsigned(r0) + unsigned(r7))));
+		max_sum0       	<= std_logic_vector(unsigned(max_input(r1, r6)) + ((unsigned(r0) + unsigned(r7))));
 		
 		max_edge1_dir	<= max_dir(r0, r3, 6, 5);
-
-		max_sum1       	<= std_logic_vector(unsigned(max_input(r0, r3)) +((unsigned(r1) + unsigned(r2))));
+		max_sum1       	<= std_logic_vector(unsigned(max_input(r0, r3)) + ((unsigned(r1) + unsigned(r2))));
 		
 	elsif(v(2) = '1') then
 
 		max_edge2_dir	<= max_dir(r2, r5, 4, 3);
-
-		max_sum2       	<= std_logic_vector(unsigned(max_input(r2, r5)) +((unsigned(r3) + unsigned(r4))));
-		
+		max_sum2       	<= std_logic_vector(unsigned(max_input(r2, r5)) + ((unsigned(r3) + unsigned(r4))));
+	
 		max_edge3_dir	<= max_dir(r4, r7, 2, 1);
-
-		max_sum3       	<= std_logic_vector(unsigned(max_input(r4, r7)) +((unsigned(r5) + unsigned(r6))));
+		max_sum3       	<= std_logic_vector(unsigned(max_input(r4, r7)) + ((unsigned(r5) + unsigned(r6))));
 		
-   end if;  
- end process;
+	end if;  
+	end process;
 
 
-   process begin
+	process begin
 		wait until rising_edge(i_clock);
 		if (v(2) = '1') then
 
-	-- means data from max_sum0 and max_sum1 is available for sure (basically the cycle 1 and cycle 2 of stage1)
+			-- means data from max_sum0 and max_sum1 is available for sure (basically the cycle 1 and cycle 2 of stage1)
 			max_edge01_dir  <= max_dir(max_sum0, max_sum1, max_edge0_dir, max_edge1_dir);
 			max_edge01      <= max_input(max_sum0, max_sum1);
 
@@ -310,12 +306,12 @@ architecture main of kirsch is
 
 		elsif (v(4) = '1') then
  
-		-- Final MAX Edge
+			-- Final MAX Edge
 			f_max_edge  	<= max_dir(max_edge23, max_sum3, max_edge23_dir, max_edge3_dir);
         
 			m_abcd        	<= max_input(max_edge23, max_sum3);
-			s_abcd		    <= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
-			temp		    <= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
+			s_abcd		<= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
+			temp		<= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
 
 		elsif(v(5) = '1') then
 			final_sum        <= std_logic_vector(((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp)));
@@ -324,12 +320,10 @@ architecture main of kirsch is
   
    end process;
 	
-	
 	edge_present	<= '1' when ((unsigned(m_abcd(9 downto 0)) & "000") - unsigned(final_sum(12 downto 0))) > 383 else '0';
 	o_edge        	<= edge_present;
-	o_valid		<= v(7);
+	o_valid		<= v(6);
 	
-	-- --Verify this, not too sure about this (could cause problems)
 	 with f_max_edge select
 		 o_dir_inter <= "001" when 8,
 		  "100" when 7,
@@ -342,4 +336,4 @@ architecture main of kirsch is
 		  "001" when OTHERS;
 	o_dir     <= o_dir_inter when edge_present = '1' else "000";
 
-end architecture;
+	end architecture;
