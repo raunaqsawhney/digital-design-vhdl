@@ -34,14 +34,6 @@ end entity;
 
 
 architecture main of kirsch is
-
-  -- Custom Functions
-  -- function "rol" (a : std_logic_vector; n : natural)
-    -- return std_logic_vector
-  -- is
-  -- begin
-    -- return std_logic_vector(unsigned(a) rol n);
-  -- end function;
    
  function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : natural; dir2 : natural)
      return natural 
@@ -97,38 +89,23 @@ architecture main of kirsch is
   ---------------
   -- Registers --
   ---------------
- -- signal sum0, sum1, sum2, sum3                  	: std_logic_vector(12 downto 0);  -- sum [9 BITS](computed in Stage 1)
-  signal max_sum0, max_sum1, max_sum2, max_sum3     	: std_logic_vector(12 downto 0);  -- max sum [10 BITS] (computed in Stage 1)
-
-  --signal ms_a, ms_b, ms_c, ms_d			: std_logic_vector(12 downto 0);  -- max sum [10 BITS] (inputs to max in Stage 2)
-  --signal m_ab, m_cd					: std_logic_vector(12 downto 0);	 -- max of ab and cd (outputs of max in Stage 2)
-  
-  --signal s_a, s_b, s_c, s_d				: std_logic_vector(12 downto 0);  -- sum [9 bits] (inputs to adder in Stage 2)
-  signal s_ab, s_cd					: std_logic_vector(12 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
-
-  --signal m_ab2, m_cd2					: std_logic_vector(12 downto 0);  -- max [10 bits] (inputs to final max in Stage 2)
-  signal m_abcd						: std_logic_vector(12 downto 0);  -- max [10 bits] (out of final max in Stage 2)
+  signal max_sum0, max_sum1, max_sum2, max_sum3 : std_logic_vector(12 downto 0);  -- max sum [10 BITS] (computed in Stage 1)
+  signal s_ab, s_cd								: std_logic_vector(12 downto 0);  -- sum [10 bits] (outputs of adder in Stage 2)
+  signal m_abcd									: std_logic_vector(12 downto 0);  -- max [10 bits] (out of final max in Stage 2)
+  signal s_abcd, temp							: std_logic_vector(12 downto 0); -- sum [11 bits] (output of final sum in Stage 2)
  
-  --signal s_ab2, s_cd2					: std_logic_vector(12 downto 0);  -- sum [10 bits] (inputs to final sum in Stage 2)
-  signal s_abcd, temp					: std_logic_vector(12 downto 0); -- sum [11 bits] (output of final sum in Stage 2)
- 
-  signal final_max					: std_logic_vector(13 downto 0); -- final max and final sum [13 bits] (in Stage 2)
-  signal final_sum					: std_logic_vector(13 downto 0);
- 
-  signal sub						: signed(12 downto 0); 		-- sub [13 bits] holds derivative
+  signal final_sum								: std_logic_vector(12 downto 0);
   
   signal r0, r1, r2, r3, r4, r5, r6, r7			: std_logic_vector(12 downto 0);  -- values
   signal max_edge0_dir, max_edge1_dir			: natural;
   signal max_edge2_dir, max_edge3_dir    		: natural;
   signal max_edge01_dir, max_edge23_dir    		: natural;
 
-  
-  --signal max_edge0, max_edge1, max_edge2, max_edge3 	: std_logic_vector(12 downto 0);  -- stage 1 output registers holding single max directions (eliminate 4)
-  signal max_edge01, max_edge23                     	: std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
+  signal max_edge01, max_edge23                 : std_logic_vector(12 downto 0);  -- stage 2 output registers holding single max directions (eliminate 2 more)
   signal o_dir_inter                    		: std_logic_vector(2 downto 0);  -- stage 2 cycle 3(6) output register with final max direction
-  signal f_max_edge 					: natural;
+  signal f_max_edge 							: natural;
   
-  signal system_mode					: std_logic_vector(1 downto 0);
+  signal system_mode							: std_logic_vector(1 downto 0);
 
 
   ------------------
@@ -137,7 +114,8 @@ architecture main of kirsch is
 
   type mem_array is array (2 downto 0) of std_logic_vector(7 downto 0);
   signal mem_out    :   mem_array;
-begin  
+
+  begin  
 
   debug_num_5 <= X"E";
   debug_num_4 <= X"C";
@@ -314,46 +292,41 @@ begin
 
 
    process begin
-       wait until rising_edge(i_clock);
-       if (v(2) = '1') then
+		wait until rising_edge(i_clock);
+		if (v(2) = '1') then
 
 	-- means data from max_sum0 and max_sum1 is available for sure (basically the cycle 1 and cycle 2 of stage1)
-		max_edge01_dir  <= max_dir(max_sum0, max_sum1, max_edge0_dir, max_edge1_dir);
-		max_edge01      <= max_input(max_sum0, max_sum1);
+			max_edge01_dir  <= max_dir(max_sum0, max_sum1, max_edge0_dir, max_edge1_dir);
+			max_edge01      <= max_input(max_sum0, max_sum1);
 
-		--m_ab        	<= max_input(max_sum0, max_sum1);
-		s_ab        	<= std_logic_vector(unsigned(r0) + unsigned(r7) + unsigned(r1) + unsigned(r2));
+			s_ab        	<= std_logic_vector(unsigned(r0) + unsigned(r7) + unsigned(r1) + unsigned(r2));
 		
-      elsif (v(3) = '1') then
+		elsif (v(3) = '1') then
   
-        max_edge23_dir 	<= max_dir(max_edge01, max_sum2, max_edge01_dir, max_edge2_dir);
-        max_edge23  	<= max_input(max_edge01, max_sum2);
-        
-       -- m_cd        	<= max_input(max_edge01, max_sum2);
-        s_cd        	<= std_logic_vector(unsigned(s_ab) + unsigned(r3) + unsigned(r4));
+			max_edge23_dir 	<= max_dir(max_edge01, max_sum2, max_edge01_dir, max_edge2_dir);
+			max_edge23  	<= max_input(max_edge01, max_sum2);
+			
+			s_cd        	<= std_logic_vector(unsigned(s_ab) + unsigned(r3) + unsigned(r4));
 
-      elsif (v(4) = '1') then
+		elsif (v(4) = '1') then
  
-	-- Final MAX Edge
-	f_max_edge  	<= max_dir(max_edge23, max_sum3, max_edge23_dir, max_edge3_dir);
+		-- Final MAX Edge
+			f_max_edge  	<= max_dir(max_edge23, max_sum3, max_edge23_dir, max_edge3_dir);
         
-	m_abcd        	<= max_input(max_edge23, max_sum3);
-	s_abcd		<= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
-	temp		<= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
+			m_abcd        	<= max_input(max_edge23, max_sum3);
+			s_abcd		    <= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
+			temp		    <= std_logic_vector(unsigned(s_cd) + unsigned(r5) + unsigned(r6));
 
-	elsif(v(5) = '1') then
-		-- problem could be here (in shifting)
-		final_max        <= std_logic_vector("0" & (unsigned(m_abcd(9 downto 0)) & "000"));
-		final_sum        <= std_logic_vector("0" & ((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp)));
+		elsif(v(5) = '1') then
+			final_sum        <= std_logic_vector(((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp)));
 	
 	end if;
   
    end process;
-  	
-	sub		<= signed((unsigned(final_max(12 downto 0)) - unsigned(final_sum(12 downto 0))));
-	edge_present	<= '1' when sub > 383 else '0';
+	
+	
+	edge_present	<= '1' when ((unsigned(m_abcd(9 downto 0)) & "000") - unsigned(final_sum(12 downto 0))) > 383 else '0';
 	o_edge        	<= edge_present;
-	--o_dir		<= f_max_edge when edge_present = '1' else "000";
 	o_valid		<= v(7);
 	
 	-- --Verify this, not too sure about this (could cause problems)
@@ -368,6 +341,5 @@ begin
 		  "111" when 1,
 		  "001" when OTHERS;
 	o_dir     <= o_dir_inter when edge_present = '1' else "000";
-	-- o_valid   <= v(8);
 
 end architecture;
