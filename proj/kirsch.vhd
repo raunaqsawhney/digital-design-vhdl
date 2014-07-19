@@ -392,13 +392,12 @@ begin
         
 	m_abcd        	<= max_input(m_cd, max_sum3);
 	s_abcd		<= std_logic_vector(unsigned(s_cd) + unsigned(sum3));
+	temp        	 <= s_abcd;
 
 	elsif(v(7) = '1') then
-		temp        	 <= s_abcd;
 		-- problem could be here (in shifting)
 		final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
 		final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(temp));
-		--Clocked subtraction, but comb output of o_edge
 
 	end if;
   
