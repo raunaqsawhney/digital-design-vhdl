@@ -398,12 +398,12 @@ begin
 		--final_max        <= std_logic_vector(unsigned(m_abcd(9 downto 0)) & "000");
 		--final_sum        <= std_logic_vector((unsigned(s_abcd(10 downto 0)) & "0") + unsigned(std_logic_vector(unsigned(s_cd) + unsigned(sum3))));
 		
-		if (signed( (unsigned(m_abcd(9 downto 0)) & "000") - ((unsigned(s_abcd(10 downto 0)) & "0")) ) > 383) then
+		
+		if ( signed( ( unsigned(m_abcd(9 downto 0)) & "000") - ( ( unsigned(s_abcd(10 downto 0)) & "0" ) + unsigned(std_logic_vector(unsigned(s_cd) + unsigned(sum3) ) ) ) ) > 383 ) then
 			edge_present 	<= '1';
 		else
 			edge_present 	<= '0'; 
 		end if;
-
 	end if;
   
   end process;
