@@ -335,6 +335,7 @@ begin
 		
 		max_edge2_dir	<= max_dir(c_0, f_0, 4, 3);
 		max_edge2   	<= max_input(c_0, f_0);
+		sum2            <= std_logic_vector(unsigned(d_0) + unsigned(e_0));
 
 		temp_max	<= max_edge2;
 		temp_sum	<= sum2;
@@ -349,6 +350,7 @@ begin
 		
 		max_edge3_dir	<= max_dir(e_0, h_0, 2, 1);
 		max_edge3   	<= max_input(e_0, h_0);
+		sum3            <= std_logic_vector(unsigned(f_0) + unsigned(g_0));
 
 		temp_max	<= max_edge3;
 		temp_sum	<= sum3;
