@@ -321,7 +321,7 @@ begin
 		max_edge1   	<= max_input(a_0, d_0);
 		sum1            <= std_logic_vector(unsigned(b_0) + unsigned(c_0));
 		
-		temp_max	<= max_input(a_0, d_0);;
+		temp_max	<= max_input(a_0, d_0);
 		temp_sum	<= std_logic_vector(unsigned(b_0) + unsigned(c_0));
 		
 		max_sum1       	<= max_sum;
