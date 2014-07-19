@@ -291,7 +291,7 @@ begin
 
 	elsif(v(1) = '1') then
 
-		max_edge0_dir	<= max_dir(r1, r6, 8, 7);
+		max_edge0_dir	<= max_dir(r1, r6, 7, 8);
 		max_edge0   	<= max_input(r1, r6);
 		sum0            <= std_logic_vector(unsigned(r0) + unsigned(r7));
 		
