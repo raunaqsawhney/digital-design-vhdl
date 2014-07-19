@@ -35,29 +35,16 @@ end entity;
 
 architecture main of kirsch is
 
-  -- Custom Functions
-  -- function "rol" (a : std_logic_vector; n : natural)
-    -- return std_logic_vector
-  -- is
-  -- begin
-    -- return std_logic_vector(unsigned(a) rol n);
-  -- end function;
-   
  function max_dir (a : std_logic_vector; b : std_logic_vector; dir1 : natural; dir2 : natural)
      return natural 
    is
    begin
-     if (unsigned(a) = unsigned(b)) then
+	if (unsigned(a) >= unsigned(b)) then
 		if ( natural(dir1) > natural(dir2) ) then
 			return natural(dir1);
 		else
 			return natural(dir2);
 		end if; 
-	
-	elsif (unsigned(a) > unsigned(b)) then
-		return natural(dir1);
-	else
-		return natural(dir2);
     end if;
    end function;
    
@@ -83,16 +70,6 @@ architecture main of kirsch is
   signal first_pass                                                 : std_logic; 
   signal mem_addr 						    : std_logic_vector (7 downto 0);
 
-  -- Direction LUT --
-  -- 000    E
-  -- 001    W
-  -- 010    N
-  -- 011    S
-  -- 100    NW
-  -- 101    SE
-  -- 110    NE
-  -- 111    SW
-  -------------------
 
   ---------------
   -- Registers --
@@ -405,8 +382,8 @@ begin
 	
 	-- --Verify this, not too sure about this (could cause problems)
 	 with f_max_edge select
-		 o_dir_inter <= "001" when 8,
-		  "100" when 7,
+		 o_dir_inter <= "001" when 8, -- W
+		  "100" when 7, -- NW
 		  "010" when 6,
 		  "110" when 5,
 		  "000" when 4,
