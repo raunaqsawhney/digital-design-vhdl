@@ -1,2 +1,2 @@
-ece327
+Digital Design in VHDL
 ======
